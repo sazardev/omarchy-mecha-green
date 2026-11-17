@@ -1,0 +1,174 @@
+#!/usr/bin/env bash
+# mecha-status — a tiny tactical dashboard for the Mecha Green theme.
+# Usage: mecha-status [--json] [--watch] [host]
+set -euo pipefail
+
+RAW_HOST="${MECHA_PING_HOST:-1.1.1.1}"
+HOST=$(printf '%s' "$RAW_HOST" | tr -cd 'A-Za-z0-9.:_-')
+[[ -n $HOST && $HOST != -* ]] || HOST="1.1.1.1"
+MODE="text"
+WATCH=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --json) MODE="json" ;;
+    --watch) WATCH=1 ;;
+    -h|--help)
+      cat <<'EOF'
+Usage: mecha-status [--json] [--watch] [host]
+
+Prints NET latency, THREAT (CPU), AMMO (RAM), PWR (battery or AC),
+mission time and the default route in the Mecha Green palette.
+
+  --json   machine-readable output, no ANSI
+  --watch  refresh every 2 seconds
+EOF
+      exit 0
+      ;;
+    --*) echo "unknown option: $arg" >&2; exit 2 ;;
+    *) RAW_HOST="$arg" ;;
+  esac
+done
+
+HOST=$(printf '%s' "$RAW_HOST" | tr -cd 'A-Za-z0-9.:_-')
+[[ -n $HOST && $HOST != -* ]] || HOST="1.1.1.1"
+
+if [[ -t 1 && $MODE == "text" ]]; then
+  AMBER=$'\033[38;2;242;200;75m'
+  OLIVE=$'\033[38;2;157;174;92m'
+  SAGE=$'\033[38;2;216;217;180m'
+  RUST=$'\033[38;2;200;91;71m'
+  MUTED=$'\033[38;2;115;124;88m'
+  BOLD=$'\033[1m'
+  RESET=$'\033[0m'
+else
+  AMBER="" OLIVE="" SAGE="" RUST="" MUTED="" BOLD="" RESET=""
+fi
+
+ping_ms() {
+  command -v ping >/dev/null 2>&1 || { echo -1; return; }
+  local out ms
+  out=$(ping -n -c 1 -W 2 "$HOST" 2>/dev/null || true)
+  ms=$(printf '%s\n' "$out" | sed -n 's/.*time[=<]\([0-9.]*\) *ms.*/\1/p' | head -1)
+  [[ -n $ms ]] && printf '%.0f\n' "$ms" || echo -1
+}
+
+cpu_pct() {
+  local -a a b
+  read -r _ a0 a1 a2 a3 a4 a5 a6 a7 _ < /proc/stat
+  a=("$a0" "$a1" "$a2" "$a3" "$a4" "$a5" "$a6" "$a7")
+  sleep 0.25
+  read -r _ b0 b1 b2 b3 b4 b5 b6 b7 _ < /proc/stat
+  b=("$b0" "$b1" "$b2" "$b3" "$b4" "$b5" "$b6" "$b7")
+  local total_a=0 total_b=0 idle_a=$((a[3]+a[4])) idle_b=$((b[3]+b[4])) i
+  for i in "${a[@]}"; do total_a=$((total_a+i)); done
+  for i in "${b[@]}"; do total_b=$((total_b+i)); done
+  local dt=$((total_b-total_a)) di=$((idle_b-idle_a))
+  (( dt > 0 )) && echo $(( 100 * (dt - di) / dt )) || echo 0
+}
+
+mem_info() {
+  awk '/MemTotal|MemAvailable/ {print $2}' /proc/meminfo |
+    awk 'NR==1 {total=$1} NR==2 {avail=$1} END {
+      if (total <= 0) { print "0 0 0"; exit }
+      used = total - avail
+      printf "%.0f %.1f %.1f\n", used * 100 / total, used / 1048576, total / 1048576
+    }'
+}
+
+battery_info() {
+  local b
+  for b in /sys/class/power_supply/BAT*; do
+    [[ -d $b ]] || continue
+    local cap status
+    cap=$(cat "$b/capacity" 2>/dev/null || echo "")
+    status=$(cat "$b/status" 2>/dev/null || echo "")
+    [[ -n $cap ]] && { echo "$cap|$status"; return; }
+  done
+  echo "|AC"
+}
+
+uptime_text() {
+  awk '{s=int($1); d=int(s/86400); h=int((s%86400)/3600); m=int((s%3600)/60);
+        printf "%sd %02d:%02d", d, h, m}' /proc/uptime
+}
+
+route_text() {
+  ip route show default 2>/dev/null | awk '/^default/ {printf "%s via %s", $3, $5; exit}'
+}
+
+NET=$(ping_ms)
+CPU=$(cpu_pct)
+read -r RAM_PCT RAM_USED RAM_TOTAL <<<"$(mem_info)"
+BAT_PCT=""
+BAT_STATUS="AC"
+IFS='|' read -r BAT_PCT BAT_STATUS <<<"$(battery_info)" || true
+BAT_PCT="${BAT_PCT:-}"
+BAT_STATUS="${BAT_STATUS:-AC}"
+UPTIME=$(uptime_text)
+ROUTE=$(route_text)
+
+THREAT="LOW"
+(( CPU >= 25 )) && THREAT="GUARDED"
+(( CPU >= 50 )) && THREAT="ELEVATED"
+(( CPU >= 75 )) && THREAT="SEVERE"
+
+if [[ -z $BAT_PCT ]]; then
+  PWR="AC"
+  PWR_COLOR="$AMBER"
+elif (( BAT_PCT > 35 )); then
+  PWR="${BAT_PCT}% ${BAT_STATUS}"
+  PWR_COLOR="$SAGE"
+else
+  PWR="${BAT_PCT}% ${BAT_STATUS}"
+  PWR_COLOR="$RUST"
+fi
+
+if (( NET < 0 )); then
+  NET_TEXT="--"
+  NET_COLOR="$RUST"
+elif (( NET < 40 )); then
+  NET_TEXT=$(printf '%03d ms' "$NET")
+  NET_COLOR="$AMBER"
+elif (( NET < 100 )); then
+  NET_TEXT=$(printf '%03d ms' "$NET")
+  NET_COLOR="$SAGE"
+else
+  NET_TEXT=$(printf '%03d ms' "$NET")
+  NET_COLOR="$RUST"
+fi
+
+if (( CPU < 40 )); then CPU_COLOR="$AMBER"; elif (( CPU < 70 )); then CPU_COLOR="$SAGE"; else CPU_COLOR="$RUST"; fi
+if (( RAM_PCT < 60 )); then RAM_COLOR="$AMBER"; elif (( RAM_PCT < 85 )); then RAM_COLOR="$SAGE"; else RAM_COLOR="$RUST"; fi
+
+if [[ $MODE == "json" ]]; then
+  printf '{"host":"%s","net_ms":%d,"cpu_pct":%d,"threat":"%s","ram_pct":%d,"ram_used_gb":%s,"ram_total_gb":%s,"battery_pct":"%s","battery_status":"%s","uptime":"%s","route":"%s"}\n' \
+    "$HOST" "$NET" "$CPU" "$THREAT" "$RAM_PCT" "$RAM_USED" "$RAM_TOTAL" "$BAT_PCT" "$BAT_STATUS" "$UPTIME" "$ROUTE"
+  exit 0
+fi
+
+render() {
+  printf '\n'
+  printf '%s%b  MECHA GREEN  //  TACTICAL STATUS  //  117%b\n' "$BOLD" "$AMBER" "$RESET"
+  printf '%s  ──────────────────────────────────────────────%b\n' "$MUTED" "$RESET"
+  printf '  %sNET     %b%s%-8s%b  %s%s%b\n' "$MUTED" "$RESET" "$NET_COLOR" "$NET_TEXT" "$RESET" "$MUTED" "$HOST" "$RESET"
+  printf '  %sTHREAT  %b%s%3d %%%-4s%b  %s%s%b\n' "$MUTED" "$RESET" "$CPU_COLOR" "$CPU" "" "$RESET" "$MUTED" "$THREAT" "$RESET"
+  printf '  %sAMMO    %b%s%3d %%%-4s%b  %s%.1f / %.1f GB%b\n' "$MUTED" "$RESET" "$RAM_COLOR" "$RAM_PCT" "" "$RESET" "$MUTED" "$RAM_USED" "$RAM_TOTAL" "$RESET"
+  printf '  %sPWR     %b%s%-12s%b\n' "$MUTED" "$RESET" "$PWR_COLOR" "$PWR" "$RESET"
+  printf '  %sMISSION %b%s%-12s%b\n' "$MUTED" "$RESET" "$SAGE" "$UPTIME" "$RESET"
+  if [[ -n $ROUTE ]]; then
+    printf '  %sLINK    %b%s%-12s%b\n' "$MUTED" "$RESET" "$SAGE" "$ROUTE" "$RESET"
+  fi
+  printf '%s  ──────────────────────────────────────────────%b\n' "$MUTED" "$RESET"
+  printf '\n'
+}
+
+if (( WATCH )); then
+  while true; do
+    clear
+    render
+    sleep 2
+  done
+else
+  render
+fi

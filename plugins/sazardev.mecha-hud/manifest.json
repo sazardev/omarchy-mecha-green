@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "sazardev.mecha-hud",
+  "name": "Mecha HUD",
+  "version": "1.0.0",
+  "author": "sazardev",
+  "license": "MIT",
+  "description": "Tactical Omarchy bar strip: ping, CPU threat, RAM ammo, optional battery power.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Mecha HUD",
+    "description": "A military-green HUD with NET latency, THRT CPU load, AMMO RAM pressure and optional PWR battery.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "pingHost": "1.1.1.1",
+      "pingIntervalSec": 5,
+      "showCpu": true,
+      "showAmmo": true,
+      "showPower": true
+    },
+    "schema": [
+      {
+        "key": "pingHost",
+        "type": "string",
+        "label": "Ping host",
+        "description": "Host or IP used for the NET latency readout.",
+        "defaultValue": "1.1.1.1"
+      },
+      {
+        "key": "pingIntervalSec",
+        "type": "integer",
+        "label": "Ping interval (seconds)",
+        "description": "How often the NET readout sends one ICMP echo request.",
+        "min": 2,
+        "max": 60,
+        "step": 1,
+        "defaultValue": 5
+      },
+      {
+        "key": "showCpu",
+        "type": "boolean",
+        "label": "Show THRT",
+        "description": "Display the CPU threat readout.",
+        "defaultValue": true
+      },
+      {
+        "key": "showAmmo",
+        "type": "boolean",
+        "label": "Show AMMO",
+        "description": "Display the RAM pressure readout.",
+        "defaultValue": true
+      },
+      {
+        "key": "showPower",
+        "type": "boolean",
+        "label": "Show PWR",
+        "description": "Display the battery readout when a battery is present.",
+        "defaultValue": true
+      }
+    ]
+  }
+}

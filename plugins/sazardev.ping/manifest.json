@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "sazardev.ping",
+  "name": "Mecha NET",
+  "version": "1.0.0",
+  "author": "sazardev",
+  "license": "MIT",
+  "description": "A compact military NET latency readout for the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "Mecha NET",
+    "description": "ICMP latency to a host, colour-coded; click for a four-packet ping burst.",
+    "category": "Network",
+    "allowMultiple": true,
+    "defaultSection": "right",
+    "defaults": {
+      "pingHost": "1.1.1.1",
+      "pingIntervalSec": 5
+    },
+    "schema": [
+      {
+        "key": "pingHost",
+        "type": "string",
+        "label": "Ping host",
+        "description": "Host or IP used for the NET readout.",
+        "defaultValue": "1.1.1.1"
+      },
+      {
+        "key": "pingIntervalSec",
+        "type": "integer",
+        "label": "Ping interval (seconds)",
+        "description": "How often the readout sends one ICMP echo request.",
+        "min": 2,
+        "max": 60,
+        "step": 1,
+        "defaultValue": 5
+      }
+    ]
+  }
+}

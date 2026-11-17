@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="44%" r="72%">
+      <stop offset="0%" stop-color="#1a1e11"/>
+      <stop offset="100%" stop-color="#050603"/>
+    </radialGradient>
+    <linearGradient id="plate" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5f6a35"/>
+      <stop offset="42%" stop-color="#3f4a22"/>
+      <stop offset="100%" stop-color="#2a3218"/>
+    </linearGradient>
+    <linearGradient id="plate-dark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3f4a22"/>
+      <stop offset="100%" stop-color="#2a3218"/>
+    </linearGradient>
+    <linearGradient id="visor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe28a"/>
+      <stop offset="55%" stop-color="#f2c84b"/>
+      <stop offset="100%" stop-color="#b07a12"/>
+    </linearGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#9dae5c" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+
+  <!-- HUD rings and reticle marks -->
+  <g fill="none" stroke="#f2c84b">
+    <circle cx="960" cy="540" r="458" stroke-opacity="0.13" stroke-width="2" stroke-dasharray="2 16"/>
+    <circle cx="960" cy="540" r="512" stroke-opacity="0.06" stroke-width="1" stroke-dasharray="1 22"/>
+    <path d="M 960 52 L 960 84 M 960 996 L 960 1028 M 472 540 L 504 540 M 1416 540 L 1448 540"
+          stroke-opacity="0.35" stroke-width="2"/>
+    <path d="M 270 180 L 310 180 M 290 160 L 290 200 M 1610 180 L 1650 180 M 1630 160 L 1630 200
+             M 270 900 L 310 900 M 290 880 L 290 920 M 1610 900 L 1650 900 M 1630 880 L 1630 920"
+          stroke-opacity="0.20" stroke-width="1.5"/>
+  </g>
+
+  <!-- Visor glow -->
+  <ellipse cx="960" cy="530" rx="210" ry="150" fill="#f2c84b" opacity="0.32" filter="url(#glow)"/>
+
+  <!-- Helmet shell -->
+  <g stroke="#050603" stroke-width="5" stroke-linejoin="round">
+    <path d="M 960 210
+             C 1050 210 1112 250 1142 312
+             L 1180 430
+             L 1170 600
+             L 1120 740
+             L 1030 820
+             L 890 820
+             L 800 740
+             L 750 600
+             L 740 430
+             L 778 312
+             C 808 250 870 210 960 210 Z"
+          fill="url(#plate)"/>
+
+    <!-- top crest -->
+    <path d="M 902 212 L 1018 212 L 998 306 L 922 306 Z" fill="#5f6a35"/>
+    <path d="M 930 212 L 990 212 L 978 286 L 942 286 Z" fill="#2a3218" stroke-width="3"/>
+
+    <!-- brow plate -->
+    <path d="M 770 360 L 1150 360 L 1162 412 L 758 412 Z" fill="url(#plate-dark)"/>
+
+    <!-- cheek plates -->
+    <path d="M 744 438 L 812 458 L 800 700 L 758 616 Z" fill="url(#plate-dark)"/>
+    <path d="M 1176 438 L 1108 458 L 1120 700 L 1162 616 Z" fill="url(#plate-dark)"/>
+
+    <!-- chin guard -->
+    <path d="M 848 732 L 1072 732 L 1028 806 L 892 806 Z" fill="url(#plate-dark)"/>
+    <path d="M 916 740 L 1004 740 L 982 778 L 938 778 Z" fill="#050603" stroke-width="3"/>
+
+    <!-- visor frame -->
+    <path d="M 808 420 L 1112 420 L 1080 624 L 1000 692 L 920 692 L 840 624 Z"
+          fill="url(#visor)" stroke-width="7"/>
+    <path d="M 828 438 L 1092 438 L 1064 608 L 994 668 L 926 668 L 856 608 Z"
+          fill="none" stroke="#8a6a2a" stroke-opacity="0.65" stroke-width="3"/>
+
+    <!-- cheek vents -->
+    <path d="M 792 650 L 824 660 M 788 670 L 820 680 M 784 690 L 816 700"
+          stroke="#050603" stroke-opacity="0.65" stroke-width="3"/>
+    <path d="M 1128 650 L 1096 660 M 1132 670 L 1100 680 M 1136 690 L 1104 700"
+          stroke="#050603" stroke-opacity="0.65" stroke-width="3"/>
+
+    <!-- ear pods -->
+    <circle cx="742" cy="560" r="38" fill="#2a3218"/>
+    <circle cx="742" cy="560" r="18" fill="#f2c84b" stroke-width="3"/>
+    <circle cx="1178" cy="560" r="38" fill="#2a3218"/>
+    <circle cx="1178" cy="560" r="18" fill="#f2c84b" stroke-width="3"/>
+  </g>
+
+  <!-- Visor reflection -->
+  <path d="M 842 442 L 944 442 L 906 600 L 858 582 Z" fill="#fff6c8" opacity="0.18"/>
+
+  <!-- Panel seams and highlights -->
+  <g fill="none" stroke="#050603" stroke-opacity="0.55" stroke-width="2.5">
+    <path d="M 960 304 L 960 360"/>
+    <path d="M 812 438 L 812 620"/>
+    <path d="M 1108 438 L 1108 620"/>
+    <path d="M 780 470 L 802 500"/>
+    <path d="M 1140 470 L 1118 500"/>
+  </g>
+  <g fill="#6b7a3a" opacity="0.42">
+    <path d="M 798 304 L 858 232 L 900 232 L 838 330 Z"/>
+    <path d="M 1122 304 L 1062 232 L 1020 232 L 1082 330 Z"/>
+    <path d="M 760 468 L 790 480 L 784 560 L 756 520 Z"/>
+    <path d="M 1160 468 L 1130 480 L 1136 560 L 1164 520 Z"/>
+  </g>
+
+  <!-- Horizon line -->
+  <path d="M 120 960 L 1800 960" stroke="#f2c84b" stroke-opacity="0.10" stroke-width="1"/>
+
+  <text x="960" y="942" text-anchor="middle" font-family="Geist Mono, monospace"
+        font-size="22" letter-spacing="11" fill="#d8d9b4" fill-opacity="0.82">MECHA GREEN</text>
+  <text x="960" y="976" text-anchor="middle" font-family="Geist Mono, monospace"
+        font-size="15" letter-spacing="6" fill="#737c58" fill-opacity="0.85">// 117 // OLIVE &amp; AMBER</text>
+</svg>

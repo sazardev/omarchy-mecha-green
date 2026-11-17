@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# ping-status — Waybar-style JSON for an Omarchy custom command module.
+# Example shell.json:
+#   { "id": "ping", "type": "command", "exec": "~/.local/bin/ping-status",
+#     "interval": 5, "tooltip": "Ping" }
+set -euo pipefail
+
+RAW_HOST="${1:-${MECHA_PING_HOST:-1.1.1.1}}"
+HOST=$(printf '%s' "$RAW_HOST" | tr -cd 'A-Za-z0-9.:_-')
+[[ -n $HOST && $HOST != -* ]] || HOST="1.1.1.1"
+OUT=""
+MS=""
+
+if command -v ping >/dev/null 2>&1; then
+  OUT=$(ping -n -c 1 -W 2 "$HOST" 2>/dev/null || true)
+  MS=$(printf '%s\n' "$OUT" | sed -n 's/.*time[=<]\([0-9.]*\) *ms.*/\1/p' | head -1)
+fi
+
+if [[ -z $MS ]]; then
+  printf '{"text":"--","tooltip":"NET no reply · %s","class":"active"}\n' "$HOST"
+  exit 0
+fi
+
+MS_INT=$(printf '%.0f' "$MS")
+if (( MS_INT < 40 )); then
+  CLASS="good"
+elif (( MS_INT < 100 )); then
+  CLASS="warn"
+else
+  CLASS="active"
+fi
+
+printf '{"text":"%03d ms","tooltip":"NET %s ms · %s","class":"%s"}\n' "$MS_INT" "$MS_INT" "$HOST" "$CLASS"

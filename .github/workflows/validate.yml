@@ -1,0 +1,37 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  shell-and-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bash syntax
+        run: |
+          bash -n install.sh
+          bash -n uninstall.sh
+          bash -n scripts/mecha-status
+          bash -n scripts/ping-status
+          bash -n scripts/fetch-halo-backgrounds.sh
+      - name: JSON manifests
+        run: |
+          for f in plugins/*/manifest.json; do
+            jq empty "$f"
+          done
+      - name: Theme sanity
+        run: |
+          for t in themes/mecha-green themes/mecha-green-light; do
+            test -f "$t/colors.toml"
+            test -f "$t/shell.toml"
+            test -f "$t/preview.png"
+            if [[ $t == *light ]]; then
+              test -f "$t/backgrounds/8-mecha-helmet-light.webp"
+            else
+              test -f "$t/backgrounds/8-mecha-helmet.webp"
+            fi
+          done
+          grep -q 'mode = "dark"' themes/mecha-green/colors.toml
+          grep -q 'mode = "light"' themes/mecha-green-light/colors.toml
