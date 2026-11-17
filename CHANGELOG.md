@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 — 2026-11-16
+
+- Normalized the SDDM and Plymouth PNG assets to 8-bit for maximum boot-time
+  compatibility with the Plymouth image loader.
+- Rebuilt the initramfs with the 8-bit assets.
+
 ## 1.2.0 — 2026-11-16
 
 - Added a custom **Plymouth boot splash**: dark olive background, amber
