@@ -6,6 +6,7 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 [![License: MIT](https://img.shields.io/badge/license-MIT-9dae5c.svg)](#license)
 [![Omarchy](https://img.shields.io/badge/Omarchy-Quattro-f2c84b.svg)](https://omarchy.org/)
 [![Quickshell](https://img.shields.io/badge/Quickshell-ready-7fa89a.svg)](https://quickshell.org/)
+[![Validate](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml/badge.svg)](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml)
 
 ![Mecha Green dark](screenshots/mecha-green.png)
 ![Mecha Green Light](screenshots/mecha-green-light.png)
