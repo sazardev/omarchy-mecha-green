@@ -173,8 +173,9 @@ Examples:
 - Omarchy with Hyprland + Quickshell (current Quattro).
 - `git` or `curl` for the installer.
 - `ping` from `iputils` for the NET/HUD widgets.
-- ImageMagick (`magick`) only if you use `--halo` or
-  `mecha-fetch-halo`.
+- ImageMagick (`magick`) if you use `--halo`, `mecha-fetch-halo` or the
+  filter in `mecha-livewall`.
+- `ffmpeg` for live wallpaper generation and the optional Halo live set.
 
 ## Use
 
