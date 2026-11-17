@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.2.0 — 2026-11-16
+
+- Added a custom **Plymouth boot splash**: dark olive background, amber
+  Omarchy mark, amber/olive progress bar and encryption prompt.
+- Added a custom **SDDM login theme**: HUD background, amber Omarchy mark,
+  amber password field, multiuser selector and error state.
+- Verified the **lock screen** in both dark and light modes; the current
+  wallpaper is blurred and the `[lock]` tokens from `shell.toml` theme the
+  password field.
+- Added `system/install-login.sh` and `system/uninstall-login.sh` with backups
+  and initramfs rebuild.
+- Added real login, boot and lock-screen previews.
+
 ## 1.1.1 — 2026-11-16
 
 - Added real 1920×1080 desktop screenshots: dark hero, light switch blueprint,

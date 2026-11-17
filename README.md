@@ -20,6 +20,10 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber indicators, amber-tinted selection, gradient-bordered popups, menus,
   notifications, launcher and lock screen. The light theme flips it to sand
   and bronze.
+- **Themed boot, login and lock screens** — a custom Plymouth splash with an
+  amber Omarchy mark and progress bar, a Mecha Green SDDM login with HUD
+  background and amber password field, and a lock screen that blurs the
+  current wallpaper and uses the same amber/sand lock tokens.
 - **15 dark wallpapers / 12 light wallpapers** — the repo bundles eight original
   Mecha Green pieces in each theme (helmet, topographic HUD, keyboard, switch
   blueprint, PCB blueprint, tactical radar, helmet schematic, supply crate).
@@ -45,6 +49,31 @@ the themed terminal, btop and the light variant.
 | ![](screenshots/real-dark-hud.webp)<br>**Mecha HUD panel** — over the Master Chief hero | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
 | ![](screenshots/real-dark-btop.webp)<br>**btop dark** — olive/amber CPU and memory | ![](screenshots/real-light-btop.webp)<br>**btop light** — sand/bronze |
 | ![](screenshots/real-dark-switch.webp)<br>**Switch blueprint desktop** — clean | ![](screenshots/real-light-warthog.webp)<br>**Light Warthog desktop** — warm Halo scene |
+
+## Boot, login and lock
+
+| | |
+|---|---|
+| ![](screenshots/login-preview.webp)<br>**SDDM login** — Mecha Green system access | ![](screenshots/plymouth-preview.webp)<br>**Plymouth boot** — amber Omarchy mark and progress bar |
+| ![](screenshots/real-dark-lock.webp)<br>**Lock screen dark** — blurred Mecha Green wallpaper | ![](screenshots/real-light-lock.webp)<br>**Lock screen light** — sand and bronze |
+
+- **Lock screen:** follows the current wallpaper, blurs it and applies the
+  `[lock]` tokens from `shell.toml` — amber border, olive field, rust error
+  state.
+- **SDDM login:** dark olive HUD background, amber Omarchy mark, amber
+  password field, multiuser selector.
+- **Plymouth boot:** custom dark-olive theme with the amber Omarchy mark and a
+  matching amber progress bar.
+
+The login and boot themes are system files, so they have their own installer:
+
+```sh
+sudo ./system/install-login.sh
+```
+
+It backs up the current SDDM/Plymouth config, installs both themes and rebuilds
+the initramfs. The login screen appears on the next logout/reboot; the boot
+splash on the next boot. Undo with `sudo ./system/uninstall-login.sh`.
 
 ## Custom hardware art
 

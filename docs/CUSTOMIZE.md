@@ -102,6 +102,28 @@ selection. Kitty, Foot and Ghostty are generated from `colors.toml`. If you use
 one of those, edit the generated file after applying or add a custom theme file
 next to `alacritty.toml`.
 
+## Lock, login and boot screens
+
+- **Lock screen:** edit the `[lock]` section of the theme's `shell.toml`
+  (`background`, `text`, `placeholder`, `text-error`, `border`, `selection`).
+  It follows the current wallpaper, so `omarchy theme bg next` changes the
+  blurred backdrop too.
+- **SDDM login:** edit `system/sddm/mecha-green/`. The background source is
+  `background.svg` (render it to `background.webp`); `Main.qml` holds the
+  logo, user selector, password field and error state; `entry.png`,
+  `lock.png` and `bullet.png` are the amber/olive assets.
+- **Plymouth boot:** edit `system/plymouth/mecha-green/`. `mecha-green.script`
+  sets the background colour and progress animation; `logo.png`,
+  `progress_bar.png` and `progress_box.png` are the visuals.
+
+After changing system screens, reinstall them:
+
+```sh
+sudo ./system/install-login.sh
+```
+
+The SDDM theme applies on the next logout/reboot; Plymouth on the next boot.
+
 ## Make your own variant
 
 1. Copy `themes/mecha-green` to a new folder under

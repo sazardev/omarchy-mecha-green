@@ -81,6 +81,48 @@ omarchy theme set "Mecha Green"
 omarchy plugin enable sazardev.mecha-hud --section right --after omarchy.power
 ```
 
+## Login and boot screen (optional, root)
+
+The SDDM login theme and Plymouth boot splash are system files, so they are
+installed separately from the user themes:
+
+```sh
+sudo ./system/install-login.sh
+```
+
+What it does:
+
+- Backs up `/etc/plymouth/plymouthd.conf` and `/etc/sddm.conf.d` to
+  `/var/backups/mecha-green-login-*`.
+- Copies the SDDM theme to `/usr/share/sddm/themes/mecha-green` and writes
+  `/etc/sddm.conf.d/99-zz-mecha-green.conf` (`Current=mecha-green`).
+- Copies the Plymouth theme to
+  `/usr/share/plymouth/themes/mecha-green`.
+- Selects it with `plymouth-set-default-theme mecha-green` and rebuilds the
+  initramfs (`limine-mkinitcpio` or `mkinitcpio -P`).
+
+The SDDM theme appears on the next logout/reboot; the splash on the next boot.
+
+Preview the login theme without logging out:
+
+```sh
+sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/mecha-green
+```
+
+Preview the lock screen over the current wallpaper:
+
+```sh
+omarchy-shell lock preview
+```
+
+Click anywhere to dismiss the lock preview.
+
+Undo:
+
+```sh
+sudo ./system/uninstall-login.sh
+```
+
 ## Why not `omarchy theme install`?
 
 `omarchy theme install <url>` is perfect for a single theme at the root of a

@@ -234,3 +234,4 @@ echo "  Add the HUD:     omarchy plugin enable sazardev.mecha-hud --section righ
 echo "  Add NET only:    omarchy plugin enable sazardev.ping --section right"
 echo "  Fetch Halo art:  mecha-fetch-halo"
 echo "  Tactical CLI:    mecha-status"
+echo "  Login + boot:    sudo ./system/install-login.sh"

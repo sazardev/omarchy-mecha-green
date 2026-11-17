@@ -16,6 +16,8 @@ jobs:
           bash -n scripts/mecha-status
           bash -n scripts/ping-status
           bash -n scripts/fetch-halo-backgrounds.sh
+          bash -n system/install-login.sh
+          bash -n system/uninstall-login.sh
       - name: JSON manifests
         run: |
           for f in plugins/*/manifest.json; do
@@ -35,3 +37,10 @@ jobs:
           done
           grep -q 'mode = "dark"' themes/mecha-green/colors.toml
           grep -q 'mode = "light"' themes/mecha-green-light/colors.toml
+      - name: Login and boot theme files
+        run: |
+          test -f system/sddm/mecha-green/Main.qml
+          test -f system/sddm/mecha-green/background.webp
+          test -f system/plymouth/mecha-green/mecha-green.plymouth
+          test -f system/plymouth/mecha-green/mecha-green.script
+          test -f system/plymouth/mecha-green/progress_bar.png
