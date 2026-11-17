@@ -1006,6 +1006,11 @@ Panel {
     onWidthChanged: requestPaint()
     onHeightChanged: requestPaint()
     Component.onCompleted: requestPaint()
+    Connections {
+      target: root
+      function onForegroundChanged() { radar.requestPaint() }
+      function onAccentChanged() { radar.requestPaint() }
+    }
 
     onPaint: {
       var ctx = getContext("2d")
