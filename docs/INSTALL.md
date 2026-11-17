@@ -42,7 +42,7 @@ cd omarchy-mecha-green
 
 ```sh
 ./install.sh --light                 # apply the light theme
-./install.sh --halo                  # also fetch the optional Halo wallpapers
+./install.sh --halo                  # fetch the full optional Halo & military set
 ./install.sh --ping                  # also enable the standalone NET widget
 ./install.sh --no-hud                # themes only
 ./install.sh --bar glassy            # translucent bar instead of opaque
@@ -68,12 +68,16 @@ mkdir -p ~/.local/bin
 cp scripts/mecha-status scripts/ping-status scripts/mecha-themetize ~/.local/bin/
 chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status ~/.local/bin/mecha-themetize
 
-# Optional Halo wallpapers
+# Optional Halo & military wallpapers
 mkdir -p ~/.local/share/omarchy-mecha-green/{scripts,assets}
 cp scripts/fetch-halo-backgrounds.sh ~/.local/share/omarchy-mecha-green/scripts/
 cp assets/lut-*.png ~/.local/share/omarchy-mecha-green/assets/
 chmod +x ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh
 ln -sf ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh ~/.local/bin/mecha-fetch-halo
+
+# Fetch only some curated sets (spartans, unsc, covenant, forerunner)
+mecha-fetch-halo --set spartans,unsc
+mecha-fetch-halo --list-sets
 
 # Load and apply
 omarchy-shell shell rescanPlugins

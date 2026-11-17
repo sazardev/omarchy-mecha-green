@@ -36,21 +36,36 @@ to the Mecha Green palette. Use them for your own desktop only; do not
 redistribute them.
 
 The set is deliberately curated to olive, amber and cream. Blue-heavy scenes
-are pushed through the same `mecha-themetize` filter used by the CLI; the
-newest additions are a tank dust cloud, a night fighter jet, sunset
-helicopters and a snow helicopter.
+are pushed through the same `mecha-themetize` filter used by the CLI. The
+optional fetch now includes four extra curated sets:
+
+| Set | Files | Content |
+|---|---:|---|
+| Spartans | 5 dark / 5 light | Chief and Spartan portraits |
+| UNSC | 5 dark / 5 light | Frigates, city, ODSTs, Pelican and Warthog |
+| Covenant | 5 dark / 5 light | Elites, Arbiter and energy swords |
+| Forerunner | 6 dark / 6 light | Spires, rings, temple and ring horizons |
 
 ```sh
 mecha-fetch-halo
 # or, from a clone:
 ./scripts/fetch-halo-backgrounds.sh
+
+# Only some sets
+mecha-fetch-halo --set spartans,unsc
+./scripts/fetch-halo-backgrounds.sh --set covenant
+
+# List the sets
+mecha-fetch-halo --list-sets
 ```
 
 Requirements: `curl` and ImageMagick (`magick`). Existing files are kept unless
 you pass `--force`; use `--force` after upgrading to refresh the new set. Use
 `--dark-only` or `--light-only` to limit the download.
 
-### Dark set (13)
+Together the base and curated sets add **34 dark** and **30 light** files.
+
+### Base dark set (13)
 
 | File | Wallhaven | Uploader |
 |---|---|---|
@@ -68,7 +83,7 @@ you pass `--force`; use `--force` after upgrading to refresh the new set. Use
 | `20-helicopter-sunset.webp` | [4lxrdp](https://wallhaven.cc/w/4lxrdp) | br3athless |
 | `21-jet-night.webp` | [42vrp6](https://wallhaven.cc/w/42vrp6) | Wallhaven |
 
-### Light set (9)
+### Base light set (9)
 
 | File | Wallhaven | Uploader |
 |---|---|---|
@@ -82,6 +97,35 @@ you pass `--force`; use `--force` after upgrading to refresh the new set. Use
 | `19-tank-dust.webp` | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
 | `20-helicopter-snow.webp` | [nmkkq1](https://wallhaven.cc/w/nmkkq1) | Wallhaven |
 
+### Curated sets (21 dark / 21 light)
+
+Dark files use 22–42. The light twin uses one number lower (21–41), so
+`22-chief-noir.webp` becomes `21-chief-noir.webp` in the light theme.
+
+| Set | Dark file | Light file | Wallhaven | Uploader |
+|---|---|---|---|---|
+| Spartans | `22-chief-noir.webp` | `21-chief-noir.webp` | [0je6vp](https://wallhaven.cc/w/0je6vp) | Wallhaven |
+| Spartans | `23-chief-blue.webp` | `22-chief-blue.webp` | [6qjwel](https://wallhaven.cc/w/6qjwel) | ZuaDoR0 |
+| Spartans | `24-helmet-amber.webp` | `23-helmet-amber.webp` | [83qpoy](https://wallhaven.cc/w/83qpoy) | Crossby |
+| Spartans | `25-chief-rain.webp` | `24-chief-rain.webp` | [lq887r](https://wallhaven.cc/w/lq887r) | canadianakin |
+| Spartans | `26-spartan-visor.webp` | `25-spartan-visor.webp` | [435686](https://wallhaven.cc/w/435686) | ShiftySigma |
+| UNSC | `27-unsc-frigate.webp` | `26-unsc-frigate.webp` | [4537m8](https://wallhaven.cc/w/4537m8) | mattilius258 |
+| UNSC | `28-unsc-city.webp` | `27-unsc-city.webp` | [g8le3e](https://wallhaven.cc/w/g8le3e) | SamUerto |
+| UNSC | `29-odst-squad.webp` | `28-odst-squad.webp` | [lm7l9p](https://wallhaven.cc/w/lm7l9p) | SamUerto |
+| UNSC | `30-pelican-drop.webp` | `29-pelican-drop.webp` | [oxep9p](https://wallhaven.cc/w/oxep9p) | SamUerto |
+| UNSC | `31-warthog-sunset.webp` | `30-warthog-sunset.webp` | [vgj8z8](https://wallhaven.cc/w/vgj8z8) | DeltaPrime |
+| Covenant | `32-elite-portrait.webp` | `31-elite-portrait.webp` | [4d3lrl](https://wallhaven.cc/w/4d3lrl) | JT42 |
+| Covenant | `33-elite-night.webp` | `32-elite-night.webp` | [kw6qq7](https://wallhaven.cc/w/kw6qq7) | SamUerto |
+| Covenant | `34-arbiter-duel.webp` | `33-arbiter-duel.webp` | [mdmkem](https://wallhaven.cc/w/mdmkem) | SamUerto |
+| Covenant | `35-elite-closeup.webp` | `34-elite-closeup.webp` | [mpq2o1](https://wallhaven.cc/w/mpq2o1) | ZuaDoR0 |
+| Covenant | `36-energy-swords.webp` | `35-energy-swords.webp` | [z8gmyo](https://wallhaven.cc/w/z8gmyo) | BIOOH |
+| Forerunner | `37-forerunner-spire.webp` | `36-forerunner-spire.webp` | [39pgl3](https://wallhaven.cc/w/39pgl3) | Crossby |
+| Forerunner | `38-ring-arc.webp` | `37-ring-arc.webp` | [dpvvgm](https://wallhaven.cc/w/dpvvgm) | Wallhaven |
+| Forerunner | `39-forerunner-temple.webp` | `38-forerunner-temple.webp` | [ey1mll](https://wallhaven.cc/w/ey1mll) | SamUerto |
+| Forerunner | `40-forerunner-snow.webp` | `39-forerunner-snow.webp` | [kwomm1](https://wallhaven.cc/w/kwomm1) | DeltaPrime |
+| Forerunner | `41-chief-sunset.webp` | `40-chief-sunset.webp` | [l3o6yl](https://wallhaven.cc/w/l3o6yl) | Doctorc418 |
+| Forerunner | `42-ring-horizon.webp` | `41-ring-horizon.webp` | [y8ldqd](https://wallhaven.cc/w/y8ldqd) | Doctorc418 |
+
 The fetch script crops out the original site watermarks where present, resizes
 to 2560×1440, applies an olive/amber grade (or a light grade for the light
 theme), and writes WebP at quality 92. The original 1–7 / 1–4 set uses:
@@ -94,9 +138,10 @@ theme), and writes WebP at quality 92. The original 1–7 / 1–4 set uses:
   the warm-graded Master Chief field hero, so the original cyan beams and sky
   are replaced with olive/amber/cream.
 
-The newer 16–21 / 16–20 set is processed with
-[`mecha-themetize`](../scripts/mecha-themetize) at 80% strength, so it shares
-the same gradient-map palette as user wallpapers.
+The newer 16–21 / 16–20 and all four curated sets are processed with
+[`mecha-themetize`](../scripts/mecha-themetize) at 80% strength, so they share
+the same gradient-map palette as user wallpapers. The curated sets drop the
+bottom 8% of each source first to remove publisher watermarks.
 
 ## Themetize your own
 

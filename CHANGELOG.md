@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.4.0 — 2026-11-16
+
+- Added four curated Halo sets, 21 dark and 21 light wallpapers: Spartans,
+  UNSC, Covenant and Forerunner. All use the `mecha-themetize` palette filter
+  and have publisher watermarks cropped out.
+- Added `--set spartans,unsc` and `--list-sets` to the optional fetcher, with
+  dark 22–42 / light 21–41 numbering.
+- Local installs now carry 42 dark and 38 light backgrounds when the optional
+  set is fetched.
+
 ## 1.3.0 — 2026-11-16
 
 - Rebuilt the keyboard wallpaper as a product-style render with beveled

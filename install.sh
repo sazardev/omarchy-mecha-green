@@ -31,7 +31,7 @@ Options:
   --no-apply     Install files but do not switch the active theme
   --no-hud       Do not enable the Mecha HUD bar widget
   --ping         Also enable the standalone Mecha NET widget
-  --halo         Download the optional Halo wallpaper set (personal use only)
+  --halo         Download all optional Halo & military sets (personal use only)
   --bar <mode>   Bar background mode: opaque (default), glassy or none
   --no-bar       Do not change the current bar background mode
   --force        Overwrite existing theme backgrounds and previews

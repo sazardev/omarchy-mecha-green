@@ -18,27 +18,100 @@ FORCE=0
 YES=0
 DARK=1
 LIGHT=1
+SETS="all"
 
-for arg in "$@"; do
-  case "$arg" in
+# Curated sets. Fields: set|dark number|slug|Wallhaven id|extension.
+# Light files use one number lower (21-41), so the same slug stays together.
+HALO_SETS=(
+  "spartans|22|chief-noir|0je6vp|jpg"
+  "spartans|23|chief-blue|6qjwel|png"
+  "spartans|24|helmet-amber|83qpoy|jpg"
+  "spartans|25|chief-rain|lq887r|jpg"
+  "spartans|26|spartan-visor|435686|jpg"
+  "unsc|27|unsc-frigate|4537m8|jpg"
+  "unsc|28|unsc-city|g8le3e|jpg"
+  "unsc|29|odst-squad|lm7l9p|jpg"
+  "unsc|30|pelican-drop|oxep9p|jpg"
+  "unsc|31|warthog-sunset|vgj8z8|png"
+  "covenant|32|elite-portrait|4d3lrl|jpg"
+  "covenant|33|elite-night|kw6qq7|jpg"
+  "covenant|34|arbiter-duel|mdmkem|png"
+  "covenant|35|elite-closeup|mpq2o1|png"
+  "covenant|36|energy-swords|z8gmyo|jpg"
+  "forerunner|37|forerunner-spire|39pgl3|png"
+  "forerunner|38|ring-arc|dpvvgm|jpg"
+  "forerunner|39|forerunner-temple|ey1mll|png"
+  "forerunner|40|forerunner-snow|kwomm1|png"
+  "forerunner|41|chief-sunset|l3o6yl|jpg"
+  "forerunner|42|ring-horizon|y8ldqd|jpg"
+)
+
+usage() {
+  cat <<'EOF'
+Usage: fetch-halo-backgrounds.sh [options]
+
+Downloads and grades the Halo & military wallpaper set into the installed
+Mecha Green themes. Existing files are kept unless --force is given.
+
+Options:
+  --dark-only              Only fetch the dark set
+  --light-only             Only fetch the light set
+  --set LIST               Curated sets: spartans, unsc, covenant, forerunner,
+                           all (default). Comma-separate to pick several.
+  --list-sets              Show the curated sets and exit
+  --force                  Overwrite existing files
+  --yes, -y                Skip the personal-use confirmation
+  -h, --help               Show this help
+EOF
+}
+
+list_sets() {
+  cat <<'EOF'
+Curated Halo sets (five files each, six for forerunner):
+
+  spartans     Chief and Spartan portraits
+  unsc         Ships, ODSTs, Pelicans and a Warthog
+  covenant     Elites, Arbiter and energy swords
+  forerunner   Spires, rings, temples and ring horizons
+
+Pass --set spartans,unsc to fetch only those sets. Both themes get the same
+slugs; dark uses 22-42 and light uses 21-41.
+EOF
+}
+
+while (( $# > 0 )); do
+  case "$1" in
     --force) FORCE=1 ;;
     --yes|-y) YES=1 ;;
     --dark-only) LIGHT=0 ;;
     --light-only) DARK=0 ;;
-    -h|--help)
-      cat <<'EOF'
-Usage: fetch-halo-backgrounds.sh [--dark-only|--light-only] [--force] [--yes]
-
-Downloads and grades the Halo & military wallpaper set into the installed
-Mecha Green themes. Existing files are kept unless --force is given. Use --force after
-upgrading from an older release to refresh the warm-graded hero and the
-curated light set.
-EOF
-      exit 0
+    --set|--sets)
+      if (( $# < 2 )); then
+        echo "--set needs spartans, unsc, covenant, forerunner or all" >&2
+        exit 2
+      fi
+      SETS="$2"
+      shift
       ;;
-    *) echo "unknown option: $arg" >&2; exit 2 ;;
+    --list-sets) list_sets; exit 0 ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
   esac
+  shift
 done
+
+SETS="${SETS// /}"
+if [[ $SETS == all || -z $SETS ]]; then
+  SETS="all"
+else
+  IFS=',' read -ra _requested_sets <<< "$SETS"
+  for _set in "${_requested_sets[@]}"; do
+    case "$_set" in
+      spartans|unsc|covenant|forerunner) ;;
+      *) echo "unknown set: $_set (use --list-sets)" >&2; exit 2 ;;
+    esac
+  done
+fi
 
 command -v curl >/dev/null 2>&1 || { echo "curl is required" >&2; exit 1; }
 command -v magick >/dev/null 2>&1 || { echo "ImageMagick (magick) is required" >&2; exit 1; }
@@ -75,6 +148,39 @@ download() {
     echo "  get   $id"
     curl -L --fail --retry 2 --silent --show-error -o "$TMP/$id.$ext" "$url"
   fi
+}
+
+set_selected() {
+  [[ $SETS == all ]] && return 0
+  [[ ",$SETS," == *",$1,"* ]]
+}
+
+# Crop the bottom 8% to remove publisher watermarks, then grade and fit.
+fetch_curated_sets() {
+  local mode="$1" dir numoff entry set num slug id ext out src h chop
+  if [[ $mode == dark ]]; then
+    dir="$DARK_DIR"; numoff=0
+  else
+    dir="$LIGHT_DIR"; numoff=-1
+  fi
+
+  for entry in "${HALO_SETS[@]}"; do
+    IFS='|' read -r set num slug id ext <<< "$entry"
+    set_selected "$set" || continue
+    out="$dir/$(printf '%02d' $((num + numoff)))-$slug.webp"
+    if [[ -f $out && $FORCE -eq 0 ]]; then
+      echo "  keep  $(basename "$out")" >&2
+      continue
+    fi
+    download "$id" "https://w.wallhaven.cc/full/${id:0:2}/wallhaven-$id.$ext" "$ext"
+    src="$TMP/$id-clean.png"
+    if [[ ! -f $src ]]; then
+      h=$(magick identify -format '%h' "$TMP/$id.$ext")
+      chop=$((h * 8 / 100))
+      magick "$TMP/$id.$ext" -gravity south -chop "0x${chop}" +repage "$src"
+    fi
+    "$THEMETIZE" "$src" "$out" --mode "$mode" --strength 80 --fit 2560x1440
+  done
 }
 
 mkdir -p "$DARK_DIR" "$LIGHT_DIR"
@@ -177,6 +283,9 @@ if (( DARK )); then
   if (( want_jet )); then
     "$THEMETIZE" "$TMP/42vrp6.jpg" "$DARK_DIR/21-jet-night.webp" --mode dark --strength 80 --fit 2560x1440
   fi
+
+  echo "  Curated sets (dark): $SETS"
+  fetch_curated_sets dark
 fi
 
 if (( LIGHT )); then
@@ -240,6 +349,9 @@ if (( LIGHT )); then
     [[ -f "$TMP/helicopter-snow.jpg" ]] || magick "$TMP/nmkkq1.jpg" -gravity north -crop 100%x1380+0+0 +repage "$TMP/helicopter-snow.jpg"
     "$THEMETIZE" "$TMP/helicopter-snow.jpg" "$LIGHT_DIR/20-helicopter-snow.webp" --mode light --strength 80 --fit 2560x1440
   fi
+
+  echo "  Curated sets (light): $SETS"
+  fetch_curated_sets light
 fi
 
 echo "Done. Cycle them with: omarchy theme bg next"

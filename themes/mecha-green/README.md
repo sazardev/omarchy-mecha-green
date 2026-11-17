@@ -33,9 +33,10 @@ This is the dark half of the Mecha Green pair. The light twin is
   topographic HUD, keyboard, Hall Effect switch blueprint, PCB blueprint,
   tactical radar, helmet schematic and supply crate.
 
-The optional Halo & military wallpaper set is fetched separately and is not part of the
-MIT assets. Run `mecha-fetch-halo` from the repository root or the installer's
-`--halo` flag.
+The optional Halo & military wallpaper sets are fetched separately and are not
+part of the MIT assets: 34 dark / 30 light files across Spartans, UNSC,
+Covenant and Forerunner sets. Run `mecha-fetch-halo`, or limit it with
+`mecha-fetch-halo --set spartans,unsc`; `--list-sets` shows the groups.
 
 ## Apply
 

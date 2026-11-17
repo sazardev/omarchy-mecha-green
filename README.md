@@ -24,11 +24,12 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber Omarchy mark and progress bar, a Mecha Green SDDM login with HUD
   background and amber password field, and a lock screen that blurs the
   current wallpaper and uses the same amber/sand lock tokens.
-- **21 dark wallpapers / 17 light wallpapers** — the repo bundles eight original
-  Mecha Green pieces in each theme (helmet, topographic HUD, keyboard, switch
-  blueprint, PCB blueprint, tactical radar, helmet schematic, supply crate).
-  An optional fetcher adds thirteen dark and nine light Halo & military scenes
-  for personal use, all graded into olive / amber / cream.
+- **42 dark wallpapers / 38 light wallpapers** — the repo bundles eight
+  original Mecha Green pieces in each theme (helmet, topographic HUD, keyboard,
+  switch blueprint, PCB blueprint, tactical radar, helmet schematic, supply
+  crate). An optional fetcher adds thirty-four dark and thirty light Halo &
+  military scenes for personal use, all graded into olive / amber / cream.
+  Curated sets: Spartans, UNSC, Covenant and Forerunner.
 - **Mecha HUD** — a working Quickshell bar plugin: `NET` latency, `THRT` CPU
   load, `AMMO` RAM pressure, optional `PWR` battery. Click for a telemetry
   panel with a 60-sample latency graph, packet loss, uptime and a ping-target
@@ -114,7 +115,7 @@ cd omarchy-mecha-green
 | `--no-apply` | Install everything but keep the current theme |
 | `--no-hud` | Do not enable the Mecha HUD bar widget |
 | `--ping` | Also enable the standalone **Mecha NET** widget |
-| `--halo` | Download the optional Halo & military wallpaper set (personal use only) |
+| `--halo` | Download all optional Halo & military sets: 34 dark / 30 light (personal use only) |
 | `--bar <mode>` | Bar background: `opaque` (default), `glassy` or `none` |
 | `--no-bar` | Leave the current bar background mode alone |
 | `--force` | Overwrite existing backgrounds and previews |
@@ -293,7 +294,8 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 ## Bundled wallpapers
 
 Each theme ships eight original 2560×1440 pieces. The optional Halo & military
-fetcher adds thirteen dark and nine light scenes on top.
+fetcher adds thirty-four dark and thirty light scenes on top, grouped into
+Spartans, UNSC, Covenant and Forerunner sets.
 
 | Art | Dark | Light |
 |---|---|---|
@@ -358,6 +360,40 @@ It adds:
 | `18-warthog-canyon.webp` (light) | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
 | `19-tank-dust.webp` (light) | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
 | `20-helicopter-snow.webp` (light) | [nmkkq1](https://wallhaven.cc/w/nmkkq1) | Wallhaven |
+
+The curated sets add five files each (six for Forerunner). Dark files use
+22–42; the light twin uses one number lower, 21–41:
+
+| Set | Dark file | Light file | Wallhaven | Credit |
+|---|---|---|---|---|
+| Spartans | `22-chief-noir.webp` | `21-chief-noir.webp` | [0je6vp](https://wallhaven.cc/w/0je6vp) | Wallhaven |
+| Spartans | `23-chief-blue.webp` | `22-chief-blue.webp` | [6qjwel](https://wallhaven.cc/w/6qjwel) | ZuaDoR0 |
+| Spartans | `24-helmet-amber.webp` | `23-helmet-amber.webp` | [83qpoy](https://wallhaven.cc/w/83qpoy) | Crossby |
+| Spartans | `25-chief-rain.webp` | `24-chief-rain.webp` | [lq887r](https://wallhaven.cc/w/lq887r) | canadianakin |
+| Spartans | `26-spartan-visor.webp` | `25-spartan-visor.webp` | [435686](https://wallhaven.cc/w/435686) | ShiftySigma |
+| UNSC | `27-unsc-frigate.webp` | `26-unsc-frigate.webp` | [4537m8](https://wallhaven.cc/w/4537m8) | mattilius258 |
+| UNSC | `28-unsc-city.webp` | `27-unsc-city.webp` | [g8le3e](https://wallhaven.cc/w/g8le3e) | SamUerto |
+| UNSC | `29-odst-squad.webp` | `28-odst-squad.webp` | [lm7l9p](https://wallhaven.cc/w/lm7l9p) | SamUerto |
+| UNSC | `30-pelican-drop.webp` | `29-pelican-drop.webp` | [oxep9p](https://wallhaven.cc/w/oxep9p) | SamUerto |
+| UNSC | `31-warthog-sunset.webp` | `30-warthog-sunset.webp` | [vgj8z8](https://wallhaven.cc/w/vgj8z8) | DeltaPrime |
+| Covenant | `32-elite-portrait.webp` | `31-elite-portrait.webp` | [4d3lrl](https://wallhaven.cc/w/4d3lrl) | JT42 |
+| Covenant | `33-elite-night.webp` | `32-elite-night.webp` | [kw6qq7](https://wallhaven.cc/w/kw6qq7) | SamUerto |
+| Covenant | `34-arbiter-duel.webp` | `33-arbiter-duel.webp` | [mdmkem](https://wallhaven.cc/w/mdmkem) | SamUerto |
+| Covenant | `35-elite-closeup.webp` | `34-elite-closeup.webp` | [mpq2o1](https://wallhaven.cc/w/mpq2o1) | ZuaDoR0 |
+| Covenant | `36-energy-swords.webp` | `35-energy-swords.webp` | [z8gmyo](https://wallhaven.cc/w/z8gmyo) | BIOOH |
+| Forerunner | `37-forerunner-spire.webp` | `36-forerunner-spire.webp` | [39pgl3](https://wallhaven.cc/w/39pgl3) | Crossby |
+| Forerunner | `38-ring-arc.webp` | `37-ring-arc.webp` | [dpvvgm](https://wallhaven.cc/w/dpvvgm) | Wallhaven |
+| Forerunner | `39-forerunner-temple.webp` | `38-forerunner-temple.webp` | [ey1mll](https://wallhaven.cc/w/ey1mll) | SamUerto |
+| Forerunner | `40-forerunner-snow.webp` | `39-forerunner-snow.webp` | [kwomm1](https://wallhaven.cc/w/kwomm1) | DeltaPrime |
+| Forerunner | `41-chief-sunset.webp` | `40-chief-sunset.webp` | [l3o6yl](https://wallhaven.cc/w/l3o6yl) | Doctorc418 |
+| Forerunner | `42-ring-horizon.webp` | `41-ring-horizon.webp` | [y8ldqd](https://wallhaven.cc/w/y8ldqd) | Doctorc418 |
+
+Fetch only the sets you want:
+
+```sh
+mecha-fetch-halo --set spartans,unsc
+mecha-fetch-halo --list-sets
+```
 
 See [`docs/WALLPAPERS.md`](docs/WALLPAPERS.md) for the full credits and notes.
 
