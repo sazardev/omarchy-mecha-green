@@ -39,6 +39,9 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   terminal (`--json` and `--watch` included), `mecha-themetize` maps any image
   onto the Mecha Green palette and can install it as a wallpaper, and
   `ping-status` is a Waybar-style command-module script.
+- **Standard Omarchy install** — registry-ready dark and light theme
+  repositories install with `omarchy theme install mecha-green` (or the light
+  twin), while `install.sh` adds the HUD, CLI, login screens and optional sets.
 - **Original SVG sources** for the helmet, topographic and keyboard art.
 
 ## Real screenshots
@@ -89,15 +92,40 @@ The bundled set includes five code-drawn military pieces. A few highlights:
 
 ## Install
 
-### One command (recommended)
+There are two supported paths: the standard Omarchy theme install for the
+theme itself, or the full project installer for the HUD, CLI, login screens and
+optional wallpaper sets.
+
+### Omarchy theme install (theme only)
+
+The themes live in their own registry-ready repositories:
+
+```sh
+# Once the registry listing is live
+omarchy theme install mecha-green
+omarchy theme install mecha-green-light
+
+# Or install directly from the repositories today
+omarchy theme install https://github.com/sazardev/omarchy-mecha-green-theme
+omarchy theme install https://github.com/sazardev/omarchy-mecha-green-light-theme
+```
+
+This is the standard Omarchy path: it keeps the palette, `shell.toml`, btop,
+Chromium, icons, keyboard RGB, unlock art and the eight original wallpapers.
+Omarchy regenerates the terminal and Hyprland configs from `colors.toml` and
+drops executable theme files, exactly as designed for third-party themes.
+
+### Full setup (recommended for the complete desktop)
 
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/sazardev/omarchy-mecha-green/main/install.sh)"
 ```
 
-The installer copies both themes, installs the plugins and CLI, enables the
-Mecha HUD on the right side of the bar, and applies the dark theme. It does
-**not** use `sudo` and backs up `shell.json` before touching the bar.
+The full installer copies both themes as user-owned themes, installs the
+Mecha HUD and Mecha NET plugins, adds the CLIs, enables the HUD on the right
+side of the bar, and applies the dark theme. It also supports the optional
+Halo/military sets and the SDDM/Plymouth login screens. It does **not** use
+`sudo` for the user setup and backs up `shell.json` before touching the bar.
 
 ### From a clone
 

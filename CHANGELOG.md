@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.4.1 — 2026-11-17
+
+- Published registry-ready theme repositories for `omarchy theme install`:
+  `mecha-green` and `mecha-green-light`, with `colors.toml`, `backgrounds/`
+  and `preview.png` at the root.
+- Submitted both themes to the Omarchy theme registry and the official extra
+  themes gallery.
+- Documented the standard Omarchy install path alongside the full installer.
+- Fixed `keyboard.rgb` to the six-hex-digit format Omarchy expects, so the
+  keyboard colour is applied.
+- Removed ignored `selection_background` / `selection_foreground` palette keys.
+
 ## 1.4.0 — 2026-11-16
 
 - Added four curated Halo sets, 21 dark and 21 light wallpapers: Spartans,

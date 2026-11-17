@@ -44,3 +44,16 @@ Covenant and Forerunner sets. Run `mecha-fetch-halo`, or limit it with
 omarchy theme set "Mecha Green"
 omarchy theme bg next
 ```
+
+## Standard Omarchy install
+
+The registry-ready dark theme lives at
+[`sazardev/omarchy-mecha-green-theme`](https://github.com/sazardev/omarchy-mecha-green-theme).
+Install it directly:
+
+```sh
+omarchy theme install https://github.com/sazardev/omarchy-mecha-green-theme
+```
+
+Once the registry listing is live, `omarchy theme install mecha-green` is the
+short form.

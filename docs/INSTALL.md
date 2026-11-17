@@ -20,7 +20,7 @@ The installer does not use `sudo`. It writes to:
 ~/.local/share/omarchy-mecha-green
 ```
 
-## One command
+## Full setup (one command)
 
 ```sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/sazardev/omarchy-mecha-green/main/install.sh)"
@@ -127,17 +127,31 @@ Undo:
 sudo ./system/uninstall-login.sh
 ```
 
-## Why not `omarchy theme install`?
+## Standard Omarchy theme install
 
-`omarchy theme install <url>` is perfect for a single theme at the root of a
-repository. This repository is a **collection**: two themes, two plugins, a
-CLI, a fetcher and original SVG sources. Omarchy's repo-theme path also
-deliberately drops `.lua` files and terminal configs from cloned themes
-(`hyprland.lua`, `alacritty.toml`) because they can run code. Mecha Green uses
-a custom `hyprland.lua` and Alacritty config, so the installer copies the theme
-folders as **user-owned** themes, where those files are allowed. If you only
-want the dark theme and no customization, you can still copy
-`themes/mecha-green` into `~/.config/omarchy/themes/` yourself.
+The themes are also published as standalone, registry-ready repositories with
+`colors.toml`, `backgrounds/` and `preview.png` at the root:
+
+```sh
+# Once listed in the Omarchy registry
+omarchy theme install mecha-green
+omarchy theme install mecha-green-light
+
+# Direct from the theme repositories, available now
+omarchy theme install https://github.com/sazardev/omarchy-mecha-green-theme
+omarchy theme install https://github.com/sazardev/omarchy-mecha-green-light-theme
+```
+
+This is the safest and most standard path. It keeps the palette, `shell.toml`,
+btop, Chromium, icons, keyboard RGB, unlock art and the eight bundled
+wallpapers. Omarchy deliberately drops `.lua` files and terminal configs from
+repository-installed themes and regenerates them from `colors.toml`, so the
+marketplace theme cannot run code on your machine.
+
+Use `install.sh` below when you also want the Mecha HUD, Mecha NET, the CLIs,
+both themes at once, the optional Halo sets and the SDDM/Plymouth login
+screens. The full installer copies the theme folders as **user-owned** themes,
+where the custom `hyprland.lua` and Alacritty config are allowed.
 
 ## Use the built-in command module
 
