@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 — 2026-11-16
+
+- Installer can set the bar background to `opaque` (default), `glassy` or
+  `none`, or leave it alone with `--no-bar`.
+- Added the bundled-wallpaper gallery to the README.
+- Clarified `omarchy bar set` string/boolean examples.
+- Hardened the installer and CLI host handling.
+
 ## 1.0.0 — 2026-11-16
 
 - Added the **Mecha Green** dark theme and **Mecha Green Light** theme.
