@@ -43,7 +43,7 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 ## Real screenshots
 
 Captured on the author's Omarchy desktop at 1920×1080: the bar, the Mecha HUD,
-the themed terminal, btop and the light variant.
+the themed terminal, btop, the keyboard wallpaper and the light variant.
 
 | | |
 |---|---|
