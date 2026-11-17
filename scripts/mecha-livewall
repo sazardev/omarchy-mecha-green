@@ -303,7 +303,10 @@ if (( INSTALL )); then
     [[ $LAST_MODE == light ]] && theme="mecha-green-light"
     dest=$(install_video "$theme" "$LAST_OUTPUT") && echo "installed $dest"
     if (( SET_BG )); then
-      omarchy theme bg set "$dest" >/dev/null 2>&1 || true
+      current=$(omarchy theme current 2>/dev/null || true)
+      if [[ $LAST_MODE == light && $current == *Light* ]] || [[ $LAST_MODE == dark && $current != *Light* ]]; then
+        omarchy theme bg set "$dest" >/dev/null 2>&1 || true
+      fi
     fi
   fi
   command -v omarchy >/dev/null 2>&1 && omarchy theme bg cache >/dev/null 2>&1 || true

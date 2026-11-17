@@ -203,7 +203,9 @@ omarchy plugin enable sazardev.ping --section right --after omarchy.network
 
 ## The Mecha HUD
 
-![Mecha HUD](screenshots/mecha-hud.png)
+| | |
+|---|---|
+| ![](screenshots/mecha-hud.png)<br>**Mecha Command — dark** | ![](screenshots/mecha-hud-light.png)<br>**Mecha Command — light** |
 
 ![Mecha HUD in the bar](screenshots/mecha-bar.png)
 
