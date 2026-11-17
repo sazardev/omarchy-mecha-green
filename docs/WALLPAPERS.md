@@ -1,8 +1,8 @@
 # Wallpapers
 
 Mecha Green ships with original artwork and an optional, separately fetched
-Halo set. This split keeps the repository's MIT license clean while still
-letting you get the full Master Chief desktop in one command.
+Halo & military set. This split keeps the repository's MIT license clean while
+still letting you get the full Master Chief desktop in one command.
 
 ## Bundled originals (MIT)
 
@@ -12,7 +12,7 @@ Each theme includes eight 2560×1440 originals:
 |---|---|
 | `8-mecha-helmet.webp` | Geometric Spartan helmet, amber visor, HUD rings |
 | `9-topographic.webp` | Olive contour map with an amber targeting reticle |
-| `10-keyboard.webp` | Stylised MCHOSE Ace 75 board with amber legends |
+| `10-keyboard.webp` | Product-style MCHOSE Ace 75 render with amber legends |
 | `11-switch-blueprint.webp` | Hall Effect switch cross-section and top view |
 | `12-pcb-blueprint.webp` | 75% keyboard PCB / 6×15 switch matrix |
 | `13-radar.webp` | Tactical radar, contact list and threat readout |
@@ -25,18 +25,20 @@ The light theme has the same eight in sand/olive/bronze, suffixed with
 SVG sources live in [`../assets/svg/`](../assets/svg/). They are also MIT.
 
 These are the wallpapers a fresh install has. The theme works out of the box
-with them; the Halo fetch is optional.
+with them; the Halo & military fetch is optional.
 
-## Optional Halo set (personal use only)
+## Optional Halo & military set (personal use only)
 
-The Halo images are fan / © Microsoft–343 Industries artwork. They are **not**
-included in this repository and are **not** covered by the MIT license. The
-fetcher downloads them from Wallhaven and grades them to the Mecha Green
-palette. Use them for your own desktop only; do not redistribute them.
+The optional images are fan / © Microsoft–343 Industries / third-party
+artwork. They are **not** included in this repository and are **not** covered
+by the MIT license. The fetcher downloads them from Wallhaven and grades them
+to the Mecha Green palette. Use them for your own desktop only; do not
+redistribute them.
 
-The set is deliberately curated to olive, amber and cream. The old blue-heavy
-portal, dawn-ring and field scenes from earlier releases are removed by the
-fetcher; sunset/warthog/desert/jungle scenes replace them.
+The set is deliberately curated to olive, amber and cream. Blue-heavy scenes
+are pushed through the same `mecha-themetize` filter used by the CLI; the
+newest additions are a tank dust cloud, a night fighter jet, sunset
+helicopters and a snow helicopter.
 
 ```sh
 mecha-fetch-halo
@@ -45,11 +47,10 @@ mecha-fetch-halo
 ```
 
 Requirements: `curl` and ImageMagick (`magick`). Existing files are kept unless
-you pass `--force`; use `--force` after upgrading from a pre-1.1 release to
-refresh the warm-graded hero and the new light set. Use `--dark-only` or
-`--light-only` to limit the download.
+you pass `--force`; use `--force` after upgrading to refresh the new set. Use
+`--dark-only` or `--light-only` to limit the download.
 
-### Dark set (7)
+### Dark set (13)
 
 | File | Wallhaven | Uploader |
 |---|---|---|
@@ -60,8 +61,14 @@ refresh the warm-graded hero and the new light set. Use `--dark-only` or
 | `5-warthog.webp` | [5dy1j8](https://wallhaven.cc/w/5dy1j8) | CrisMaggot |
 | `6-fireteam.webp` | [eo8ggr](https://wallhaven.cc/w/eo8ggr) | ZuaDoR0 |
 | `7-canyon.webp` | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
+| `16-halo-dawn.webp` | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
+| `17-forerunner-gate.webp` | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
+| `18-warthog-canyon.webp` | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
+| `19-tank-dust.webp` | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
+| `20-helicopter-sunset.webp` | [4lxrdp](https://wallhaven.cc/w/4lxrdp) | br3athless |
+| `21-jet-night.webp` | [42vrp6](https://wallhaven.cc/w/42vrp6) | Wallhaven |
 
-### Light set (4)
+### Light set (9)
 
 | File | Wallhaven | Uploader |
 |---|---|---|
@@ -69,10 +76,15 @@ refresh the warm-graded hero and the new light set. Use `--dark-only` or
 | `2-canyon-light.webp` | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
 | `3-desert-light.webp` | [oxer87](https://wallhaven.cc/w/oxer87) | SamUerto |
 | `4-jungle-light.webp` | [zmreeg](https://wallhaven.cc/w/zmreeg) | SamUerto |
+| `16-halo-dawn.webp` | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
+| `17-forerunner-gate.webp` | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
+| `18-warthog-canyon.webp` | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
+| `19-tank-dust.webp` | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
+| `20-helicopter-snow.webp` | [nmkkq1](https://wallhaven.cc/w/nmkkq1) | Wallhaven |
 
 The fetch script crops out the original site watermarks where present, resizes
 to 2560×1440, applies an olive/amber grade (or a light grade for the light
-theme), and writes WebP at quality 92. It uses:
+theme), and writes WebP at quality 92. The original 1–7 / 1–4 set uses:
 
 - [`assets/lut-olive-amber.png`](../assets/lut-olive-amber.png) for the
   night-ring and fireteam duotones.
@@ -82,10 +94,35 @@ theme), and writes WebP at quality 92. It uses:
   the warm-graded Master Chief field hero, so the original cyan beams and sky
   are replaced with olive/amber/cream.
 
+The newer 16–21 / 16–20 set is processed with
+[`mecha-themetize`](../scripts/mecha-themetize) at 80% strength, so it shares
+the same gradient-map palette as user wallpapers.
+
+## Themetize your own
+
+```sh
+# Dark only, next to the input
+mecha-themetize photo.jpg
+
+# Both modes, installed into the themes with the next free number
+mecha-themetize photo.jpg --mode both --install --name 22-photo
+
+# Light only, keep more original colour
+mecha-themetize art.png out.webp --mode light --keep-color 30
+```
+
+`--strength` controls how much of the theme grade is applied; `--keep-color`
+is its inverse. `--fit` crops to 2560×1440 by default (`none` keeps the input
+aspect), `--vignette` and `--grain` add optional texture.
+
 ## Add your own
 
 ```sh
-cp my-wallpaper.webp ~/.config/omarchy/themes/mecha-green/backgrounds/16-my-wallpaper.webp
+# Fast path: auto-number and install into both themes
+mecha-themetize my-wallpaper.jpg --mode both --install --name my-wallpaper
+
+# Or copy a ready WebP yourself
+cp my-wallpaper.webp ~/.config/omarchy/themes/mecha-green/backgrounds/22-my-wallpaper.webp
 omarchy theme bg next
 ```
 
@@ -99,7 +136,7 @@ restart is needed.
 | Theme configuration (`*.toml`, `*.lua`, `btop.theme`, etc.) | MIT |
 | Plugins and scripts | MIT |
 | Original helmet/topographic/keyboard/switch/PCB/radar/crate art and SVGs | MIT |
-| Halo wallpaper set | © Microsoft–343 Industries / respective Wallhaven uploaders; personal use only; not redistributed here |
+| Halo & military wallpaper set | © Microsoft–343 Industries / respective Wallhaven uploaders; personal use only; not redistributed here |
 | Omarchy logo (recoloured boot mark) | Omarchy project |
 
 Halo, Master Chief, MCHOSE and Omarchy are trademarks of their respective

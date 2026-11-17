@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.3.0 — 2026-11-16
+
+- Rebuilt the keyboard wallpaper as a product-style render with beveled
+  keycaps, side faces, shadows, a case light bar, full legends and correct
+  WASD/ESC/ENTER/arrow highlights.
+- Added `mecha-themetize`: a CLI that maps any image onto the olive/amber
+  palette, with dark/light modes, strength blending, 16:9 fit, optional grain
+  and vignette, and `--install` auto-numbering.
+- Added six dark and five light Halo/military backgrounds: dawn ring,
+  Forerunner gate, Warthog canyon, tank dust, sunset helicopters, night jet and
+  snow helicopter.
+- Updated the optional fetcher to process the new set through the filter.
+
 ## 1.2.1 — 2026-11-16
 
 - Normalized the SDDM and Plymouth PNG assets to 8-bit for maximum boot-time

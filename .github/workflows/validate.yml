@@ -16,6 +16,7 @@ jobs:
           bash -n scripts/mecha-status
           bash -n scripts/ping-status
           bash -n scripts/fetch-halo-backgrounds.sh
+          bash -n scripts/mecha-themetize
           bash -n system/install-login.sh
           bash -n system/uninstall-login.sh
       - name: JSON manifests

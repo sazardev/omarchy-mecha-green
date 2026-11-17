@@ -155,12 +155,14 @@ install_plugin "$SCRIPT_DIR/plugins/sazardev.ping" sazardev.ping
 # ---- CLI + optional wallpaper fetcher -----------------------------------
 install_script "$SCRIPT_DIR/scripts/mecha-status" mecha-status
 install_script "$SCRIPT_DIR/scripts/ping-status" ping-status
+install_script "$SCRIPT_DIR/scripts/mecha-themetize" mecha-themetize
 
 if (( ! DRY )); then
   mkdir -p "$DATA_DIR/scripts" "$DATA_DIR/assets"
   cp -f "$SCRIPT_DIR/scripts/fetch-halo-backgrounds.sh" "$DATA_DIR/scripts/"
+  cp -f "$SCRIPT_DIR/scripts/mecha-themetize" "$DATA_DIR/scripts/"
   cp -f "$SCRIPT_DIR"/assets/lut-*.png "$DATA_DIR/assets/"
-  chmod +x "$DATA_DIR/scripts/fetch-halo-backgrounds.sh"
+  chmod +x "$DATA_DIR/scripts/fetch-halo-backgrounds.sh" "$DATA_DIR/scripts/mecha-themetize"
   cat >"$BIN_DIR/mecha-fetch-halo" <<'EOF'
 #!/usr/bin/env bash
 exec "${XDG_DATA_HOME:-$HOME/.local/share}/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh" "$@"
@@ -234,4 +236,5 @@ echo "  Add the HUD:     omarchy plugin enable sazardev.mecha-hud --section righ
 echo "  Add NET only:    omarchy plugin enable sazardev.ping --section right"
 echo "  Fetch Halo art:  mecha-fetch-halo"
 echo "  Tactical CLI:    mecha-status"
+echo "  Themetize art:   mecha-themetize <image> --mode both --install"
 echo "  Login + boot:    sudo ./system/install-login.sh"

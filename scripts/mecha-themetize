@@ -1,0 +1,203 @@
+#!/usr/bin/env bash
+# mecha-themetize — map any image onto the Mecha Green olive/amber palette.
+#
+# Examples:
+#   mecha-themetize photo.jpg                          # dark WebP, 2560x1440
+#   mecha-themetize photo.jpg --mode both --install    # both themes, auto-numbered
+#   mecha-themetize art.png out.webp --mode light --strength 90 --fit none
+set -euo pipefail
+
+INPUT=""
+OUTPUT=""
+MODE="dark"
+STRENGTH=80
+FIT="2560x1440"
+INSTALL=0
+FORCE=0
+NAME=""
+GRAIN=0
+VIGNETTE=0
+
+usage() {
+  cat <<'EOF'
+Usage: mecha-themetize <input> [output] [options]
+
+Maps an image onto the Mecha Green palette with a luminance gradient map and
+a configurable amount of the original colour.
+
+Options:
+  --mode dark|light|both   Palette and grade (default: dark)
+  --strength 0-100         How much of the theme grade to apply (default: 80)
+  --keep-color 0-100       Original colour to keep; overrides --strength
+  --fit WxH|none           Target crop (default: 2560x1440)
+  --name NAME              Basename used by --install
+  --install                Copy into ~/.config/omarchy/themes/mecha-green*/
+  --force                  Overwrite an existing installed file
+  --vignette               Add a gentle vignette
+  --grain                  Add a subtle film grain (off by default)
+  -h, --help               Show this help
+
+Examples:
+  mecha-themetize photo.jpg
+  mecha-themetize photo.jpg --mode both --install --name halo-field
+  mecha-themetize art.png /tmp/art.webp --mode light --strength 92
+EOF
+}
+
+while (( $# > 0 )); do
+  case "$1" in
+    --mode)
+      MODE="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
+    --strength)
+      STRENGTH="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
+    --keep-color)
+      local_keep="${2:-}"; shift 2 || { usage >&2; exit 2; }
+      STRENGTH=$((100 - local_keep)) ;;
+    --fit)
+      FIT="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
+    --name)
+      NAME="${2:-}"; shift 2 || { usage >&2; exit 2; } ;;
+    --install) INSTALL=1; shift ;;
+    --force) FORCE=1; shift ;;
+    --vignette) VIGNETTE=1; shift ;;
+    --grain) GRAIN=1; shift ;;
+    --no-grain) GRAIN=0; shift ;;
+    -h|--help) usage; exit 0 ;;
+    --*) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
+    *)
+      if [[ -z $INPUT ]]; then INPUT="$1"
+      elif [[ -z $OUTPUT ]]; then OUTPUT="$1"
+      else echo "too many arguments: $1" >&2; exit 2
+      fi
+      shift ;;
+  esac
+done
+
+[[ -n $INPUT ]] || { usage >&2; exit 2; }
+[[ -f $INPUT ]] || { echo "input not found: $INPUT" >&2; exit 1; }
+[[ $MODE =~ ^(dark|light|both)$ ]] || { echo "--mode must be dark, light or both" >&2; exit 2; }
+[[ $STRENGTH =~ ^[0-9]+$ ]] && (( STRENGTH >= 0 && STRENGTH <= 100 )) || {
+  echo "--strength must be 0-100" >&2; exit 2;
+}
+command -v magick >/dev/null 2>&1 || { echo "ImageMagick (magick) is required" >&2; exit 1; }
+
+theme_root="${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/themes"
+slug="$(printf '%s' "${NAME:-$(basename "${INPUT%.*}")}" |
+  tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')"
+[[ -n $slug ]] || slug="wallpaper"
+
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+
+make_lut() {
+  local mode="$1" out="$2"
+  if [[ $mode == dark ]]; then
+    magick -size 64x1 gradient:'#050603-#1a1e11' \
+           -size 64x1 gradient:'#1a1e11-#3f4a22' \
+           -size 72x1 gradient:'#3f4a22-#d9b34a' \
+           -size 56x1 gradient:'#d9b34a-#f2efcf' \
+           +append "$out"
+  else
+    magick -size 64x1 gradient:'#2b321a-#5f6a35' \
+           -size 64x1 gradient:'#5f6a35-#a88a3a' \
+           -size 64x1 gradient:'#a88a3a-#d9a92e' \
+           -size 38x1 gradient:'#d9a92e-#e9c86a' \
+           -size 26x1 gradient:'#e9c86a-#f5f2df' \
+           +append "$out"
+  fi
+}
+
+process() {
+  local mode="$1" out="$2"
+  local lut="$TMP/lut-$mode.png"
+  make_lut "$mode" "$lut"
+
+  local args=( "$INPUT" -auto-orient )
+  args+=( \( +clone -colorspace gray -auto-level "$lut" -clut \) )
+  args+=( -compose blend -define "compose:args=${STRENGTH}x$((100 - STRENGTH))" -composite )
+
+  if [[ $mode == dark ]]; then
+    args+=( -modulate 96,92,100 -fill '#1b2412' -colorize 4% -brightness-contrast -2x4 )
+  else
+    args+=( -modulate 100,95,102 -fill '#f0ecd2' -colorize 2% -brightness-contrast -3x10 -gamma 1.03 )
+  fi
+
+  if [[ $VIGNETTE -eq 1 ]]; then
+    if [[ $mode == dark ]]; then
+      args+=( -background '#080a06' -vignette 0x300 )
+    else
+      args+=( -background '#e9e5cb' -vignette 0x300 )
+    fi
+  fi
+
+  if [[ $GRAIN -eq 1 ]]; then
+    args+=( -attenuate 0.02 +noise Gaussian )
+  fi
+
+  if [[ $FIT != none ]]; then
+    args+=( -resize "${FIT}^" -gravity center -extent "$FIT" )
+  fi
+
+  args+=( -quality 92 "$out" )
+  magick "${args[@]}"
+}
+
+install_mode() {
+  local mode="$1" source="$2"
+  local theme_dir="$theme_root/mecha-green"
+  [[ $mode == light ]] && theme_dir="$theme_root/mecha-green-light"
+  local bg_dir="$theme_dir/backgrounds"
+
+  if [[ ! -d $bg_dir ]]; then
+    echo "theme backgrounds not found: $bg_dir" >&2
+    echo "Install the theme first with ./install.sh" >&2
+    return 1
+  fi
+
+  local max_num=15
+  local found
+  found=$(find "$bg_dir" -maxdepth 1 -type f -name '[0-9][0-9]-*' -printf '%f\n' |
+    sed -E 's/^([0-9]{2})-.*/\1/' | sort -n | tail -1 || true)
+  [[ -n $found ]] && max_num=$((10#$found))
+  local num
+  num=$(printf '%02d' $((max_num + 1)))
+  local dest="$bg_dir/${num}-${slug}.webp"
+
+  if [[ -e $dest && $FORCE -eq 0 ]]; then
+    echo "already exists: $dest (use --force)" >&2
+    return 1
+  fi
+  cp -f "$source" "$dest"
+  echo "  installed $dest"
+}
+
+if [[ $INSTALL -eq 1 ]]; then
+  if [[ $MODE == dark || $MODE == both ]]; then
+    process dark "$TMP/dark.webp"
+    install_mode dark "$TMP/dark.webp"
+  fi
+  if [[ $MODE == light || $MODE == both ]]; then
+    process light "$TMP/light.webp"
+    install_mode light "$TMP/light.webp"
+  fi
+  if command -v omarchy >/dev/null 2>&1; then
+    omarchy theme bg cache >/dev/null 2>&1 || true
+  fi
+  echo "Done. Cycle with: omarchy theme bg next"
+  exit 0
+fi
+
+if [[ $MODE == both ]]; then
+  base="${OUTPUT:-${INPUT%.*}-mecha.webp}"
+  [[ $base == *.* ]] || base="${base}.webp"
+  ext="${base##*.}"
+  stem="${base%.*}"
+  process dark "${stem}-dark.${ext}"
+  process light "${stem}-light.${ext}"
+  echo "wrote ${stem}-dark.${ext}"
+  echo "wrote ${stem}-light.${ext}"
+else
+  out="${OUTPUT:-${INPUT%.*}-mecha-${MODE}.webp}"
+  process "$MODE" "$out"
+  echo "wrote $out"
+fi

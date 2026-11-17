@@ -67,6 +67,28 @@ shell hot-reloads), or disable the plugin:
 omarchy plugin disable sazardev.ping
 ```
 
+## Wallpapers with the theme filter
+
+`mecha-themetize` maps any image onto the theme palette with a luminance
+gradient map, then blends back a configurable amount of the original colour:
+
+```sh
+# One dark WebP next to the input
+mecha-themetize photo.jpg
+
+# Both themes, auto-numbered and installed
+mecha-themetize photo.jpg --mode both --install --name photo
+
+# Light theme, 70% theme / 30% original
+mecha-themetize photo.jpg --mode light --keep-color 30
+
+# Keep the original composition, no 16:9 crop
+mecha-themetize photo.jpg --fit none
+```
+
+Useful flags: `--strength` (0–100), `--keep-color` (0–100, inverse of strength),
+`--fit WxH|none`, `--vignette`, `--grain`, `--force`.
+
 ## Wallpapers
 
 Add any image to:

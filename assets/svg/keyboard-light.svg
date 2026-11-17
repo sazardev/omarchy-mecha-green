@@ -1,56 +1,1284 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="42%" r="72%">
+    <radialGradient id="bg" cx="50%" cy="42%" r="74%">
       <stop offset="0%" stop-color="#f5f2df"/>
       <stop offset="100%" stop-color="#d9d5b5"/>
     </radialGradient>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#4f6428" stroke-opacity="0.09" stroke-width="1"/>
+    </pattern>
     <linearGradient id="case" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#8d984f"/>
+      <stop offset="0%" stop-color="#a8ad6e"/>
+      <stop offset="42%" stop-color="#6f7c3e"/>
       <stop offset="100%" stop-color="#5f6a35"/>
     </linearGradient>
     <linearGradient id="key" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#b2b77a" stop-opacity="0.95"/>
-      <stop offset="100%" stop-color="#7d8a4a" stop-opacity="0.95"/>
+      <stop offset="0%" stop-color="#c5c99a"/>
+      <stop offset="55%" stop-color="#8a9a4b"/>
+      <stop offset="100%" stop-color="#5f6a35"/>
     </linearGradient>
     <linearGradient id="key-hl" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#b2b77a"/>
-      <stop offset="100%" stop-color="#7d5200" stop-opacity="0.55"/>
+      <stop offset="0%" stop-color="#c5c99a"/>
+      <stop offset="52%" stop-color="#d99a24" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#5f6a35"/>
     </linearGradient>
-    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
-      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#7d8a4a" stroke-opacity="0.06" stroke-width="1"/>
-    </pattern>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="28"/>
+    <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d99a24" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#d99a24" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lightbar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7d5200" stop-opacity="0"/>
+      <stop offset="28%" stop-color="#7d5200" stop-opacity="0.9"/>
+      <stop offset="72%" stop-color="#7d5200" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7d5200" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="key-shadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+    <filter id="case-shadow" x="-20%" y="-40%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <filter id="light-glow" x="-40%" y="-300%" width="180%" height="700%">
+      <feGaussianBlur stdDeviation="10"/>
     </filter>
   </defs>
 
   <rect width="1920" height="1080" fill="url(#bg)"/>
   <rect width="1920" height="1080" fill="url(#grid)"/>
+  <ellipse cx="960" cy="840" rx="780" ry="220" fill="url(#bloom)"/>
 
-  <!-- Under-keyboard amber bloom -->
-  <ellipse cx="960" cy="820" rx="660" ry="120" fill="#d99a24" opacity="0.18" filter="url(#glow)"/>
+  <g transform="translate(0, 0) skewX(-2.2) skewY(0.35)">
+    <!-- shadow under the case -->
+    <rect x="200" y="338" width="1520" height="550" rx="30"
+          fill="#000000" opacity="0.55" filter="url(#case-shadow)"/>
 
-  <!-- Keyboard case -->
-  <rect x="180" y="300" width="1560" height="540" rx="28"
-        fill="url(#case)" stroke="#4b5428" stroke-width="4"/>
-  <rect x="192" y="312" width="1536" height="516" rx="20"
-        fill="none" stroke="#2b321a" stroke-opacity="0.13" stroke-width="2"/>
-  <rect x="250" y="282" width="1420" height="8" rx="4" fill="#7d5200" opacity="0.55"/>
+    <!-- side / bottom of the case -->
+    <rect x="180" y="318" width="1560" height="560" rx="30"
+          fill="#5f6a35" stroke="#2b321a" stroke-width="3"/>
+    <!-- top of the case -->
+    <rect x="180" y="300" width="1560" height="560" rx="30"
+          fill="url(#case)" stroke="#2b321a" stroke-width="3"/>
+    <!-- bevel -->
+    <rect x="192" y="312" width="1536" height="536" rx="22"
+          fill="none" stroke="#c5c99a" stroke-opacity="0.22" stroke-width="2"/>
+    <!-- recessed key well -->
+    <rect x="200" y="334" width="1520" height="506" rx="18"
+          fill="#0b0e07" opacity="0.72"/>
+    <rect x="200" y="334" width="1520" height="506" rx="18"
+          fill="none" stroke="#2b321a" stroke-opacity="0.55" stroke-width="2"/>
+    <!-- amber underglow between the keys -->
+    <ellipse cx="960.0" cy="693.92" rx="660.0" ry="90"
+             fill="#d99a24" opacity="0.16" filter="url(#case-shadow)"/>
 
-  <!-- Keys -->
-  <rect x="210.0" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="252.2" y="384.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">ESC</text><rect x="304.4" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="312.4" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="398.8" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="406.8" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="493.1" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="501.1" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="587.5" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="595.5" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="681.9" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="689.9" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="776.2" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="784.2" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="870.6" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="878.6" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="965.0" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="973.0" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1059.4" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1067.4" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1153.8" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1161.8" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1248.1" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1256.1" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1342.5" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1350.5" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1436.9" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1444.9" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1531.2" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1539.2" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1625.6" y="340.0" width="84.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1633.6" y="347.0" width="68.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="210.0" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="255.3" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">`</text><rect x="310.7" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="318.7" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="356.0" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">1</text><rect x="411.3" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="419.3" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="456.7" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">2</text><rect x="512.0" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="520.0" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="557.3" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">3</text><rect x="612.7" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="620.7" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="658.0" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">4</text><rect x="713.3" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="721.3" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="758.7" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">5</text><rect x="814.0" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="822.0" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="859.3" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">6</text><rect x="914.7" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="922.7" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="960.0" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">7</text><rect x="1015.3" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1023.3" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1060.7" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">8</text><rect x="1116.0" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1124.0" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1161.3" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">9</text><rect x="1216.7" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1224.7" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1262.0" y="464.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">0</text><rect x="1317.3" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1325.3" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1418.0" y="420.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1426.0" y="427.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1518.7" y="420.0" width="191.3" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1526.7" y="427.0" width="175.3" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="210.0" y="500.0" width="141.0" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="507.0" width="125.0" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="280.5" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">TAB</text><rect x="361.0" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="369.0" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="461.7" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="469.7" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="562.3" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="570.3" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="607.7" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">Q</text><rect x="663.0" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="671.0" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="708.3" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">W</text><rect x="763.7" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="771.7" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="809.0" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">E</text><rect x="864.3" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="872.3" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="909.7" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">R</text><rect x="965.0" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="973.0" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1010.3" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">T</text><rect x="1065.7" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1073.7" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1111.0" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">Y</text><rect x="1166.3" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1174.3" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1211.7" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">U</text><rect x="1267.0" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1275.0" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1312.3" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">I</text><rect x="1367.7" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1375.7" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1413.0" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">O</text><rect x="1468.3" y="500.0" width="141.0" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1476.3" y="507.0" width="125.0" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1538.8" y="544.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">P</text><rect x="1619.3" y="500.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1627.3" y="507.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="210.0" y="580.0" width="166.2" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="587.0" width="150.2" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="293.1" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">CAPS</text><rect x="386.2" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="394.2" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="486.8" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="494.8" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="587.5" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="595.5" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="632.8" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">A</text><rect x="688.2" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="696.2" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="733.5" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">S</text><rect x="788.8" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="796.8" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="834.2" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">D</text><rect x="889.5" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="897.5" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="934.8" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">F</text><rect x="990.2" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="998.2" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1035.5" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">G</text><rect x="1090.8" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1098.8" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1136.2" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">H</text><rect x="1191.5" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1199.5" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1236.8" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">J</text><rect x="1292.2" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1300.2" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1337.5" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">K</text><rect x="1392.8" y="580.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1400.8" y="587.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1438.2" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">L</text><rect x="1493.5" y="580.0" width="216.5" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="1501.5" y="587.0" width="200.5" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1601.8" y="624.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">ENTER</text><rect x="210.0" y="660.0" width="216.5" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="667.0" width="200.5" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="318.2" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">SHIFT</text><rect x="436.5" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="444.5" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="537.2" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="545.2" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="637.8" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="645.8" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="738.5" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="746.5" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="783.8" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">Z</text><rect x="839.2" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="847.2" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="884.5" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">X</text><rect x="939.8" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="947.8" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="985.2" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">C</text><rect x="1040.5" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="1048.5" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1085.8" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">V</text><rect x="1141.2" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1149.2" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1186.5" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">B</text><rect x="1241.8" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1249.8" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1287.2" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">N</text><rect x="1342.5" y="660.0" width="90.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1350.5" y="667.0" width="74.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1387.8" y="704.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">M</text><rect x="1443.2" y="660.0" width="266.8" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1451.2" y="667.0" width="250.8" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="210.0" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="218.0" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="261.3" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">CTRL</text><rect x="322.7" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="330.7" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="374.0" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">WIN</text><rect x="435.4" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="443.4" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="486.7" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">ALT</text><rect x="548.1" y="740.0" width="553.4" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="556.1" y="747.0" width="537.4" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="824.8" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="14" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">MECHA GREEN</text><rect x="1111.5" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1119.5" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1224.2" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1232.2" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1336.9" y="740.0" width="102.7" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1344.9" y="747.0" width="86.7" height="2" rx="1" fill="#2b321a" opacity="0.13"/><rect x="1449.6" y="740.0" width="80.1" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1457.6" y="747.0" width="64.1" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1489.6" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">FN</text><rect x="1539.7" y="740.0" width="80.1" height="70.0" rx="11" fill="url(#key)" stroke="#2b321a" stroke-width="2"/><rect x="1547.7" y="747.0" width="64.1" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1579.8" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="15" letter-spacing="1" fill="#7d5200" fill-opacity="0.72">CTRL</text><rect x="1629.9" y="740.0" width="80.1" height="70.0" rx="11" fill="url(#key-hl)" stroke="#7d5200" stroke-opacity="0.85" stroke-width="2"/><rect x="1637.9" y="747.0" width="64.1" height="2" rx="1" fill="#2b321a" opacity="0.13"/><text x="1669.9" y="784.1" text-anchor="middle" font-family="Geist Mono, monospace" font-size="22" letter-spacing="1" fill="#7d5200" fill-opacity="0.95">◀</text>
+    
+            <g>
+              <rect x="210.0" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 356.0 L 245.4 356.0 L 235.3 370.0 L 222.0 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="252.2" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">ESC</text>
+            </g>
+            <g>
+              <rect x="304.4" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="304.4" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="304.4" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="311.4" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 316.4 356.0 L 339.8 356.0 L 329.7 370.0 L 316.4 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="346.6" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F1</text>
+            </g>
+            <g>
+              <rect x="398.8" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="398.8" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="398.8" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="405.8" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 410.8 356.0 L 434.2 356.0 L 424.1 370.0 L 410.8 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="440.9" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F2</text>
+            </g>
+            <g>
+              <rect x="493.1" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="493.1" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="493.1" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="500.1" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 505.1 356.0 L 528.6 356.0 L 518.4 370.0 L 505.1 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="535.3" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F3</text>
+            </g>
+            <g>
+              <rect x="587.5" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="587.5" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="587.5" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="594.5" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 599.5 356.0 L 622.9 356.0 L 612.8 370.0 L 599.5 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="629.7" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F4</text>
+            </g>
+            <g>
+              <rect x="681.9" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="681.9" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="681.9" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="688.9" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 693.9 356.0 L 717.3 356.0 L 707.2 370.0 L 693.9 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="724.1" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F5</text>
+            </g>
+            <g>
+              <rect x="776.2" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="776.2" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="776.2" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="783.2" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 788.2 356.0 L 811.7 356.0 L 801.6 370.0 L 788.2 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="818.4" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F6</text>
+            </g>
+            <g>
+              <rect x="870.6" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="870.6" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="870.6" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="877.6" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 882.6 356.0 L 906.1 356.0 L 895.9 370.0 L 882.6 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="912.8" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F7</text>
+            </g>
+            <g>
+              <rect x="965.0" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="965.0" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="965.0" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="972.0" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 977.0 356.0 L 1000.4 356.0 L 990.3 370.0 L 977.0 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1007.2" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F8</text>
+            </g>
+            <g>
+              <rect x="1059.4" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1059.4" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1059.4" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1066.4" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1071.4 356.0 L 1094.8 356.0 L 1084.7 370.0 L 1071.4 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1101.6" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F9</text>
+            </g>
+            <g>
+              <rect x="1153.8" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1153.8" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1153.8" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1160.8" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1165.8 356.0 L 1189.2 356.0 L 1179.1 370.0 L 1165.8 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1195.9" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F10</text>
+            </g>
+            <g>
+              <rect x="1248.1" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1248.1" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1248.1" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1255.1" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1260.1 356.0 L 1283.6 356.0 L 1273.4 370.0 L 1260.1 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1290.3" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F11</text>
+            </g>
+            <g>
+              <rect x="1342.5" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1342.5" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1342.5" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1349.5" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1354.5 356.0 L 1377.9 356.0 L 1367.8 370.0 L 1354.5 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1384.7" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F12</text>
+            </g>
+            <g>
+              <rect x="1436.9" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1436.9" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1436.9" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1443.9" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1448.9 356.0 L 1472.3 356.0 L 1462.2 370.0 L 1448.9 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1479.1" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">DEL</text>
+            </g>
+            <g>
+              <rect x="1531.2" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1531.2" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1531.2" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1538.2" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1543.2 356.0 L 1566.7 356.0 L 1556.6 370.0 L 1543.2 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1573.4" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">HOME</text>
+            </g>
+            <g>
+              <rect x="1625.6" y="351.0" width="84.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1625.6" y="349.0" width="84.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1625.6" y="344.0" width="84.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1632.6" y="349.0" width="70.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1637.6 356.0 L 1661.1 356.0 L 1650.9 370.0 L 1637.6 370.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1667.8" y="390.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">END</text>
+            </g>
+            <g>
+              <rect x="210.0" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 438.7 L 248.1 438.7 L 237.2 452.7 L 222.0 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="255.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">`</text>
+            </g>
+            <g>
+              <rect x="310.7" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="310.7" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="310.7" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="317.7" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 322.7 438.7 L 348.7 438.7 L 337.9 452.7 L 322.7 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="356.0" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">1</text>
+            </g>
+            <g>
+              <rect x="411.3" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="411.3" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="411.3" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="418.3" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 423.3 438.7 L 449.4 438.7 L 438.5 452.7 L 423.3 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="456.7" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">2</text>
+            </g>
+            <g>
+              <rect x="512.0" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="512.0" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="512.0" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="519.0" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 524.0 438.7 L 550.1 438.7 L 539.2 452.7 L 524.0 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="557.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">3</text>
+            </g>
+            <g>
+              <rect x="612.7" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="612.7" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="612.7" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="619.7" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 624.7 438.7 L 650.7 438.7 L 639.9 452.7 L 624.7 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="658.0" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">4</text>
+            </g>
+            <g>
+              <rect x="713.3" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="713.3" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="713.3" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="720.3" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 725.3 438.7 L 751.4 438.7 L 740.5 452.7 L 725.3 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="758.7" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">5</text>
+            </g>
+            <g>
+              <rect x="814.0" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="814.0" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="814.0" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="821.0" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 826.0 438.7 L 852.1 438.7 L 841.2 452.7 L 826.0 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="859.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">6</text>
+            </g>
+            <g>
+              <rect x="914.7" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="914.7" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="914.7" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="921.7" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 926.7 438.7 L 952.7 438.7 L 941.9 452.7 L 926.7 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="960.0" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">7</text>
+            </g>
+            <g>
+              <rect x="1015.3" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1015.3" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1015.3" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1022.3" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1027.3 438.7 L 1053.4 438.7 L 1042.5 452.7 L 1027.3 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1060.7" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">8</text>
+            </g>
+            <g>
+              <rect x="1116.0" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1116.0" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1116.0" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1123.0" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1128.0 438.7 L 1154.1 438.7 L 1143.2 452.7 L 1128.0 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1161.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">9</text>
+            </g>
+            <g>
+              <rect x="1216.7" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1216.7" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1216.7" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1223.7" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1228.7 438.7 L 1254.7 438.7 L 1243.9 452.7 L 1228.7 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1262.0" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">0</text>
+            </g>
+            <g>
+              <rect x="1317.3" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1317.3" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1317.3" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1324.3" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1329.3 438.7 L 1355.4 438.7 L 1344.5 452.7 L 1329.3 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1362.7" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">-</text>
+            </g>
+            <g>
+              <rect x="1418.0" y="433.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1418.0" y="431.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1418.0" y="426.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1425.0" y="431.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1430.0 438.7 L 1456.1 438.7 L 1445.2 452.7 L 1430.0 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1463.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">=</text>
+            </g>
+            <g>
+              <rect x="1518.7" y="433.7" width="191.3" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1518.7" y="431.7" width="191.3" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1518.7" y="426.7" width="191.3" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1525.7" y="431.7" width="177.3" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1530.7 438.7 L 1599.0 438.7 L 1576.1 452.7 L 1530.7 452.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1614.3" y="473.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="9"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">BACKSPACE</text>
+            </g>
+            <g>
+              <rect x="210.0" y="516.3" width="141.0" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="514.3" width="141.0" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="509.3" width="141.0" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="514.3" width="127.0" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 521.3 L 269.2 521.3 L 252.3 535.3 L 222.0 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="280.5" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">TAB</text>
+            </g>
+            <g>
+              <rect x="361.0" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="361.0" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="361.0" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="368.0" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 373.0 521.3 L 399.1 521.3 L 388.2 535.3 L 373.0 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="406.3" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">Q</text>
+            </g>
+            <g>
+              <rect x="461.7" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="461.7" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="461.7" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="468.7" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 473.7 521.3 L 499.7 521.3 L 488.9 535.3 L 473.7 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="507.0" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">W</text>
+            </g>
+            <g>
+              <rect x="562.3" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="562.3" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="562.3" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="569.3" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 574.3 521.3 L 600.4 521.3 L 589.5 535.3 L 574.3 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="607.7" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">E</text>
+            </g>
+            <g>
+              <rect x="663.0" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="663.0" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="663.0" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="670.0" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 675.0 521.3 L 701.1 521.3 L 690.2 535.3 L 675.0 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="708.3" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">R</text>
+            </g>
+            <g>
+              <rect x="763.7" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="763.7" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="763.7" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="770.7" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 775.7 521.3 L 801.7 521.3 L 790.9 535.3 L 775.7 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="809.0" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">T</text>
+            </g>
+            <g>
+              <rect x="864.3" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="864.3" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="864.3" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="871.3" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 876.3 521.3 L 902.4 521.3 L 891.5 535.3 L 876.3 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="909.7" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">Y</text>
+            </g>
+            <g>
+              <rect x="965.0" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="965.0" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="965.0" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="972.0" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 977.0 521.3 L 1003.1 521.3 L 992.2 535.3 L 977.0 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1010.3" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">U</text>
+            </g>
+            <g>
+              <rect x="1065.7" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1065.7" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1065.7" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1072.7" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1077.7 521.3 L 1103.7 521.3 L 1092.9 535.3 L 1077.7 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1111.0" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">I</text>
+            </g>
+            <g>
+              <rect x="1166.3" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1166.3" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1166.3" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1173.3" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1178.3 521.3 L 1204.4 521.3 L 1193.5 535.3 L 1178.3 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1211.7" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">O</text>
+            </g>
+            <g>
+              <rect x="1267.0" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1267.0" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1267.0" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1274.0" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1279.0 521.3 L 1305.1 521.3 L 1294.2 535.3 L 1279.0 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1312.3" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">P</text>
+            </g>
+            <g>
+              <rect x="1367.7" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1367.7" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1367.7" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1374.7" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1379.7 521.3 L 1405.7 521.3 L 1394.9 535.3 L 1379.7 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1413.0" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">[</text>
+            </g>
+            <g>
+              <rect x="1468.3" y="516.3" width="141.0" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1468.3" y="514.3" width="141.0" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1468.3" y="509.3" width="141.0" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1475.3" y="514.3" width="127.0" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1480.3 521.3 L 1527.6 521.3 L 1510.6 535.3 L 1480.3 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1538.8" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">]</text>
+            </g>
+            <g>
+              <rect x="1619.3" y="516.3" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1619.3" y="514.3" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1619.3" y="509.3" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1626.3" y="514.3" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1631.3 521.3 L 1657.4 521.3 L 1646.5 535.3 L 1631.3 535.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1664.7" y="555.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">\</text>
+            </g>
+            <g>
+              <rect x="210.0" y="599.0" width="166.2" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="597.0" width="166.2" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="592.0" width="166.2" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="597.0" width="152.2" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 604.0 L 279.8 604.0 L 259.9 618.0 L 222.0 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="293.1" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">CAPS</text>
+            </g>
+            <g>
+              <rect x="386.2" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="386.2" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="386.2" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="393.2" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 398.2 604.0 L 424.2 604.0 L 413.4 618.0 L 398.2 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="431.5" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">A</text>
+            </g>
+            <g>
+              <rect x="486.8" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="486.8" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="486.8" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="493.8" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 498.8 604.0 L 524.9 604.0 L 514.0 618.0 L 498.8 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="532.2" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">S</text>
+            </g>
+            <g>
+              <rect x="587.5" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="587.5" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="587.5" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="594.5" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 599.5 604.0 L 625.6 604.0 L 614.7 618.0 L 599.5 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="632.8" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">D</text>
+            </g>
+            <g>
+              <rect x="688.2" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="688.2" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="688.2" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="695.2" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 700.2 604.0 L 726.2 604.0 L 715.4 618.0 L 700.2 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="733.5" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">F</text>
+            </g>
+            <g>
+              <rect x="788.8" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="788.8" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="788.8" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="795.8" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 800.8 604.0 L 826.9 604.0 L 816.0 618.0 L 800.8 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="834.2" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">G</text>
+            </g>
+            <g>
+              <rect x="889.5" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="889.5" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="889.5" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="896.5" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 901.5 604.0 L 927.6 604.0 L 916.7 618.0 L 901.5 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="934.8" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">H</text>
+            </g>
+            <g>
+              <rect x="990.2" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="990.2" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="990.2" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="997.2" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1002.2 604.0 L 1028.2 604.0 L 1017.4 618.0 L 1002.2 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1035.5" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">J</text>
+            </g>
+            <g>
+              <rect x="1090.8" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1090.8" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1090.8" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1097.8" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1102.8 604.0 L 1128.9 604.0 L 1118.0 618.0 L 1102.8 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1136.2" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">K</text>
+            </g>
+            <g>
+              <rect x="1191.5" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1191.5" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1191.5" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1198.5" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1203.5 604.0 L 1229.6 604.0 L 1218.7 618.0 L 1203.5 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1236.8" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">L</text>
+            </g>
+            <g>
+              <rect x="1292.2" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1292.2" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1292.2" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1299.2" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1304.2 604.0 L 1330.2 604.0 L 1319.4 618.0 L 1304.2 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1337.5" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">;</text>
+            </g>
+            <g>
+              <rect x="1392.8" y="599.0" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1392.8" y="597.0" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1392.8" y="592.0" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1399.8" y="597.0" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1404.8 604.0 L 1430.9 604.0 L 1420.0 618.0 L 1404.8 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1438.2" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">'</text>
+            </g>
+            <g>
+              <rect x="1493.5" y="599.0" width="216.5" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1493.5" y="597.0" width="216.5" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1493.5" y="592.0" width="216.5" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1500.5" y="597.0" width="202.5" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1505.5 604.0 L 1584.4 604.0 L 1558.5 618.0 L 1505.5 618.0 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1601.8" y="638.5" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">ENTER</text>
+            </g>
+            <g>
+              <rect x="210.0" y="681.7" width="216.5" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="679.7" width="216.5" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="674.7" width="216.5" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="679.7" width="202.5" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 686.7 L 300.9 686.7 L 274.9 700.7 L 222.0 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="318.2" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">SHIFT</text>
+            </g>
+            <g>
+              <rect x="436.5" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="436.5" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="436.5" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="443.5" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 448.5 686.7 L 474.6 686.7 L 463.7 700.7 L 448.5 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="481.8" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">Z</text>
+            </g>
+            <g>
+              <rect x="537.2" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="537.2" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="537.2" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="544.2" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 549.2 686.7 L 575.2 686.7 L 564.4 700.7 L 549.2 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="582.5" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">X</text>
+            </g>
+            <g>
+              <rect x="637.8" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="637.8" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="637.8" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="644.8" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 649.8 686.7 L 675.9 686.7 L 665.0 700.7 L 649.8 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="683.2" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">C</text>
+            </g>
+            <g>
+              <rect x="738.5" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="738.5" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="738.5" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="745.5" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 750.5 686.7 L 776.6 686.7 L 765.7 700.7 L 750.5 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="783.8" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">V</text>
+            </g>
+            <g>
+              <rect x="839.2" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="839.2" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="839.2" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="846.2" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 851.2 686.7 L 877.2 686.7 L 866.4 700.7 L 851.2 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="884.5" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">B</text>
+            </g>
+            <g>
+              <rect x="939.8" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="939.8" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="939.8" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="946.8" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 951.8 686.7 L 977.9 686.7 L 967.0 700.7 L 951.8 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="985.2" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">N</text>
+            </g>
+            <g>
+              <rect x="1040.5" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1040.5" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1040.5" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1047.5" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1052.5 686.7 L 1078.6 686.7 L 1067.7 700.7 L 1052.5 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1085.8" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">M</text>
+            </g>
+            <g>
+              <rect x="1141.2" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1141.2" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1141.2" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1148.2" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1153.2 686.7 L 1179.2 686.7 L 1168.4 700.7 L 1153.2 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1186.5" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">,</text>
+            </g>
+            <g>
+              <rect x="1241.8" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1241.8" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1241.8" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1248.8" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1253.8 686.7 L 1279.9 686.7 L 1269.0 700.7 L 1253.8 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1287.2" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">.</text>
+            </g>
+            <g>
+              <rect x="1342.5" y="681.7" width="90.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1342.5" y="679.7" width="90.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1342.5" y="674.7" width="90.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1349.5" y="679.7" width="76.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1354.5 686.7 L 1380.6 686.7 L 1369.7 700.7 L 1354.5 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1387.8" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">/</text>
+            </g>
+            <g>
+              <rect x="1443.2" y="681.7" width="266.8" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1443.2" y="679.7" width="266.8" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1443.2" y="674.7" width="266.8" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1450.2" y="679.7" width="252.8" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1455.2 686.7 L 1555.2 686.7 L 1523.2 700.7 L 1455.2 700.7 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1576.6" y="721.2" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">SHIFT</text>
+            </g>
+            <g>
+              <rect x="210.0" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="210.0" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="210.0" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="217.0" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 222.0 769.3 L 253.1 769.3 L 240.8 783.3 L 222.0 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="261.3" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">CTRL</text>
+            </g>
+            <g>
+              <rect x="322.7" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="322.7" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="322.7" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="329.7" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 334.7 769.3 L 365.8 769.3 L 353.5 783.3 L 334.7 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="374.0" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">WIN</text>
+            </g>
+            <g>
+              <rect x="435.4" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="435.4" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="435.4" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="442.4" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 447.4 769.3 L 478.5 769.3 L 466.2 783.3 L 447.4 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="486.7" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">ALT</text>
+            </g>
+            <g>
+              <rect x="548.1" y="764.3" width="553.4" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="548.1" y="762.3" width="553.4" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="548.1" y="757.3" width="553.4" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="555.1" y="762.3" width="539.4" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 560.1 769.3 L 780.5 769.3 L 714.1 783.3 L 560.1 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="824.8" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">SPACE</text>
+            </g>
+            <g>
+              <rect x="1111.5" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1111.5" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1111.5" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1118.5" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1123.5 769.3 L 1154.6 769.3 L 1142.3 783.3 L 1123.5 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1162.8" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">ALT</text>
+            </g>
+            <g>
+              <rect x="1224.2" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1224.2" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1224.2" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1231.2" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1236.2 769.3 L 1267.3 769.3 L 1255.0 783.3 L 1236.2 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1275.5" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">FN</text>
+            </g>
+            <g>
+              <rect x="1336.9" y="764.3" width="102.7" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1336.9" y="762.3" width="102.7" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1336.9" y="757.3" width="102.7" height="72.7" rx="10"
+                    fill="url(#key)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1343.9" y="762.3" width="88.7" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1348.9 769.3 L 1380.0 769.3 L 1367.7 783.3 L 1348.9 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1388.2" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="12"
+                    letter-spacing="0.5" fill="#3a4224" fill-opacity="0.70">CTRL</text>
+            </g>
+            <g>
+              <rect x="1449.6" y="764.3" width="80.1" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1449.6" y="762.3" width="80.1" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1449.6" y="757.3" width="80.1" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1456.6" y="762.3" width="66.1" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1461.6 769.3 L 1483.2 769.3 L 1473.6 783.3 L 1461.6 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1489.6" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">←</text>
+            </g>
+            <g>
+              <rect x="1539.7" y="764.3" width="80.1" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1539.7" y="762.3" width="80.1" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1539.7" y="757.3" width="80.1" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1546.7" y="762.3" width="66.1" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1551.7 769.3 L 1573.4 769.3 L 1563.7 783.3 L 1551.7 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1579.8" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">↓</text>
+            </g>
+            <g>
+              <rect x="1629.9" y="764.3" width="80.1" height="72.7" rx="10"
+                    fill="#050603" opacity="0.50" filter="url(#key-shadow)"/>
+              <rect x="1629.9" y="762.3" width="80.1" height="72.7" rx="10"
+                    fill="#8a9a4b" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1629.9" y="757.3" width="80.1" height="72.7" rx="10"
+                    fill="url(#key-hl)" stroke="#2b321a" stroke-width="2"/>
+              <rect x="1636.9" y="762.3" width="66.1" height="2" rx="1"
+                    fill="#c5c99a" opacity="0.22"/>
+              <path d="M 1641.9 769.3 L 1663.5 769.3 L 1653.9 783.3 L 1641.9 783.3 Z"
+                    fill="#ffffff" opacity="0.045"/>
+              <text x="1669.9" y="803.8" text-anchor="middle"
+                    font-family="Geist Mono, monospace" font-size="17"
+                    letter-spacing="0.5" fill="#7d5200" fill-opacity="0.95">→</text>
+            </g>
 
-  <!-- Case accents -->
-  <path d="M 230 820 L 1690 820"
-        stroke="#7d5200" stroke-opacity="0.25" stroke-width="2"/>
-  <text x="232" y="258" font-family="Geist Mono, monospace" font-size="20"
-        letter-spacing="8" fill="#2b321a" fill-opacity="0.9">MCHOSE ACE 75</text>
-  <text x="232" y="282" font-family="Geist Mono, monospace" font-size="13"
-        letter-spacing="5" fill="#7d5200" fill-opacity="0.95">MECHA GREEN // 117</text>
+    <!-- through-style light bar -->
+    <rect x="270" y="299" width="1380" height="5" rx="2.5" fill="url(#lightbar)"/>
+    <rect x="270" y="297" width="1380" height="9" rx="4" fill="#7d5200" opacity="0.35" filter="url(#light-glow)"/>
 
-  <text x="1688" y="280" text-anchor="end" font-family="Geist Mono, monospace"
-        font-size="13" letter-spacing="4" fill="#6b7250" fill-opacity="0.9">75% // 8K // HALL EFFECT</text>
+    <!-- corner screws -->
+    <circle cx="206" cy="326" r="7" fill="#5f6a35" stroke="#2b321a" stroke-width="2"/><circle cx="206" cy="326" r="2.5" fill="#c5c99a" opacity="0.7"/><circle cx="1714" cy="326" r="7" fill="#5f6a35" stroke="#2b321a" stroke-width="2"/><circle cx="1714" cy="326" r="2.5" fill="#c5c99a" opacity="0.7"/><circle cx="206" cy="834" r="7" fill="#5f6a35" stroke="#2b321a" stroke-width="2"/><circle cx="206" cy="834" r="2.5" fill="#c5c99a" opacity="0.7"/><circle cx="1714" cy="834" r="7" fill="#5f6a35" stroke="#2b321a" stroke-width="2"/><circle cx="1714" cy="834" r="2.5" fill="#c5c99a" opacity="0.7"/>
 
-  <text x="232" y="898" font-family="Geist Mono, monospace" font-size="12"
-        letter-spacing="4" fill="#6b7250" fill-opacity="0.85">OLIVE TRANSLUCENT KEYCAPS / AMBER LEGENDS</text>
+    <!-- case branding -->
+    <text x="250" y="324" font-family="Geist Mono, monospace" font-size="10"
+          letter-spacing="5" fill="#2b321a" fill-opacity="0.65">MCHOSE</text>
+    <text x="1670" y="324" text-anchor="end" font-family="Geist Mono, monospace"
+          font-size="9" letter-spacing="2" fill="#62684a" fill-opacity="0.9">ACE 75 // HALL EFFECT</text>
+    <text x="960.0" y="853" text-anchor="middle"
+          font-family="Geist Mono, monospace" font-size="9" letter-spacing="3"
+          fill="#7d5200" fill-opacity="0.55">MECHA GREEN // 117</text>
+  </g>
+
+  <!-- subtle corner HUD marks -->
+  <g fill="none" stroke="#7d5200" stroke-opacity="0.22" stroke-width="1.5">
+    <path d="M 70 70 L 110 70 M 70 70 L 70 110"/>
+    <path d="M 1850 70 L 1810 70 M 1850 70 L 1850 110"/>
+    <path d="M 70 1010 L 110 1010 M 70 1010 L 70 970"/>
+    <path d="M 1850 1010 L 1810 1010 M 1850 1010 L 1850 970"/>
+  </g>
 </svg>

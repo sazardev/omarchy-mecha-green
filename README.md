@@ -24,19 +24,20 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber Omarchy mark and progress bar, a Mecha Green SDDM login with HUD
   background and amber password field, and a lock screen that blurs the
   current wallpaper and uses the same amber/sand lock tokens.
-- **15 dark wallpapers / 12 light wallpapers** — the repo bundles eight original
+- **21 dark wallpapers / 17 light wallpapers** — the repo bundles eight original
   Mecha Green pieces in each theme (helmet, topographic HUD, keyboard, switch
   blueprint, PCB blueprint, tactical radar, helmet schematic, supply crate).
-  An optional fetcher adds seven dark and four light Halo scenes for personal
-  use, curated to olive / amber / cream.
+  An optional fetcher adds thirteen dark and nine light Halo & military scenes
+  for personal use, all graded into olive / amber / cream.
 - **Mecha HUD** — a working Quickshell bar plugin: `NET` latency, `THRT` CPU
   load, `AMMO` RAM pressure, optional `PWR` battery. Click for a telemetry
   panel with a 60-sample latency graph, packet loss, uptime and a ping-target
   switcher.
 - **Mecha NET** — a compact standalone latency widget if you want only ping.
 - **CLI artifacts** — `mecha-status` prints a tactical dashboard in the
-  terminal (`--json` and `--watch` included), and `ping-status` is a
-  Waybar-style command-module script.
+  terminal (`--json` and `--watch` included), `mecha-themetize` maps any image
+  onto the Mecha Green palette and can install it as a wallpaper, and
+  `ping-status` is a Waybar-style command-module script.
 - **Original SVG sources** for the helmet, topographic and keyboard art.
 
 ## Real screenshots
@@ -48,7 +49,8 @@ the themed terminal, btop and the light variant.
 |---|---|
 | ![](screenshots/real-dark-hud.webp)<br>**Mecha HUD panel** — over the Master Chief hero | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
 | ![](screenshots/real-dark-btop.webp)<br>**btop dark** — olive/amber CPU and memory | ![](screenshots/real-light-btop.webp)<br>**btop light** — sand/bronze |
-| ![](screenshots/real-dark-switch.webp)<br>**Switch blueprint desktop** — clean | ![](screenshots/real-light-warthog.webp)<br>**Light Warthog desktop** — warm Halo scene |
+| ![](screenshots/real-dark-keyboard.webp)<br>**Keyboard wallpaper** — product-style MCHOSE Ace 75 | ![](screenshots/real-dark-switch.webp)<br>**Switch blueprint desktop** — clean |
+| ![](screenshots/real-light-warthog.webp)<br>**Light Warthog desktop** — warm Halo scene | ![](screenshots/real-light-switch.webp)<br>**Light switch blueprint** — sand/bronze desktop |
 
 ## Boot, login and lock
 
@@ -112,7 +114,7 @@ cd omarchy-mecha-green
 | `--no-apply` | Install everything but keep the current theme |
 | `--no-hud` | Do not enable the Mecha HUD bar widget |
 | `--ping` | Also enable the standalone **Mecha NET** widget |
-| `--halo` | Download the optional Halo wallpaper set (personal use only) |
+| `--halo` | Download the optional Halo & military wallpaper set (personal use only) |
 | `--bar <mode>` | Bar background: `opaque` (default), `glassy` or `none` |
 | `--no-bar` | Leave the current bar background mode alone |
 | `--force` | Overwrite existing backgrounds and previews |
@@ -233,6 +235,32 @@ mecha-status 8.8.8.8         # choose a ping host
 `type: "command"` bar modules. See [`docs/INSTALL.md`](docs/INSTALL.md#use-the-built-in-command-module)
 for the `shell.json` snippet.
 
+## Themetize any image
+
+`mecha-themetize` maps any image onto the Mecha Green olive/amber palette with
+a luminance gradient and keeps a configurable amount of the original colour.
+
+```sh
+# Dark theme, 2560×1440 WebP next to the input
+mecha-themetize ~/Pictures/wallpaper.jpg
+
+# Both themes, auto-numbered into the installed theme folders
+mecha-themetize ~/Pictures/wallpaper.jpg --mode both --install --name my-wallpaper
+
+# Light theme, keep more of the original colour
+mecha-themetize artwork.png /tmp/art.webp --mode light --keep-color 30
+
+# No crop, full original composition
+mecha-themetize photo.jpg --fit none
+```
+
+Options: `--mode dark|light|both`, `--strength 0-100`, `--keep-color 0-100`,
+`--fit WxH|none`, `--name`, `--install`, `--force`, `--vignette`, `--grain`.
+
+`--install` finds the next free `NN-name.webp` in
+`~/.config/omarchy/themes/mecha-green/backgrounds/` (or the light twin) and
+refreshes the background cache.
+
 ## Palette
 
 ### Mecha Green (dark)
@@ -264,8 +292,8 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 
 ## Bundled wallpapers
 
-Each theme ships eight original 2560×1440 pieces. The optional Halo fetcher
-adds seven dark and four light scenes on top.
+Each theme ships eight original 2560×1440 pieces. The optional Halo & military
+fetcher adds thirteen dark and nine light scenes on top.
 
 | Art | Dark | Light |
 |---|---|---|
@@ -293,9 +321,10 @@ The repository bundles **original** wallpapers only:
 
 These are licensed MIT together with the theme code.
 
-The **Halo wallpaper set is not bundled**. It is Halo fan / © Microsoft–343
-Industries artwork from Wallhaven, and remains the property of its respective
-owners. The optional fetcher downloads and grades it for personal desktop use:
+The **Halo & military wallpaper set is not bundled**. It is fan /
+© Microsoft–343 Industries / third-party artwork from Wallhaven, and remains
+the property of its respective owners. The optional fetcher downloads, crops
+and grades it for personal desktop use:
 
 ```sh
 mecha-fetch-halo
@@ -318,6 +347,17 @@ It adds:
 | `2-canyon-light.webp` (light) | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
 | `3-desert-light.webp` (light) | [oxer87](https://wallhaven.cc/w/oxer87) | SamUerto |
 | `4-jungle-light.webp` (light) | [zmreeg](https://wallhaven.cc/w/zmreeg) | SamUerto |
+| `16-halo-dawn.webp` | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
+| `17-forerunner-gate.webp` | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
+| `18-warthog-canyon.webp` | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
+| `19-tank-dust.webp` | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
+| `20-helicopter-sunset.webp` | [4lxrdp](https://wallhaven.cc/w/4lxrdp) | br3athless |
+| `21-jet-night.webp` | [42vrp6](https://wallhaven.cc/w/42vrp6) | Wallhaven |
+| `16-halo-dawn.webp` (light) | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
+| `17-forerunner-gate.webp` (light) | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
+| `18-warthog-canyon.webp` (light) | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
+| `19-tank-dust.webp` (light) | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
+| `20-helicopter-snow.webp` (light) | [nmkkq1](https://wallhaven.cc/w/nmkkq1) | Wallhaven |
 
 See [`docs/WALLPAPERS.md`](docs/WALLPAPERS.md) for the full credits and notes.
 

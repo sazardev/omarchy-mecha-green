@@ -65,8 +65,8 @@ cp -r plugins/sazardev.mecha-hud plugins/sazardev.ping ~/.config/omarchy/plugins
 
 # CLI
 mkdir -p ~/.local/bin
-cp scripts/mecha-status scripts/ping-status ~/.local/bin/
-chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status
+cp scripts/mecha-status scripts/ping-status scripts/mecha-themetize ~/.local/bin/
+chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status ~/.local/bin/mecha-themetize
 
 # Optional Halo wallpapers
 mkdir -p ~/.local/share/omarchy-mecha-green/{scripts,assets}

@@ -29,7 +29,7 @@ Sand, olive ink and bronze. The daylight half of the Mecha Green pair.
   keyboard, Hall Effect switch blueprint, PCB blueprint, tactical radar,
   helmet schematic and supply crate.
 
-The optional light Halo wallpaper set is fetched separately and is not part of
+The optional light Halo & military wallpaper set is fetched separately and is not part of
 the MIT assets. Run `mecha-fetch-halo` from the repository root or the
 installer's `--halo` flag.
 
