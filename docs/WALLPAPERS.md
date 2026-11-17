@@ -69,7 +69,7 @@ Existing files are kept unless you pass `--force`; use `--force` after
 upgrading to refresh the new set. Use `--dark-only` or `--light-only` to limit
 the download.
 
-Together the base and curated sets add **34 dark** and **30 light** files.
+Together the base and curated sets add **34 dark** and **30 light** stills.
 
 ### Base dark set (13)
 
