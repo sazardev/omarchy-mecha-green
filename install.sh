@@ -17,6 +17,7 @@ PING=0
 HALO=0
 FORCE=0
 DRY=0
+BAR_MODE="opaque"
 
 usage() {
   cat <<'EOF'
@@ -31,6 +32,8 @@ Options:
   --no-hud       Do not enable the Mecha HUD bar widget
   --ping         Also enable the standalone Mecha NET widget
   --halo         Download the optional Halo wallpaper set (personal use only)
+  --bar <mode>   Bar background mode: opaque (default), glassy or none
+  --no-bar       Do not change the current bar background mode
   --force        Overwrite existing theme backgrounds and previews
   --dry-run      Print what would be installed, change nothing
   -h, --help     Show this help
@@ -41,18 +44,31 @@ Environment overrides:
 EOF
 }
 
-for arg in "$@"; do
-  case "$arg" in
+while (( $# > 0 )); do
+  case "$1" in
     --light) APPLY="light" ;;
     --no-apply) APPLY="none" ;;
     --no-hud) HUD=0 ;;
     --ping) PING=1 ;;
     --halo) HALO=1 ;;
+    --bar)
+      if (( $# < 2 )); then
+        echo "--bar needs opaque, glassy or none" >&2
+        exit 2
+      fi
+      case "$2" in
+        opaque|glassy|none) BAR_MODE="$2" ;;
+        *) echo "--bar needs opaque, glassy or none" >&2; exit 2 ;;
+      esac
+      shift
+      ;;
+    --no-bar) BAR_MODE="keep" ;;
     --force) FORCE=1 ;;
     --dry-run) DRY=1 ;;
     -h|--help) usage; exit 0 ;;
-    *) echo "unknown option: $arg" >&2; usage >&2; exit 2 ;;
+    *) echo "unknown option: $1" >&2; usage >&2; exit 2 ;;
   esac
+  shift
 done
 
 say() { printf '\033[38;2;242;200;75m%s\033[0m\n' "$*"; }
@@ -195,6 +211,11 @@ if (( ! DRY )) && [[ $APPLY != "none" ]] && [[ ${MECHA_SKIP_OMARCHY_CHECK:-0} !=
   fi
 fi
 
+if (( ! DRY )) && [[ $BAR_MODE != "keep" ]] && [[ ${MECHA_SKIP_OMARCHY_CHECK:-0} != "1" ]]; then
+  say "Setting bar background: $BAR_MODE"
+  omarchy bar background "$BAR_MODE" 2>/dev/null || warn "Could not set the bar background mode."
+fi
+
 # ---- Summary ------------------------------------------------------------
 say ""
 if (( DRY )); then
@@ -208,6 +229,7 @@ echo "  CLI:      $BIN_DIR/mecha-status"
 echo ""
 echo "  Switch theme:   omarchy theme set \"Mecha Green\" | \"Mecha Green Light\""
 echo "  Cycle wallpaper: omarchy theme bg next"
+echo "  Bar background:  omarchy bar background opaque|glassy|none"
 echo "  Add the HUD:     omarchy plugin enable sazardev.mecha-hud --section right"
 echo "  Add NET only:    omarchy plugin enable sazardev.ping --section right"
 echo "  Fetch Halo art:  mecha-fetch-halo"

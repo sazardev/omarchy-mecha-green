@@ -45,6 +45,8 @@ cd omarchy-mecha-green
 ./install.sh --halo                  # also fetch the optional Halo wallpapers
 ./install.sh --ping                  # also enable the standalone NET widget
 ./install.sh --no-hud                # themes only
+./install.sh --bar glassy            # translucent bar instead of opaque
+./install.sh --no-bar                # keep the current bar mode
 ./install.sh --dry-run               # inspect without changing anything
 ```
 

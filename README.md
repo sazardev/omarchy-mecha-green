@@ -62,6 +62,8 @@ cd omarchy-mecha-green
 | `--no-hud` | Do not enable the Mecha HUD bar widget |
 | `--ping` | Also enable the standalone **Mecha NET** widget |
 | `--halo` | Download the optional Halo wallpaper set (personal use only) |
+| `--bar <mode>` | Bar background: `opaque` (default), `glassy` or `none` |
+| `--no-bar` | Leave the current bar background mode alone |
 | `--force` | Overwrite existing backgrounds and previews |
 | `--dry-run` | Show what would be installed |
 
