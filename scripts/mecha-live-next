@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# mecha-live-next — cycle through the live wallpapers of the current Mecha Green theme.
+set -euo pipefail
+
+HOME_DIR="${HOME}"
+STATE_LINK="$HOME_DIR/.local/state/omarchy/current/background"
+
+theme="$(omarchy theme current 2>/dev/null || true)"
+case "$theme" in
+  *Light*) name="mecha-green-light" ;;
+  *) name="mecha-green" ;;
+esac
+
+mapfile -t videos < <(
+  find "$HOME_DIR/.config/omarchy/backgrounds/$name" \
+       "$HOME_DIR/.config/omarchy/themes/$name/backgrounds" \
+       -maxdepth 1 -type f \
+       \( -iname '*.mp4' -o -iname '*.webm' -o -iname '*.mov' -o -iname '*.m4v' -o -iname '*.mkv' -o -iname '*.avi' \) \
+       -print 2>/dev/null | sort -u
+)
+
+if (( ${#videos[@]} == 0 )); then
+  echo "no live wallpapers installed for $name" >&2
+  exit 1
+fi
+
+current="$(readlink -f "$STATE_LINK" 2>/dev/null || true)"
+next="${videos[0]}"
+for i in "${!videos[@]}"; do
+  if [[ ${videos[$i]} == "$current" ]]; then
+    next="${videos[$(((i + 1) % ${#videos[@]}))]}"
+    break
+  fi
+done
+
+omarchy theme bg set "$next" >/dev/null
+echo "$next"

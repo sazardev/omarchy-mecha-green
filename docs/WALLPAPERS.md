@@ -6,7 +6,7 @@ still letting you get the full Master Chief desktop in one command.
 
 ## Bundled originals (MIT)
 
-Each theme includes eight 2560×1440 originals:
+Each theme includes eight 2560×1440 stills plus two 12-second live loops:
 
 | File | Art |
 |---|---|
@@ -18,14 +18,19 @@ Each theme includes eight 2560×1440 originals:
 | `13-radar.webp` | Tactical radar, contact list and threat readout |
 | `14-helmet-blueprint.webp` | MJOLNIR helmet schematic with dimensions |
 | `15-crate.webp` | Field supply crate stencil with hazard strip |
+| `live-helmet.mp4` | Helmet command-feed loop with scanlines and HUD |
+| `live-radar.mp4` | Rotating radar sweep with contact blips |
 
-The light theme has the same eight in sand/olive/bronze, suffixed with
-`-light` (for example `11-switch-blueprint-light.webp`).
+The light theme has the same eight stills in sand/olive/bronze, suffixed with
+`-light` (for example `11-switch-blueprint-light.webp`), and its own
+`live-helmet.mp4` / `live-radar.mp4` loops.
 
 SVG sources live in [`../assets/svg/`](../assets/svg/). They are also MIT.
 
 These are the wallpapers a fresh install has. The theme works out of the box
-with them; the Halo & military fetch is optional.
+with them; the Halo & military fetch and live set are optional. See
+[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for playback, controls and the
+`mecha-livewall` generator.
 
 ## Optional Halo & military set (personal use only)
 
@@ -59,9 +64,10 @@ mecha-fetch-halo --set spartans,unsc
 mecha-fetch-halo --list-sets
 ```
 
-Requirements: `curl` and ImageMagick (`magick`). Existing files are kept unless
-you pass `--force`; use `--force` after upgrading to refresh the new set. Use
-`--dark-only` or `--light-only` to limit the download.
+Requirements: `curl`, ImageMagick (`magick`) and `ffmpeg` for the live set.
+Existing files are kept unless you pass `--force`; use `--force` after
+upgrading to refresh the new set. Use `--dark-only` or `--light-only` to limit
+the download.
 
 Together the base and curated sets add **34 dark** and **30 light** files.
 
@@ -126,6 +132,22 @@ Dark files use 22–42. The light twin uses one number lower (21–41), so
 | Forerunner | `41-chief-sunset.webp` | `40-chief-sunset.webp` | [l3o6yl](https://wallhaven.cc/w/l3o6yl) | Doctorc418 |
 | Forerunner | `42-ring-horizon.webp` | `41-ring-horizon.webp` | [y8ldqd](https://wallhaven.cc/w/y8ldqd) | Doctorc418 |
 
+### Live set (7 dark / 5 light)
+
+`mecha-live-set` turns the fetched stills into animated H.264 loops:
+
+```sh
+mecha-fetch-halo
+mecha-live-set
+```
+
+- Dark: UNSC city, Chief in rain, Covenant portrait, ring arc, Warthog dust,
+  Forerunner spire and energy swords.
+- Light: UNSC city, Chief in rain, Forerunner snow, Warthog dust and ring arc.
+
+The loops live in `~/.config/omarchy/backgrounds/mecha-green{,-light}/` and are
+played natively by OWE. `mecha-live-next` skips stills and cycles videos only.
+
 The fetch script crops out the original site watermarks where present, resizes
 to 2560×1440, applies an olive/amber grade (or a light grade for the light
 theme), and writes WebP at quality 92. The original 1–7 / 1–4 set uses:
@@ -160,6 +182,23 @@ mecha-themetize art.png out.webp --mode light --keep-color 30
 is its inverse. `--fit` crops to 2560×1440 by default (`none` keeps the input
 aspect), `--vignette` and `--grain` add optional texture.
 
+## Themetize a video wallpaper
+
+```sh
+# Slow HUD push
+mecha-livewall photo.jpg --style command --install
+
+# Rain, both themes
+mecha-livewall art.png --mode both --style rain --install --name my-wall
+
+# Skip the filter for an already-graded image
+mecha-livewall chief.webp --no-filter --style rain --install --name chief
+```
+
+Styles: `command`, `rain`, `dust`, `pulse`, `storm` and `radar`. Output is
+2560×1440 H.264, 30 fps, silent and looped. `--install` writes to the current
+theme's user background folder; `--set` applies it immediately.
+
 ## Add your own
 
 ```sh
@@ -180,8 +219,8 @@ restart is needed.
 |---|---|
 | Theme configuration (`*.toml`, `*.lua`, `btop.theme`, etc.) | MIT |
 | Plugins and scripts | MIT |
-| Original helmet/topographic/keyboard/switch/PCB/radar/crate art and SVGs | MIT |
-| Halo & military wallpaper set | © Microsoft–343 Industries / respective Wallhaven uploaders; personal use only; not redistributed here |
+| Original helmet/topographic/keyboard/switch/PCB/radar/crate art, SVGs and live loops | MIT |
+| Halo & military wallpaper set and live loops | © Microsoft–343 Industries / respective Wallhaven uploaders; personal use only; not redistributed here |
 | Omarchy logo (recoloured boot mark) | Omarchy project |
 
 Halo, Master Chief, MCHOSE and Omarchy are trademarks of their respective

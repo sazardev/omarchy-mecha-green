@@ -24,16 +24,18 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber Omarchy mark and progress bar, a Mecha Green SDDM login with HUD
   background and amber password field, and a lock screen that blurs the
   current wallpaper and uses the same amber/sand lock tokens.
-- **42 dark wallpapers / 38 light wallpapers** — the repo bundles eight
-  original Mecha Green pieces in each theme (helmet, topographic HUD, keyboard,
-  switch blueprint, PCB blueprint, tactical radar, helmet schematic, supply
-  crate). An optional fetcher adds thirty-four dark and thirty light Halo &
-  military scenes for personal use, all graded into olive / amber / cream.
-  Curated sets: Spartans, UNSC, Covenant and Forerunner.
+- **42 dark / 38 light stills + live loops** — the repo bundles eight original
+  Mecha Green stills and two original live loops in each theme (helmet,
+  topographic HUD, keyboard, switch blueprint, PCB blueprint, tactical radar,
+  helmet schematic, supply crate, helmet feed, radar sweep). An optional
+  fetcher adds thirty-four dark and thirty light Halo & military stills plus
+  seven dark and five light live loops for personal use, all graded into
+  olive / amber / cream. Curated sets: Spartans, UNSC, Covenant and Forerunner.
 - **Mecha HUD** — a working Quickshell bar plugin: `NET` latency, `THRT` CPU
-  load, `AMMO` RAM pressure, optional `PWR` battery. Click for a telemetry
-  panel with a 60-sample latency graph, packet loss, uptime and a ping-target
-  switcher.
+  load, `AMMO` RAM pressure, optional `PWR` battery. Click for a Halo-style
+  command panel with integrity bars, objectives, an animated radar, a
+  60-sample latency graph, packet loss, uptime, a ping-target switcher and a
+  **NEXT LIVE** control for video wallpapers.
 - **Mecha NET** — a compact standalone latency widget if you want only ping.
 - **CLI artifacts** — `mecha-status` prints a tactical dashboard in the
   terminal (`--json` and `--watch` included), `mecha-themetize` maps any image
@@ -51,7 +53,7 @@ the themed terminal, btop, the keyboard wallpaper and the light variant.
 
 | | |
 |---|---|
-| ![](screenshots/real-dark-hud.webp)<br>**Mecha HUD panel** — over the Master Chief hero | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
+| ![](screenshots/real-dark-hud.webp)<br>**Mecha Command panel** — over the live helmet feed | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
 | ![](screenshots/real-dark-btop.webp)<br>**btop dark** — olive/amber CPU and memory | ![](screenshots/real-light-btop.webp)<br>**btop light** — sand/bronze |
 | ![](screenshots/real-dark-keyboard.webp)<br>**Keyboard wallpaper** — product-style MCHOSE Ace 75 | ![](screenshots/real-dark-switch.webp)<br>**Switch blueprint desktop** — clean |
 | ![](screenshots/real-light-warthog.webp)<br>**Light Warthog desktop** — warm Halo scene | ![](screenshots/real-light-switch.webp)<br>**Light switch blueprint** — sand/bronze desktop |
@@ -111,7 +113,8 @@ omarchy theme install https://github.com/sazardev/omarchy-mecha-green-light-them
 ```
 
 This is the standard Omarchy path: it keeps the palette, `shell.toml`, btop,
-Chromium, icons, keyboard RGB, unlock art and the eight original wallpapers.
+Chromium, icons, keyboard RGB, unlock art, the eight original stills and the
+two bundled live loops.
 Omarchy regenerates the terminal and Hyprland configs from `colors.toml` and
 drops executable theme files, exactly as designed for third-party themes.
 
@@ -143,7 +146,8 @@ cd omarchy-mecha-green
 | `--no-apply` | Install everything but keep the current theme |
 | `--no-hud` | Do not enable the Mecha HUD bar widget |
 | `--ping` | Also enable the standalone **Mecha NET** widget |
-| `--halo` | Download all optional Halo & military sets: 34 dark / 30 light (personal use only) |
+| `--halo` | Download all optional Halo & military sets: 34 dark / 30 light stills (personal use only) |
+| `--halo-live` | Also build the 7 dark / 5 light Halo live loops (implies `--halo`) |
 | `--bar <mode>` | Bar background: `opaque` (default), `glassy` or `none` |
 | `--no-bar` | Leave the current bar background mode alone |
 | `--force` | Overwrite existing backgrounds and previews |
@@ -213,19 +217,21 @@ The bar strip is three (or four) military readouts:
 
 Interactions:
 
-- **Left click** — open the telemetry panel.
+- **Left click** — open the Mecha Command panel.
 - **Middle click** — refresh every sample immediately.
 - **Right click** — cycle the ping target: Cloudflare → Google → local gateway.
 - Hover for a one-line tactical tooltip.
 
-The panel adds:
+The panel is laid out like a Halo military menu:
 
+- Integrity bars for `UPLINK`, `CORE`, `AMMO` and optional `POWER`.
+- An objectives list with live `SECURE` / `GUARDED` / `LOW` states.
+- An animated radar with contact blips.
+- Telemetry cards for NET, THREAT, AMMO, SHIELD, PACKET and MISSION.
 - A 60-sample latency graph with packet-loss gaps.
 - Per-sample packet loss and session sample count.
-- CPU threat label (`LOW`, `GUARDED`, `ELEVATED`, `SEVERE`).
-- RAM used / total in GB.
-- Mission time (uptime) and a reset button.
 - A ping-target switcher that persists your choice in `shell.json`.
+- **NEXT LIVE** — cycles video wallpapers only, using `mecha-live-next`.
 
 Settings can also be changed from the shell:
 
@@ -321,9 +327,10 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 
 ## Bundled wallpapers
 
-Each theme ships eight original 2560×1440 pieces. The optional Halo & military
-fetcher adds thirty-four dark and thirty light scenes on top, grouped into
-Spartans, UNSC, Covenant and Forerunner sets.
+Each theme ships eight original 2560×1440 stills plus two original live loops.
+The optional Halo & military fetcher adds thirty-four dark and thirty light
+stills on top, grouped into Spartans, UNSC, Covenant and Forerunner sets, and
+can build seven dark / five light live loops from them.
 
 | Art | Dark | Light |
 |---|---|---|
@@ -336,9 +343,38 @@ Spartans, UNSC, Covenant and Forerunner sets.
 | Helmet schematic | ![](screenshots/thumb-helmet-blueprint-dark.webp) | ![](screenshots/thumb-helmet-blueprint-light.webp) |
 | Supply crate | ![](screenshots/thumb-crate-dark.webp) | ![](screenshots/thumb-crate-light.webp) |
 
+## Live wallpapers
+
+The bundled **helmet feed** and **radar sweep** loops play natively through
+OWE and cycle with `omarchy theme bg next`. They are silent, 12-second
+2560×1440 H.264 loops with scanlines, grain and a military HUD frame.
+
+| | |
+|---|---|
+| ![](screenshots/live-helmet-dark.webp)<br>**Helmet feed** — dark | ![](screenshots/live-radar-dark.webp)<br>**Radar sweep** — dark |
+| ![](screenshots/live-helmet-light.webp)<br>**Helmet feed** — light | ![](screenshots/live-radar-light.webp)<br>**Radar sweep** — light |
+
+For Halo live wallpapers, fetch the Halo stills and build the curated loops:
+
+```sh
+./scripts/fetch-halo-backgrounds.sh
+mecha-live-set                    # 7 dark / 5 light loops
+mecha-live-next                   # next video only
+```
+
+`mecha-livewall` turns any image into a filtered loop:
+
+```sh
+mecha-livewall photo.jpg --style command --install
+mecha-livewall art.png --mode both --style rain --install --name my-wall
+```
+
+Styles: `command`, `rain`, `dust`, `pulse`, `storm` and `radar`. The full
+guide is in [`docs/LIVE_WALLPAPERS.md`](docs/LIVE_WALLPAPERS.md).
+
 ## Wallpapers & licensing
 
-The repository bundles **original** wallpapers only:
+The repository bundles **original** wallpapers and live loops only:
 
 - `8-mecha-helmet.webp` — original vector Spartan helmet.
 - `9-topographic.webp` — original topographic HUD.
@@ -348,6 +384,8 @@ The repository bundles **original** wallpapers only:
 - `13-radar.webp` — original tactical radar and contact list.
 - `14-helmet-blueprint.webp` — original MJOLNIR helmet schematic.
 - `15-crate.webp` — original field supply crate stencil.
+- `live-helmet.mp4` — original 12 s helmet command-feed loop.
+- `live-radar.mp4` — original 12 s radar sweep loop.
 
 These are licensed MIT together with the theme code.
 

@@ -17,6 +17,9 @@ jobs:
           bash -n scripts/ping-status
           bash -n scripts/fetch-halo-backgrounds.sh
           bash -n scripts/mecha-themetize
+          bash -n scripts/mecha-livewall
+          bash -n scripts/mecha-live-next
+          bash -n scripts/make-live-set.sh
           bash -n system/install-login.sh
           bash -n system/uninstall-login.sh
       - name: JSON manifests
@@ -35,9 +38,18 @@ jobs:
             else
               test -f "$t/backgrounds/8-mecha-helmet.webp"
             fi
+            test -f "$t/backgrounds/live-helmet.mp4"
+            test -f "$t/backgrounds/live-radar.mp4"
           done
           grep -q 'mode = "dark"' themes/mecha-green/colors.toml
           grep -q 'mode = "light"' themes/mecha-green-light/colors.toml
+      - name: Live wallpaper assets
+        run: |
+          for f in hud-dark.png hud-light.png scanlines-dark.png scanlines-light.png \
+                   rain-dark.png rain-light.png fog-dark.webp fog-light.webp \
+                   glow-dark.png glow-light.png sweep-dark.png sweep-light.png; do
+            test -f "assets/live/$f"
+          done
       - name: Login and boot theme files
         run: |
           test -f system/sddm/mecha-green/Main.qml

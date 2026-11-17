@@ -1,0 +1,100 @@
+# Live wallpapers
+
+Mecha Green uses Omarchy's native **OWE** renderer for video backgrounds. No
+extra playback daemon is required: a video placed in a theme's `backgrounds/`
+folder shows up in the normal Omarchy background picker and plays with hardware
+decoding.
+
+The bundled loops are silent, 2560×1440 H.264 at 30 fps and loop seamlessly.
+
+## Bundled loops
+
+Each theme ships two original MIT loops:
+
+| File | Loop |
+|---|---|
+| `backgrounds/live-helmet.mp4` | 12 s command-feed push over the Spartan helmet, with scanlines, HUD frame and grain |
+| `backgrounds/live-radar.mp4` | 12 s rotating radar sweep with contact blips |
+
+Cycle them with:
+
+```sh
+omarchy theme bg next
+```
+
+They also appear in the Mecha HUD's **NEXT LIVE** button, which skips stills and
+cycles only videos.
+
+## Halo live set
+
+The optional Halo stills can be turned into a curated live set. Fetch the
+stills first, then build the loops:
+
+```sh
+./scripts/fetch-halo-backgrounds.sh
+mecha-live-set
+```
+
+`mecha-live-set` builds **7 dark / 5 light** loops from the filtered stills:
+
+| Theme | Loops |
+|---|---|
+| Dark | UNSC city, Chief in rain, Covenant portrait, ring arc, Warthog dust, Forerunner spire, energy swords |
+| Light | UNSC city, Chief in rain, Forerunner snow, Warthog dust, ring arc |
+
+They are written to
+`~/.config/omarchy/backgrounds/mecha-green{,-light}/live-*.mp4`, so they survive
+theme updates. Use `--dark-only`, `--light-only` or `--force` as needed.
+
+The Halo artwork remains personal-use only and is not bundled in the repository.
+
+## Themetize any image
+
+`mecha-livewall` turns any still into a filtered live wallpaper:
+
+```sh
+# Command-feed push with scanlines and HUD frame
+mecha-livewall photo.jpg --install
+
+# Rain, both themes, auto-numbered
+mecha-livewall art.png --mode both --style rain --install --name my-wall
+
+# Already filtered (for example a fetched Halo still)
+mecha-livewall chief.webp --no-filter --style rain --install --name chief
+```
+
+Styles:
+
+| Style | Motion |
+|---|---|
+| `command` | Slow push, scanlines, HUD frame and grain |
+| `rain` | Command plus falling rain |
+| `dust` | Slow pan with drifting fog and dust |
+| `pulse` | Slow push with an amber energy glow |
+| `storm` | Rain with a subtle lightning flicker |
+| `radar` | Rotating radar sweep, for HUD/radar art |
+
+Options include `--mode dark|light|both`, `--duration`, `--fps`,
+`--strength`, `--fit WxH`, `--install`, `--set` and `--force`. Input images go
+through `mecha-themetize` by default; pass `--no-filter` when the image is
+already graded.
+
+The loop uses a sine-based camera move, so it returns to its first frame. Rain,
+radar sweeps, fog and glow are timed to the same duration.
+
+## Cycle videos only
+
+```sh
+mecha-live-next
+```
+
+Reads the current theme, finds its video backgrounds and sets the next one.
+This is the command behind the HUD's `NEXT LIVE` button.
+
+## Performance
+
+- 2560×1440, 30 fps, H.264 High profile, no audio.
+- OWE pauses video automatically when fullscreen or the monitor sleeps,
+  depending on its policy.
+- Keep individual loops under roughly 10 MB and avoid 4K sources for a 1080p
+  desktop.

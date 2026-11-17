@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "sazardev.mecha-hud",
   "name": "Mecha HUD",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "sazardev",
   "license": "MIT",
-  "description": "Tactical Omarchy bar strip: ping, CPU threat, RAM ammo, optional battery power.",
+  "description": "Halo-style tactical Omarchy command panel: ping, CPU, RAM, battery, objectives, radar and live wallpaper controls.",
   "kinds": [
     "bar-widget"
   ],
@@ -14,7 +14,7 @@
   },
   "barWidget": {
     "displayName": "Mecha HUD",
-    "description": "A military-green HUD with NET latency, THRT CPU load, AMMO RAM pressure and optional PWR battery.",
+    "description": "A military-green command screen with NET latency, THRT CPU load, AMMO RAM pressure, objectives, radar and a NEXT LIVE wallpaper control.",
     "category": "System",
     "allowMultiple": false,
     "defaultSection": "right",

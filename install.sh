@@ -15,6 +15,7 @@ APPLY="dark"
 HUD=1
 PING=0
 HALO=0
+HALO_LIVE=0
 FORCE=0
 DRY=0
 BAR_MODE="opaque"
@@ -32,6 +33,7 @@ Options:
   --no-hud       Do not enable the Mecha HUD bar widget
   --ping         Also enable the standalone Mecha NET widget
   --halo         Download all optional Halo & military sets (personal use only)
+  --halo-live    Also build the Halo live wallpaper loops (implies --halo)
   --bar <mode>   Bar background mode: opaque (default), glassy or none
   --no-bar       Do not change the current bar background mode
   --force        Overwrite existing theme backgrounds and previews
@@ -51,6 +53,7 @@ while (( $# > 0 )); do
     --no-hud) HUD=0 ;;
     --ping) PING=1 ;;
     --halo) HALO=1 ;;
+    --halo-live) HALO=1; HALO_LIVE=1 ;;
     --bar)
       if (( $# < 2 )); then
         echo "--bar needs opaque, glassy or none" >&2
@@ -156,19 +159,31 @@ install_plugin "$SCRIPT_DIR/plugins/sazardev.ping" sazardev.ping
 install_script "$SCRIPT_DIR/scripts/mecha-status" mecha-status
 install_script "$SCRIPT_DIR/scripts/ping-status" ping-status
 install_script "$SCRIPT_DIR/scripts/mecha-themetize" mecha-themetize
+install_script "$SCRIPT_DIR/scripts/mecha-livewall" mecha-livewall
+install_script "$SCRIPT_DIR/scripts/mecha-live-next" mecha-live-next
 
 if (( ! DRY )); then
   mkdir -p "$DATA_DIR/scripts" "$DATA_DIR/assets"
   cp -f "$SCRIPT_DIR/scripts/fetch-halo-backgrounds.sh" "$DATA_DIR/scripts/"
   cp -f "$SCRIPT_DIR/scripts/mecha-themetize" "$DATA_DIR/scripts/"
+  cp -f "$SCRIPT_DIR/scripts/mecha-livewall" "$DATA_DIR/scripts/"
+  cp -f "$SCRIPT_DIR/scripts/make-live-set.sh" "$DATA_DIR/scripts/"
   cp -f "$SCRIPT_DIR"/assets/lut-*.png "$DATA_DIR/assets/"
-  chmod +x "$DATA_DIR/scripts/fetch-halo-backgrounds.sh" "$DATA_DIR/scripts/mecha-themetize"
+  mkdir -p "$DATA_DIR/assets/live"
+  cp -R "$SCRIPT_DIR/assets/live/." "$DATA_DIR/assets/live/"
+  chmod +x "$DATA_DIR/scripts/fetch-halo-backgrounds.sh" \
+    "$DATA_DIR/scripts/mecha-themetize" "$DATA_DIR/scripts/mecha-livewall" \
+    "$DATA_DIR/scripts/make-live-set.sh"
   cat >"$BIN_DIR/mecha-fetch-halo" <<'EOF'
 #!/usr/bin/env bash
 exec "${XDG_DATA_HOME:-$HOME/.local/share}/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh" "$@"
 EOF
-  chmod +x "$BIN_DIR/mecha-fetch-halo"
-  ok "mecha-fetch-halo"
+  cat >"$BIN_DIR/mecha-live-set" <<'EOF'
+#!/usr/bin/env bash
+exec "${XDG_DATA_HOME:-$HOME/.local/share}/omarchy-mecha-green/scripts/make-live-set.sh" "$@"
+EOF
+  chmod +x "$BIN_DIR/mecha-fetch-halo" "$BIN_DIR/mecha-live-set"
+  ok "mecha-fetch-halo / mecha-live-set"
 fi
 
 # ---- Optional Halo wallpapers -------------------------------------------
@@ -178,6 +193,16 @@ if (( HALO )); then
     echo "  would run $DATA_DIR/scripts/fetch-halo-backgrounds.sh --yes"
   else
     OMARCHY_THEMES_DIR="$THEMES_DIR" "$DATA_DIR/scripts/fetch-halo-backgrounds.sh" --yes
+  fi
+fi
+
+if (( HALO_LIVE )); then
+  say "Building Halo live wallpapers…"
+  if (( DRY )); then
+    echo "  would run $DATA_DIR/scripts/make-live-set.sh"
+  else
+    OMARCHY_THEMES_DIR="$THEMES_DIR" "$DATA_DIR/scripts/make-live-set.sh" || \
+      warn "Live set could not be built. Fetch the Halo stills first."
   fi
 fi
 
@@ -235,6 +260,9 @@ echo "  Bar background:  omarchy bar background opaque|glassy|none"
 echo "  Add the HUD:     omarchy plugin enable sazardev.mecha-hud --section right"
 echo "  Add NET only:    omarchy plugin enable sazardev.ping --section right"
 echo "  Fetch Halo art:  mecha-fetch-halo"
+echo "  Live wallpapers: mecha-livewall <image> --install"
+echo "  Halo live set:   mecha-live-set"
+echo "  Next live:       mecha-live-next"
 echo "  Tactical CLI:    mecha-status"
 echo "  Themetize art:   mecha-themetize <image> --mode both --install"
 echo "  Login + boot:    sudo ./system/install-login.sh"

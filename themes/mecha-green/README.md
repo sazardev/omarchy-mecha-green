@@ -29,14 +29,16 @@ This is the dark half of the Mecha Green pair. The light twin is
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — amber Omarchy boot logo.
-- `backgrounds/` — eight original Mecha Green wallpapers: helmet,
-  topographic HUD, keyboard, Hall Effect switch blueprint, PCB blueprint,
-  tactical radar, helmet schematic and supply crate.
+- `backgrounds/` — eight original Mecha Green stills (helmet, topographic
+  HUD, keyboard, Hall Effect switch blueprint, PCB blueprint, tactical radar,
+  helmet schematic and supply crate) plus two live loops:
+  `live-helmet.mp4` and `live-radar.mp4`.
 
 The optional Halo & military wallpaper sets are fetched separately and are not
 part of the MIT assets: 34 dark / 30 light files across Spartans, UNSC,
 Covenant and Forerunner sets. Run `mecha-fetch-halo`, or limit it with
-`mecha-fetch-halo --set spartans,unsc`; `--list-sets` shows the groups.
+`mecha-fetch-halo --set spartans,unsc`; `--list-sets` shows the groups. Build
+the 7 dark / 5 light Halo live loops with `mecha-live-set`.
 
 ## Apply
 

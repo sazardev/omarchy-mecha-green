@@ -21,13 +21,16 @@ The installer does this automatically unless you pass `--no-hud`.
 
 | Action | Result |
 |---|---|
-| Left click | Open the telemetry panel |
+| Left click | Open the Mecha Command panel |
 | Middle click | Refresh NET, THRT, AMMO, PWR, uptime and gateway now |
 | Right click | Cycle the ping target: Cloudflare → Google → gateway |
 | Hover | Tactical one-line tooltip |
 
-The panel has a 60-sample latency graph, packet-loss count, CPU threat label,
-RAM used/total, mission time (uptime), ping-target switcher and a reset button.
+The command panel is styled like a Halo military menu: integrity bars for
+UPLINK / CORE / AMMO, an objectives list, an animated radar, telemetry cards,
+a 60-sample latency graph, packet-loss count, mission clock, ping-target
+switcher and a reset button. **NEXT LIVE** cycles video wallpapers only via
+`mecha-live-next`.
 
 ## Settings
 
@@ -56,3 +59,5 @@ omarchy bar set sazardev.mecha-hud showCpu true
   desktop the `AMMO` RAM readout is the third block.
 - Requires the Omarchy shell (Quickshell). It is a user plugin, so it survives
   Omarchy updates.
+- `NEXT LIVE` needs `mecha-live-next` from the Mecha Green full installer. If it
+  is not present, the button falls back to cycling every background.

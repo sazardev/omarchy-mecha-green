@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.5.0 — 2026-11-17
+
+- Added two original MIT live wallpapers to each theme: a 12 s helmet command
+  feed and a 12 s radar sweep. They are 2560×1440 H.264, silent, loop
+  seamlessly and play natively through OWE.
+- Added `mecha-livewall`: turn any image into a filtered live wallpaper with
+  `command`, `rain`, `dust`, `pulse`, `storm` and `radar` styles.
+- Added `mecha-live-set` / `make-live-set.sh`, which builds 7 dark and 5 light
+  Halo live loops from the fetched stills, and `mecha-live-next`, which cycles
+  videos only.
+- Redesigned the Mecha HUD panel as a military command screen: integrity bars,
+  objectives list, animated radar, scanline/grid backdrop, mission clock and
+  a NEXT LIVE button.
+- Added `--halo-live` to the installer, installed the live scripts and assets,
+  and documented live wallpapers in README and docs.
+- Updated the registry-ready theme repositories with the two MIT live loops.
+
 ## 1.4.1 — 2026-11-17
 
 - Published registry-ready theme repositories for `omarchy theme install`:

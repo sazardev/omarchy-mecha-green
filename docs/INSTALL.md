@@ -6,6 +6,7 @@
 - `git` or `curl` for the installer.
 - `ping` (`iputils`) for Mecha HUD / Mecha NET.
 - ImageMagick (`magick`) only for the optional Halo wallpaper fetcher.
+- `ffmpeg` for local live wallpaper generation (already present on Omarchy).
 
 The installer does not use `sudo`. It writes to:
 
@@ -17,6 +18,9 @@ The installer does not use `sudo`. It writes to:
 ~/.local/bin/mecha-status
 ~/.local/bin/ping-status
 ~/.local/bin/mecha-fetch-halo
+~/.local/bin/mecha-livewall
+~/.local/bin/mecha-live-next
+~/.local/bin/mecha-live-set
 ~/.local/share/omarchy-mecha-green
 ```
 
@@ -43,6 +47,7 @@ cd omarchy-mecha-green
 ```sh
 ./install.sh --light                 # apply the light theme
 ./install.sh --halo                  # fetch the full optional Halo & military set
+./install.sh --halo-live             # fetch it and build the live loops
 ./install.sh --ping                  # also enable the standalone NET widget
 ./install.sh --no-hud                # themes only
 ./install.sh --bar glassy            # translucent bar instead of opaque
@@ -65,19 +70,30 @@ cp -r plugins/sazardev.mecha-hud plugins/sazardev.ping ~/.config/omarchy/plugins
 
 # CLI
 mkdir -p ~/.local/bin
-cp scripts/mecha-status scripts/ping-status scripts/mecha-themetize ~/.local/bin/
-chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status ~/.local/bin/mecha-themetize
+cp scripts/mecha-status scripts/ping-status scripts/mecha-themetize \
+  scripts/mecha-livewall scripts/mecha-live-next ~/.local/bin/
+chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status ~/.local/bin/mecha-themetize \
+  ~/.local/bin/mecha-livewall ~/.local/bin/mecha-live-next
 
 # Optional Halo & military wallpapers
 mkdir -p ~/.local/share/omarchy-mecha-green/{scripts,assets}
-cp scripts/fetch-halo-backgrounds.sh ~/.local/share/omarchy-mecha-green/scripts/
+cp scripts/fetch-halo-backgrounds.sh scripts/mecha-livewall scripts/make-live-set.sh \
+  ~/.local/share/omarchy-mecha-green/scripts/
 cp assets/lut-*.png ~/.local/share/omarchy-mecha-green/assets/
-chmod +x ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh
+cp -R assets/live ~/.local/share/omarchy-mecha-green/assets/
+chmod +x ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh \
+  ~/.local/share/omarchy-mecha-green/scripts/mecha-livewall \
+  ~/.local/share/omarchy-mecha-green/scripts/make-live-set.sh
 ln -sf ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh ~/.local/bin/mecha-fetch-halo
+ln -sf ~/.local/share/omarchy-mecha-green/scripts/make-live-set.sh ~/.local/bin/mecha-live-set
 
 # Fetch only some curated sets (spartans, unsc, covenant, forerunner)
 mecha-fetch-halo --set spartans,unsc
 mecha-fetch-halo --list-sets
+
+# Build the Halo live loops, then cycle only videos
+mecha-live-set
+mecha-live-next
 
 # Load and apply
 omarchy-shell shell rescanPlugins

@@ -89,6 +89,21 @@ mecha-themetize photo.jpg --fit none
 Useful flags: `--strength` (0–100), `--keep-color` (0–100, inverse of strength),
 `--fit WxH|none`, `--vignette`, `--grain`, `--force`.
 
+## Live wallpapers
+
+`mecha-livewall` turns a still into a filtered video loop:
+
+```sh
+mecha-livewall photo.jpg --style command --install
+mecha-livewall art.png --mode both --style rain --install --name my-wall
+```
+
+Styles: `command`, `rain`, `dust`, `pulse`, `storm`, `radar`. The output is
+2560×1440 H.264, 30 fps, silent and looped. `--install` writes to
+`~/.config/omarchy/backgrounds/<theme>/`, and `mecha-live-next` cycles videos
+only. The bundled theme loops are `live-helmet.mp4` and `live-radar.mp4`; see
+[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for the Halo set.
+
 ## Wallpapers
 
 Add any image to:
