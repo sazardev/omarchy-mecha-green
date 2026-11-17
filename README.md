@@ -35,6 +35,15 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   Waybar-style command-module script.
 - **Original SVG sources** for the helmet, topographic and keyboard art.
 
+## Custom hardware art
+
+The bundled set includes five code-drawn military pieces. A few highlights:
+
+| | |
+|---|---|
+| ![](screenshots/feature-switch.webp)<br>**Hall Effect switch** — cross-section, spring, magnet and Hall sensor | ![](screenshots/feature-pcb.webp)<br>**PCB / switch matrix** — 75% matrix and switch footprint |
+| ![](screenshots/feature-radar.webp)<br>**Tactical radar** — contacts, sweep and threat readout | ![](screenshots/feature-crate.webp)<br>**Supply crate** — stencil, hazard strip and lot marks |
+
 ## Install
 
 ### One command (recommended)
