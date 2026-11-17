@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1 — 2026-11-16
+
+- Added real 1920×1080 desktop screenshots: dark hero, light switch blueprint,
+  Mecha HUD panel, Mecha status CLI, btop dark/light and the light Warthog
+  desktop.
+- Mecha HUD shows the detected gateway as `LOCAL` in the ping-target strip
+  instead of exposing the private IP in screenshots.
+- README now opens with real desktop captures and a dedicated screenshot
+  gallery.
+
 ## 1.1.0 — 2026-11-16
 
 - Added five new original wallpaper pairs: Hall Effect switch blueprint, 75%

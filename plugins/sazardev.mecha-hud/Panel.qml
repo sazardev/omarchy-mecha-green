@@ -434,7 +434,7 @@ Panel {
               required property var modelData
               width: (parent.width - Style.space(16)) / 3
               label: modelData.label
-              address: modelData.host
+              address: modelData.host === telemetry.gateway && telemetry.gateway !== "" ? "LOCAL" : modelData.host
               active: root.configuredHost === modelData.host
               onClicked: root.setHost(modelData.host)
             }

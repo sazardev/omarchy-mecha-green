@@ -8,8 +8,8 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 [![Quickshell](https://img.shields.io/badge/Quickshell-ready-7fa89a.svg)](https://quickshell.org/)
 [![Validate](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml/badge.svg)](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml)
 
-![Mecha Green dark](screenshots/mecha-green.png)
-![Mecha Green Light](screenshots/mecha-green-light.png)
+![Mecha Green on the desktop](screenshots/real-dark-hero.webp)
+![Mecha Green Light on the desktop](screenshots/real-light-switch.webp)
 
 ## What you get
 
@@ -34,6 +34,17 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   terminal (`--json` and `--watch` included), and `ping-status` is a
   Waybar-style command-module script.
 - **Original SVG sources** for the helmet, topographic and keyboard art.
+
+## Real screenshots
+
+Captured on the author's Omarchy desktop at 1920×1080: the bar, the Mecha HUD,
+the themed terminal, btop and the light variant.
+
+| | |
+|---|---|
+| ![](screenshots/real-dark-hud.webp)<br>**Mecha HUD panel** — over the Master Chief hero | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
+| ![](screenshots/real-dark-btop.webp)<br>**btop dark** — olive/amber CPU and memory | ![](screenshots/real-light-btop.webp)<br>**btop light** — sand/bronze |
+| ![](screenshots/real-dark-switch.webp)<br>**Switch blueprint desktop** — clean | ![](screenshots/real-light-warthog.webp)<br>**Light Warthog desktop** — warm Halo scene |
 
 ## Custom hardware art
 
