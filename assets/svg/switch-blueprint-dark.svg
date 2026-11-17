@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+<defs>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#9dae5c" stroke-opacity="0.055" stroke-width="1"/>
+      </pattern>
+      <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="8" stroke="#9dae5c" stroke-opacity="0.45" stroke-width="2"/>
+      </pattern>
+      <linearGradient id="amber" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#f2efcf"/>
+        <stop offset="45%" stop-color="#f2c84b"/>
+        <stop offset="100%" stop-color="#f2c84b"/>
+      </linearGradient>
+      <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+        <feGaussianBlur stdDeviation="10"/>
+      </filter>
+    </defs>
+<rect width="1920" height="1080" fill="#0b0e07"/>
+<rect width="1920" height="1080" fill="url(#grid)"/>
+<rect x="28" y="28" width="1864" height="1024" rx="0" fill="none" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.55" fill-opacity="0.55"/>
+<rect x="36" y="36" width="1848" height="1008" rx="0" fill="none" stroke="#9dae5c" stroke-width="0.8" stroke-opacity="0.25" fill-opacity="0.25"/>
+<line x1="28" y1="28" x2="52" y2="28" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="28" y1="28" x2="28" y2="52" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1892" y1="28" x2="1868" y2="28" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1892" y1="28" x2="1892" y2="52" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="28" y1="1052" x2="52" y2="1052" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="28" y1="1052" x2="28" y2="1028" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1892" y1="1052" x2="1868" y2="1052" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1892" y1="1052" x2="1892" y2="1028" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<text x="70" y="92" font-family="Geist Mono, monospace" font-size="30" font-weight="bold" letter-spacing="6" fill="#f2c84b" fill-opacity="1" text-anchor="start">MECHA GREEN</text>
+<text x="70" y="116" font-family="Geist Mono, monospace" font-size="13" font-weight="normal" letter-spacing="2" fill="#737c58" fill-opacity="1" text-anchor="start">HALL EFFECT SWITCH  //  EXPLODED SECTION</text>
+<text x="1850" y="92" font-family="Geist Mono, monospace" font-size="14" font-weight="normal" letter-spacing="2" fill="#d8d9b4" fill-opacity="1" text-anchor="end">MCHOSE ACE 75</text>
+<text x="1850" y="114" font-family="Geist Mono, monospace" font-size="11" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="end">SHEET 01 / 01  //  SCALE 4:1</text>
+<rect x="470" y="130" width="300" height="90" rx="10" fill="none" stroke="#9dae5c" stroke-width="2" stroke-opacity="0.8" fill-opacity="0.8" stroke-dasharray="6 5"/>
+<text x="620" y="120" font-family="Geist Mono, monospace" font-size="11" font-weight="normal" letter-spacing="2" fill="#737c58" fill-opacity="1" text-anchor="middle">KEYCAP</text>
+<path d="M 600 170 L 640 170 L 640 210 L 650 210 L 650 230 L 640 230 L 640 660 L 600 660 L 600 230 L 590 230 L 590 210 L 600 210 Z" fill="#2a3218" stroke="#f2c84b" stroke-width="2"/>
+<rect x="612" y="214" width="16" height="36" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="0.9" fill-opacity="0.9"/>
+<line x1="620" y1="250" x2="620" y2="640" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.5"/>
+<path d="M 400 380 L 840 380 L 860 420 L 860 620 L 840 650 L 400 650 L 380 620 L 380 420 Z" fill="#1a1e11" stroke="#f2c84b" stroke-width="2"/>
+<path d="M 400 380 L 840 380 L 860 420 L 860 620 L 840 650 L 400 650 L 380 620 L 380 420 Z" fill="url(#hatch)" opacity="0.35"/>
+<rect x="560" y="380" width="120" height="40" rx="0" fill="#3f4a22" stroke="#9dae5c" stroke-width="1.5" stroke-opacity="0.9" fill-opacity="0.9"/>
+<text x="470" y="440" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">TOP HOUSING // PC</text>
+<text x="470" y="458" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="0" fill="#737c58" fill-opacity="0.7" text-anchor="start">CLEAR / OLIVE</text>
+<ellipse cx="620" cy="490" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.55"/>
+<ellipse cx="620" cy="510" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.7000000000000001"/>
+<ellipse cx="620" cy="530" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.55"/>
+<ellipse cx="620" cy="550" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.7000000000000001"/>
+<ellipse cx="620" cy="570" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.55"/>
+<ellipse cx="620" cy="590" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.7000000000000001"/>
+<ellipse cx="620" cy="610" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.55"/>
+<ellipse cx="620" cy="630" rx="92" ry="12" fill="none" stroke="#9dae5c" stroke-width="2" opacity="0.7000000000000001"/>
+<text x="730" y="530" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">SPRING // 45 gf</text>
+<path d="M 390 650 L 850 650 L 880 700 L 880 820 L 850 850 L 390 850 L 360 820 L 360 700 Z" fill="#2a3218" stroke="#f2c84b" stroke-width="2"/>
+<path d="M 390 650 L 850 650 L 880 700 L 880 820 L 850 850 L 390 850 L 360 820 L 360 700 Z" fill="url(#hatch)" opacity="0.30"/>
+<text x="390" y="790" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">BOTTOM HOUSING // PC</text>
+<rect x="598" y="660" width="44" height="56" rx="0" fill="url(#amber)" stroke="#f2c84b" stroke-width="2" stroke-opacity="0.95" fill-opacity="0.95"/>
+<rect x="575" y="820" width="90" height="26" rx="0" fill="#3f4a22" stroke="#f2c84b" stroke-width="2" stroke-opacity="0.95" fill-opacity="0.95"/>
+<text x="620" y="838" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="1" fill="#f2efcf" fill-opacity="1" text-anchor="middle">HALL</text>
+<path d="M 600 716 C 560 760 560 800 590 820" fill="none" stroke="#f2c84b" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.8"/>
+<path d="M 640 716 C 680 760 680 800 650 820" fill="none" stroke="#f2c84b" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.8"/>
+<rect x="180" y="850" width="870" height="42" rx="4" fill="#1a1e11" stroke="#f2c84b" stroke-width="2" stroke-opacity="0.95" fill-opacity="0.95"/>
+<line x1="180" y1="862" x2="1050" y2="862" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.35"/>
+<rect x="470" y="820" width="12" height="30" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<rect x="758" y="820" width="12" height="30" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<circle cx="476" cy="876" r="6" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<circle cx="764" cy="876" r="6" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<text x="180" y="920" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">PCB // 1.6 mm  //  GOLD PINS</text>
+<line x1="260" y1="130" x2="260" y2="900" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.8" stroke-dasharray="5 5"/>
+<line x1="246" y1="130" x2="274" y2="130" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="246" y1="900" x2="274" y2="900" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<path d="M 260 130 L 253 148 L 267 148 Z" fill="#f2c84b"/>
+<path d="M 260 900 L 253 882 L 267 882 Z" fill="#f2c84b"/>
+<text x="218" y="520" font-family="Geist Mono, monospace" font-size="11" font-weight="normal" letter-spacing="2" fill="#f2c84b" fill-opacity="1" text-anchor="middle" transform="rotate(-90 218 520)">TRAVEL 3.4 mm</text>
+<line x1="360" y1="940" x2="880" y2="940" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.8" stroke-dasharray="5 5"/>
+<line x1="360" y1="926" x2="360" y2="954" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="880" y1="926" x2="880" y2="954" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<path d="M 360 940 L 378 933 L 378 947 Z" fill="#f2c84b"/>
+<path d="M 880 940 L 862 933 L 862 947 Z" fill="#f2c84b"/>
+<text x="620" y="975" font-family="Geist Mono, monospace" font-size="11" font-weight="normal" letter-spacing="2" fill="#f2c84b" fill-opacity="1" text-anchor="middle">15.0 mm</text>
+<circle cx="700" cy="175" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="700" y1="175" x2="892" y2="150" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="154" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">KEYCAP MOUNT</text>
+<circle cx="650" cy="400" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="650" y1="400" x2="892" y2="390" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="394" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">STEM // POM</text>
+<circle cx="710" cy="530" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="710" y1="530" x2="892" y2="530" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="534" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">SPRING</text>
+<circle cx="642" cy="686" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="642" y1="686" x2="892" y2="675" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="679" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">MAGNET // NdFeB</text>
+<circle cx="665" cy="832" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="665" y1="832" x2="892" y2="820" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="824" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">HALL SENSOR</text>
+<circle cx="860" cy="862" r="3.5" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="1" fill-opacity="1"/>
+<line x1="860" y1="862" x2="892" y2="900" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.75"/>
+<text x="900" y="904" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#737c58" fill-opacity="1" text-anchor="start">PCB // 1.6 mm</text>
+<text x="1320" y="250" font-family="Geist Mono, monospace" font-size="13" font-weight="bold" letter-spacing="3" fill="#f2c84b" fill-opacity="1" text-anchor="start">TOP VIEW // 15 × 15 mm</text>
+<rect x="1320" y="300" width="360" height="360" rx="24" fill="#1a1e11" stroke="#f2c84b" stroke-width="2" stroke-opacity="0.95" fill-opacity="0.95"/>
+<rect x="1350" y="330" width="300" height="300" rx="14" fill="none" stroke="#9dae5c" stroke-width="1.2" stroke-opacity="0.75" fill-opacity="0.75"/>
+<rect x="1350" y="330" width="300" height="300" rx="14" fill="url(#hatch)" stroke="none" stroke-width="1.5" stroke-opacity="0.18" fill-opacity="0.18"/>
+<path d="M 1470 420 L 1530 420 L 1530 480 L 1590 480 L 1590 540 L 1530 540 L 1530 600 L 1470 600 L 1470 540 L 1410 540 L 1410 480 L 1470 480 Z" fill="#3f4a22" stroke="#f2c84b" stroke-width="2"/>
+<rect x="1478" y="488" width="44" height="44" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="0.9" fill-opacity="0.9"/>
+<rect x="1390" y="690" width="24" height="54" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<rect x="1586" y="690" width="24" height="54" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="1" fill-opacity="1"/>
+<text x="1402" y="770" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="0" fill="#737c58" fill-opacity="1" text-anchor="middle">PIN 1</text>
+<text x="1598" y="770" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="0" fill="#737c58" fill-opacity="1" text-anchor="middle">PIN 2</text>
+<line x1="1320" y1="790" x2="1680" y2="790" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.8" stroke-dasharray="5 5"/>
+<line x1="1320" y1="776" x2="1320" y2="804" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1680" y1="776" x2="1680" y2="804" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<text x="1500" y="818" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="0" fill="#f2c84b" fill-opacity="1" text-anchor="middle">15.0 mm</text>
+<line x1="1740" y1="300" x2="1740" y2="660" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.8" stroke-dasharray="5 5"/>
+<line x1="1726" y1="300" x2="1754" y2="300" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<line x1="1726" y1="660" x2="1754" y2="660" stroke="#f2c84b" stroke-width="2" stroke-opacity="1"/>
+<text x="1762" y="490" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#f2c84b" fill-opacity="1" text-anchor="start" transform="rotate(90 1762 490)">15.0 mm</text>
+<rect x="1320" y="850" width="500" height="170" rx="0" fill="#1a1e11" stroke="#f2c84b" stroke-width="1.5" stroke-opacity="0.95" fill-opacity="0.95"/>
+<line x1="1320" y1="890" x2="1820" y2="890" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.5"/>
+<line x1="1320" y1="940" x2="1820" y2="940" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.5"/>
+<line x1="1320" y1="980" x2="1820" y2="980" stroke="#9dae5c" stroke-width="1" stroke-opacity="0.5"/>
+<text x="1340" y="878" font-family="Geist Mono, monospace" font-size="12" font-weight="bold" letter-spacing="1" fill="#f2c84b" fill-opacity="1" text-anchor="start">MECHA GREEN // HALL EFFECT SWITCH</text>
+<text x="1340" y="924" font-family="Geist Mono, monospace" font-size="10" font-weight="normal" letter-spacing="1" fill="#d8d9b4" fill-opacity="1" text-anchor="start">MCHOSE ACE 75  //  MAGNETIC  //  117</text>
+<text x="1340" y="966" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="0" fill="#737c58" fill-opacity="1" text-anchor="start">TRAVEL 3.4 mm   //   RESOLUTION 0.01 mm</text>
+<text x="1340" y="1004" font-family="Geist Mono, monospace" font-size="9" font-weight="normal" letter-spacing="0" fill="#737c58" fill-opacity="1" text-anchor="start">8K POLLING  //  0.08 ms  //  SHEET 01/01</text>
+<line x1="1680" y1="956" x2="1680" y2="1000" stroke="#d8d9b4" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="1684" y1="956" x2="1684" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1687" y1="956" x2="1687" y2="1000" stroke="#d8d9b4" stroke-width="3" stroke-opacity="0.75"/>
+<line x1="1692" y1="956" x2="1692" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1695" y1="956" x2="1695" y2="1000" stroke="#d8d9b4" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="1699" y1="956" x2="1699" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1702" y1="956" x2="1702" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1705" y1="956" x2="1705" y2="1000" stroke="#d8d9b4" stroke-width="3" stroke-opacity="0.75"/>
+<line x1="1710" y1="956" x2="1710" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1713" y1="956" x2="1713" y2="1000" stroke="#d8d9b4" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="1717" y1="956" x2="1717" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1720" y1="956" x2="1720" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1723" y1="956" x2="1723" y2="1000" stroke="#d8d9b4" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="1727" y1="956" x2="1727" y2="1000" stroke="#d8d9b4" stroke-width="3" stroke-opacity="0.75"/>
+<line x1="1732" y1="956" x2="1732" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1735" y1="956" x2="1735" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<line x1="1738" y1="956" x2="1738" y2="1000" stroke="#d8d9b4" stroke-width="2" stroke-opacity="0.75"/>
+<line x1="1742" y1="956" x2="1742" y2="1000" stroke="#d8d9b4" stroke-width="1" stroke-opacity="0.75"/>
+<rect x="70" y="960" width="210" height="34" rx="0" fill="#f2c84b" stroke="#f2c84b" stroke-width="1" stroke-opacity="0.9" fill-opacity="0.9"/>
+<text x="175" y="983" font-family="Geist Mono, monospace" font-size="12" font-weight="bold" letter-spacing="3" fill="#0b0e07" fill-opacity="1" text-anchor="middle">OLIVE / AMBER</text>
+</svg>

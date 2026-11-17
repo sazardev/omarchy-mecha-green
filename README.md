@@ -20,10 +20,11 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber indicators, amber-tinted selection, gradient-bordered popups, menus,
   notifications, launcher and lock screen. The light theme flips it to sand
   and bronze.
-- **10 dark wallpapers / 6 light wallpapers** — the repo bundles three original
-  Mecha Green backgrounds in each theme (helmet, topographic HUD, keyboard).
-  An optional fetcher adds seven dark and three light Halo scenes for personal
-  use.
+- **15 dark wallpapers / 12 light wallpapers** — the repo bundles eight original
+  Mecha Green pieces in each theme (helmet, topographic HUD, keyboard, switch
+  blueprint, PCB blueprint, tactical radar, helmet schematic, supply crate).
+  An optional fetcher adds seven dark and four light Halo scenes for personal
+  use, curated to olive / amber / cream.
 - **Mecha HUD** — a working Quickshell bar plugin: `NET` latency, `THRT` CPU
   load, `AMMO` RAM pressure, optional `PWR` battery. Click for a telemetry
   panel with a 60-sample latency graph, packet loss, uptime and a ping-target
@@ -214,14 +215,19 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 
 ## Bundled wallpapers
 
-Each theme ships three original 2560×1440 pieces. The optional Halo fetcher
-adds seven dark and three light scenes on top.
+Each theme ships eight original 2560×1440 pieces. The optional Halo fetcher
+adds seven dark and four light scenes on top.
 
-| | Dark | Light |
+| Art | Dark | Light |
 |---|---|---|
-| Helmet | ![](screenshots/wallpaper-helmet-dark.webp) | ![](screenshots/wallpaper-helmet-light.webp) |
-| Topographic HUD | ![](screenshots/wallpaper-topo-dark.webp) | ![](screenshots/wallpaper-topo-light.webp) |
-| Keyboard | ![](screenshots/wallpaper-keyboard-dark.webp) | ![](screenshots/wallpaper-keyboard-light.webp) |
+| Helmet | ![](screenshots/thumb-helmet-dark.webp) | ![](screenshots/thumb-helmet-light.webp) |
+| Topographic HUD | ![](screenshots/thumb-topo-dark.webp) | ![](screenshots/thumb-topo-light.webp) |
+| Keyboard | ![](screenshots/thumb-keyboard-dark.webp) | ![](screenshots/thumb-keyboard-light.webp) |
+| Hall Effect switch | ![](screenshots/thumb-switch-dark.webp) | ![](screenshots/thumb-switch-light.webp) |
+| PCB / switch matrix | ![](screenshots/thumb-pcb-dark.webp) | ![](screenshots/thumb-pcb-light.webp) |
+| Tactical radar | ![](screenshots/thumb-radar-dark.webp) | ![](screenshots/thumb-radar-light.webp) |
+| Helmet schematic | ![](screenshots/thumb-helmet-blueprint-dark.webp) | ![](screenshots/thumb-helmet-blueprint-light.webp) |
+| Supply crate | ![](screenshots/thumb-crate-dark.webp) | ![](screenshots/thumb-crate-light.webp) |
 
 ## Wallpapers & licensing
 
@@ -230,6 +236,11 @@ The repository bundles **original** wallpapers only:
 - `8-mecha-helmet.webp` — original vector Spartan helmet.
 - `9-topographic.webp` — original topographic HUD.
 - `10-keyboard.webp` — original MCHOSE Ace 75-inspired keyboard art.
+- `11-switch-blueprint.webp` — original Hall Effect switch cross-section.
+- `12-pcb-blueprint.webp` — original 75% keyboard PCB / switch matrix.
+- `13-radar.webp` — original tactical radar and contact list.
+- `14-helmet-blueprint.webp` — original MJOLNIR helmet schematic.
+- `15-crate.webp` — original field supply crate stencil.
 
 These are licensed MIT together with the theme code.
 
@@ -251,12 +262,13 @@ It adds:
 | `2-amber-chief.webp` | [4x7leo](https://wallhaven.cc/w/4x7leo) | JT42 |
 | `3-chief-dark.webp` | [3lovdd](https://wallhaven.cc/w/3lovdd) | SnackySkullFace |
 | `4-night-ring.webp` | [9odk5d](https://wallhaven.cc/w/9odk5d) | ArtificialCC |
-| `5-forerunner-gate.webp` | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
+| `5-warthog.webp` | [5dy1j8](https://wallhaven.cc/w/5dy1j8) | CrisMaggot |
 | `6-fireteam.webp` | [eo8ggr](https://wallhaven.cc/w/eo8ggr) | ZuaDoR0 |
 | `7-canyon.webp` | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
-| `1-dawn-ring.webp` (light) | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
-| `2-field-light.webp` (light) | [85qdg2](https://wallhaven.cc/w/85qdg2) | NonoRiri |
-| `3-canyon-light.webp` (light) | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
+| `1-warthog-light.webp` (light) | [5dy1j8](https://wallhaven.cc/w/5dy1j8) | CrisMaggot |
+| `2-canyon-light.webp` (light) | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
+| `3-desert-light.webp` (light) | [oxer87](https://wallhaven.cc/w/oxer87) | SamUerto |
+| `4-jungle-light.webp` (light) | [zmreeg](https://wallhaven.cc/w/zmreeg) | SamUerto |
 
 See [`docs/WALLPAPERS.md`](docs/WALLPAPERS.md) for the full credits and notes.
 

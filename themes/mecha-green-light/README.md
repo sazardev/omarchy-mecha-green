@@ -25,8 +25,9 @@ Sand, olive ink and bronze. The daylight half of the Mecha Green pair.
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — bronze Omarchy boot logo on sand.
-- `backgrounds/` — three original light wallpapers: helmet, topographic HUD
-  and keyboard.
+- `backgrounds/` — eight original light wallpapers: helmet, topographic HUD,
+  keyboard, Hall Effect switch blueprint, PCB blueprint, tactical radar,
+  helmet schematic and supply crate.
 
 The optional light Halo wallpaper set is fetched separately and is not part of
 the MIT assets. Run `mecha-fetch-halo` from the repository root or the

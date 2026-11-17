@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0 — 2026-11-16
+
+- Added five new original wallpaper pairs: Hall Effect switch blueprint, 75%
+  PCB / switch matrix, tactical radar, MJOLNIR helmet schematic and field
+  supply crate.
+- Replaced the blue-heavy Halo scenes with a warm-curated set: warthog,
+  desert and jungle replace the portal, dawn ring and blue field.
+- Warm-graded the Master Chief field hero with a blue-channel mask, so the
+  cyan beams and sky become olive / amber / cream.
+- Updated the Halo fetcher, credits, gallery and docs.
+- Added the new LUTs and SVG sources (all MIT).
+
 ## 1.0.1 — 2026-11-16
 
 - Installer can set the bar background to `opaque` (default), `glassy` or

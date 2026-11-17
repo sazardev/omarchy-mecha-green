@@ -71,7 +71,7 @@ chmod +x ~/.local/bin/mecha-status ~/.local/bin/ping-status
 # Optional Halo wallpapers
 mkdir -p ~/.local/share/omarchy-mecha-green/{scripts,assets}
 cp scripts/fetch-halo-backgrounds.sh ~/.local/share/omarchy-mecha-green/scripts/
-cp assets/lut-olive-amber.png ~/.local/share/omarchy-mecha-green/assets/
+cp assets/lut-*.png ~/.local/share/omarchy-mecha-green/assets/
 chmod +x ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh
 ln -sf ~/.local/share/omarchy-mecha-green/scripts/fetch-halo-backgrounds.sh ~/.local/bin/mecha-fetch-halo
 

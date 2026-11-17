@@ -159,7 +159,7 @@ install_script "$SCRIPT_DIR/scripts/ping-status" ping-status
 if (( ! DRY )); then
   mkdir -p "$DATA_DIR/scripts" "$DATA_DIR/assets"
   cp -f "$SCRIPT_DIR/scripts/fetch-halo-backgrounds.sh" "$DATA_DIR/scripts/"
-  cp -f "$SCRIPT_DIR/assets/lut-olive-amber.png" "$DATA_DIR/assets/"
+  cp -f "$SCRIPT_DIR"/assets/lut-*.png "$DATA_DIR/assets/"
   chmod +x "$DATA_DIR/scripts/fetch-halo-backgrounds.sh"
   cat >"$BIN_DIR/mecha-fetch-halo" <<'EOF'
 #!/usr/bin/env bash

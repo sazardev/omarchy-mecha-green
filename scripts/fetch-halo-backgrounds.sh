@@ -10,7 +10,9 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 THEMES_DIR="${OMARCHY_THEMES_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/omarchy/themes}"
 DARK_DIR="$THEMES_DIR/mecha-green/backgrounds"
 LIGHT_DIR="$THEMES_DIR/mecha-green-light/backgrounds"
-LUT="$ROOT/assets/lut-olive-amber.png"
+LUT_OLIVE="$ROOT/assets/lut-olive-amber.png"
+LUT_HERO="$ROOT/assets/lut-hero.png"
+LUT_TRI="$ROOT/assets/lut-tritone.png"
 FORCE=0
 YES=0
 DARK=1
@@ -27,7 +29,9 @@ for arg in "$@"; do
 Usage: fetch-halo-backgrounds.sh [--dark-only|--light-only] [--force] [--yes]
 
 Downloads and grades the Halo wallpaper set into the installed Mecha Green
-themes. Existing files are kept unless --force is given.
+themes. Existing files are kept unless --force is given. Use --force after
+upgrading from an older release to refresh the warm-graded hero and the
+curated light set.
 EOF
       exit 0
       ;;
@@ -37,7 +41,9 @@ done
 
 command -v curl >/dev/null 2>&1 || { echo "curl is required" >&2; exit 1; }
 command -v magick >/dev/null 2>&1 || { echo "ImageMagick (magick) is required" >&2; exit 1; }
-[[ -f $LUT ]] || { echo "missing LUT: $LUT" >&2; exit 1; }
+for lut in "$LUT_OLIVE" "$LUT_HERO" "$LUT_TRI"; do
+  [[ -f $lut ]] || { echo "missing LUT: $lut" >&2; exit 1; }
+done
 
 if (( ! YES )); then
   cat <<'EOF'
@@ -71,13 +77,17 @@ download() {
 
 mkdir -p "$DARK_DIR" "$LIGHT_DIR"
 
+# Remove the old blue-heavy scenes from earlier releases.
+rm -f "$DARK_DIR/5-forerunner-gate.webp"
+rm -f "$LIGHT_DIR/1-dawn-ring.webp" "$LIGHT_DIR/2-field-light.webp" "$LIGHT_DIR/3-canyon-light.webp"
+
 if (( DARK )); then
   echo "Mecha Green (dark)"
   want_master=$(wanted "$DARK_DIR/1-master-chief.webp" && echo 1 || echo 0)
   want_amber=$(wanted "$DARK_DIR/2-amber-chief.webp" && echo 1 || echo 0)
   want_dark=$(wanted "$DARK_DIR/3-chief-dark.webp" && echo 1 || echo 0)
   want_night=$(wanted "$DARK_DIR/4-night-ring.webp" && echo 1 || echo 0)
-  want_gate=$(wanted "$DARK_DIR/5-forerunner-gate.webp" && echo 1 || echo 0)
+  want_warthog=$(wanted "$DARK_DIR/5-warthog.webp" && echo 1 || echo 0)
   want_fire=$(wanted "$DARK_DIR/6-fireteam.webp" && echo 1 || echo 0)
   want_canyon=$(wanted "$DARK_DIR/7-canyon.webp" && echo 1 || echo 0)
 
@@ -85,14 +95,18 @@ if (( DARK )); then
   (( want_amber )) && download 4x7leo 'https://w.wallhaven.cc/full/4x/wallhaven-4x7leo.jpg' jpg
   (( want_dark )) && download 3lovdd 'https://w.wallhaven.cc/full/3l/wallhaven-3lovdd.jpg' jpg
   (( want_night )) && download 9odk5d 'https://w.wallhaven.cc/full/9o/wallhaven-9odk5d.png' png
-  (( want_gate )) && download j5o29p 'https://w.wallhaven.cc/full/j5/wallhaven-j5o29p.jpg' jpg
+  (( want_warthog )) && download 5dy1j8 'https://w.wallhaven.cc/full/5d/wallhaven-5dy1j8.jpg' jpg
   (( want_fire )) && download eo8ggr 'https://w.wallhaven.cc/full/eo/wallhaven-eo8ggr.jpg' jpg
   (( want_canyon )) && download 5wwdz7 'https://w.wallhaven.cc/full/5w/wallhaven-5wwdz7.png' png
 
   if (( want_master )); then
     magick "$TMP/85qdg2.jpg" -crop 3840x2080+0+0 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -modulate 91,82,106 -fill '#1b2412' -colorize 12% -brightness-contrast -5x10 -gamma 0.985 \
-      -background '#080a06' -vignette 0x350 -unsharp 0x0.5+0.5+0.02 -quality 92 "$DARK_DIR/1-master-chief.webp"
+      "$TMP/hero-base.png"
+    magick "$TMP/hero-base.png" -fx '(b > r*1.15 && b > g*1.03) ? 1 : 0' -blur 0x3 "$TMP/hero-mask.png"
+    magick "$TMP/hero-base.png" -colorspace gray -auto-level "$LUT_HERO" -clut "$TMP/hero-lut.png"
+    magick "$TMP/hero-base.png" "$TMP/hero-lut.png" "$TMP/hero-mask.png" -composite \
+      -modulate 96,90,100 -fill '#1b2412' -colorize 5% -brightness-contrast -3x8 \
+      -background '#080a06' -vignette 0x450 -quality 92 "$DARK_DIR/1-master-chief.webp"
   fi
   if (( want_amber )); then
     magick "$TMP/4x7leo.jpg" -resize 2560x1440^ -gravity center -extent 2560x1440 \
@@ -106,17 +120,17 @@ if (( DARK )); then
   fi
   if (( want_night )); then
     magick "$TMP/9odk5d.png" -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -colorspace gray -auto-level "$LUT" -clut -brightness-contrast 2x4 \
+      -colorspace gray -auto-level "$LUT_OLIVE" -clut -brightness-contrast 2x4 \
       -background '#080a06' -vignette 0x350 -quality 92 "$DARK_DIR/4-night-ring.webp"
   fi
-  if (( want_gate )); then
-    magick "$TMP/j5o29p.jpg" -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -modulate 90,88,102 -fill '#2b331a' -colorize 9% -fill '#f2c84b' -colorize 3% -brightness-contrast -4x8 \
-      -background '#080a06' -vignette 0x350 -quality 92 "$DARK_DIR/5-forerunner-gate.webp"
+  if (( want_warthog )); then
+    magick "$TMP/5dy1j8.jpg" -crop 1890x1040+0+0 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
+      -modulate 95,85,103 -fill '#2b331a' -colorize 10% -brightness-contrast -3x8 \
+      -background '#080a06' -vignette 0x350 -quality 92 "$DARK_DIR/5-warthog.webp"
   fi
   if (( want_fire )); then
     magick "$TMP/eo8ggr.jpg" -crop 2560x1103+0+169 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -colorspace gray -auto-level "$LUT" -clut -brightness-contrast 6x8 \
+      -colorspace gray -auto-level "$LUT_OLIVE" -clut -brightness-contrast 6x8 \
       -background '#080a06' -vignette 0x350 -quality 92 "$DARK_DIR/6-fireteam.webp"
   fi
   if (( want_canyon )); then
@@ -128,25 +142,31 @@ fi
 
 if (( LIGHT )); then
   echo "Mecha Green Light"
-  want_dawn=$(wanted "$LIGHT_DIR/1-dawn-ring.webp" && echo 1 || echo 0)
-  want_field=$(wanted "$LIGHT_DIR/2-field-light.webp" && echo 1 || echo 0)
-  want_canyon_l=$(wanted "$LIGHT_DIR/3-canyon-light.webp" && echo 1 || echo 0)
+  want_warthog_l=$(wanted "$LIGHT_DIR/1-warthog-light.webp" && echo 1 || echo 0)
+  want_canyon_l=$(wanted "$LIGHT_DIR/2-canyon-light.webp" && echo 1 || echo 0)
+  want_desert_l=$(wanted "$LIGHT_DIR/3-desert-light.webp" && echo 1 || echo 0)
+  want_jungle_l=$(wanted "$LIGHT_DIR/4-jungle-light.webp" && echo 1 || echo 0)
 
-  (( want_dawn )) && download e725e8 'https://w.wallhaven.cc/full/e7/wallhaven-e725e8.jpg' jpg
-  (( want_field )) && download 85qdg2 'https://w.wallhaven.cc/full/85/wallhaven-85qdg2.jpg' jpg
+  (( want_warthog_l )) && download 5dy1j8 'https://w.wallhaven.cc/full/5d/wallhaven-5dy1j8.jpg' jpg
   (( want_canyon_l )) && download 5wwdz7 'https://w.wallhaven.cc/full/5w/wallhaven-5wwdz7.png' png
+  (( want_desert_l )) && download oxer87 'https://w.wallhaven.cc/full/ox/wallhaven-oxer87.jpg' jpg
+  (( want_jungle_l )) && download zmreeg 'https://w.wallhaven.cc/full/zm/wallhaven-zmreeg.jpg' jpg
 
-  if (( want_dawn )); then
-    magick "$TMP/e725e8.jpg" -crop 3840x2000+0+0 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -modulate 100,95,103 -fill '#f0ecd2' -colorize 3% -brightness-contrast 0x3 -quality 92 "$LIGHT_DIR/1-dawn-ring.webp"
-  fi
-  if (( want_field )); then
-    magick "$TMP/85qdg2.jpg" -crop 3840x2080+0+0 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -modulate 105,92,103 -fill '#f0ecd2' -colorize 5% -brightness-contrast 2x4 -quality 92 "$LIGHT_DIR/2-field-light.webp"
+  if (( want_warthog_l )); then
+    magick "$TMP/5dy1j8.jpg" -crop 1890x1040+0+0 +repage -resize 2560x1440^ -gravity center -extent 2560x1440 \
+      -modulate 105,90,103 -fill '#f0ecd2' -colorize 4% -brightness-contrast 2x4 -quality 92 "$LIGHT_DIR/1-warthog-light.webp"
   fi
   if (( want_canyon_l )); then
     magick "$TMP/5wwdz7.png" -resize 2560x1440^ -gravity center -extent 2560x1440 \
-      -modulate 105,90,102 -fill '#f0ecd2' -colorize 6% -brightness-contrast 2x4 -quality 92 "$LIGHT_DIR/3-canyon-light.webp"
+      -modulate 105,90,102 -fill '#f0ecd2' -colorize 6% -brightness-contrast 2x4 -quality 92 "$LIGHT_DIR/2-canyon-light.webp"
+  fi
+  if (( want_desert_l )); then
+    magick "$TMP/oxer87.jpg" -resize 2560x1440^ -gravity center -extent 2560x1440 \
+      -colorspace gray -auto-level "$LUT_TRI" -clut -brightness-contrast 6x3 -quality 92 "$LIGHT_DIR/3-desert-light.webp"
+  fi
+  if (( want_jungle_l )); then
+    magick "$TMP/zmreeg.jpg" -resize 2560x1440^ -gravity center -extent 2560x1440 \
+      -colorspace gray -auto-level "$LUT_TRI" -clut -brightness-contrast 8x3 -quality 92 "$LIGHT_DIR/4-jungle-light.webp"
   fi
 fi
 
