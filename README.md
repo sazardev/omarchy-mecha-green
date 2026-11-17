@@ -209,6 +209,17 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 | Rust | `#9C3F2D` |
 | Deep patina | `#2F6A5E` |
 
+## Bundled wallpapers
+
+Each theme ships three original 2560×1440 pieces. The optional Halo fetcher
+adds seven dark and three light scenes on top.
+
+| | Dark | Light |
+|---|---|---|
+| Helmet | ![](screenshots/wallpaper-helmet-dark.webp) | ![](screenshots/wallpaper-helmet-light.webp) |
+| Topographic HUD | ![](screenshots/wallpaper-topo-dark.webp) | ![](screenshots/wallpaper-topo-light.webp) |
+| Keyboard | ![](screenshots/wallpaper-keyboard-dark.webp) | ![](screenshots/wallpaper-keyboard-light.webp) |
+
 ## Wallpapers & licensing
 
 The repository bundles **original** wallpapers only:
