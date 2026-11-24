@@ -58,3 +58,12 @@ omarchy theme install https://github.com/sazardev/omarchy-mecha-green-theme
 
 Once the registry listing is live, `omarchy theme install mecha-green` is the
 short form.
+
+## Login and boot screens (optional)
+
+```sh
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/sazardev/omarchy-mecha-green/main/system/install-login.sh)"
+```
+
+Installs the flat SDDM login and Plymouth splash, backs up the current
+configuration and rebuilds the initramfs.

@@ -60,7 +60,11 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 The login and boot themes are system files, so they have their own installer:
 
 ```sh
+# From a clone
 sudo ./system/install-login.sh
+
+# Or without cloning
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/sazardev/omarchy-mecha-green/main/system/install-login.sh)"
 ```
 
 It backs up the current SDDM/Plymouth config, installs both themes and rebuilds

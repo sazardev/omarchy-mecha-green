@@ -1,14 +1,34 @@
 #!/usr/bin/env bash
 # Install the Mecha Green SDDM login theme and Plymouth boot splash.
-# Run as root: sudo ./system/install-login.sh
+# Run locally:  sudo ./system/install-login.sh
+# Run via curl: sudo bash -c "$(curl -fsSL .../system/install-login.sh)"
 set -euo pipefail
+
+REPO_URL="https://github.com/sazardev/omarchy-mecha-green.git"
+BRANCH="main"
 
 if (( EUID != 0 )); then
   echo "Run this installer as root: sudo $0" >&2
   exit 1
 fi
 
-REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
+SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
+
+if [[ -d "$SCRIPT_DIR/system/sddm/mecha-green" && -d "$SCRIPT_DIR/system/plymouth/mecha-green" ]]; then
+  REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+else
+  command -v git >/dev/null 2>&1 || {
+    echo "git is required for the curl installer" >&2
+    exit 1
+  }
+  printf '\033[38;2;242;200;75mFetching Mecha Green system themes…\033[0m\n'
+  TMP="$(mktemp -d)"
+  trap 'rm -rf "$TMP"' EXIT
+  git clone --depth 1 --branch "$BRANCH" "$REPO_URL" "$TMP/repo" >/dev/null
+  REPO_DIR="$TMP/repo"
+fi
+
 SDDM_SRC="$REPO_DIR/system/sddm/mecha-green"
 PLYMOUTH_SRC="$REPO_DIR/system/plymouth/mecha-green"
 SDDM_DEST="/usr/share/sddm/themes/mecha-green"

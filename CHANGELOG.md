@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.4 — 2026-11-24
+
+- Made `system/install-login.sh` curl-friendly with automatic repository
+  bootstrap.
+- Added the one-line SDDM/Plymouth installer to both Omarchy package READMEs and
+  the theme documentation.
+
 ## 1.7.3 — 2026-11-24
 
 - Replaced the pixelated Omarchy system logo with a flat Pascal-case

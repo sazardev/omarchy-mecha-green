@@ -14,7 +14,11 @@ system/
 ## Install
 
 ```sh
+# From a clone
 sudo ./system/install-login.sh
+
+# Or without cloning
+sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/sazardev/omarchy-mecha-green/main/system/install-login.sh)"
 ```
 
 The installer backs up the current SDDM/Plymouth configuration to
