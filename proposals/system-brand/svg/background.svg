@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440">
+  <defs>
+    <path id="wave" d="M1040 1110 C1180 860 1320 960 1450 720 C1580 480 1740 560 1870 330 C2000 100 2200 210 2360 -20 C2470 -170 2580 -120 2700 -260"/>
+  </defs>
+  <rect width="2560" height="1440" fill="#0e1009"/>
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <use href="#wave" transform="translate(0 -256)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -224)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 -192)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -160)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 -128)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -96)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 -64)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -32)" stroke="#737c58"/>
+    <use href="#wave" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 32)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 64)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 96)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 128)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 160)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 192)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 224)" stroke="#737c58"/>
+    <use href="#wave" transform="translate(0 256)" stroke="#4f6428"/>
+  </g>
+</svg>

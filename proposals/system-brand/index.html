@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mecha Green — System Brand Proposal</title>
+  <style>
+    :root{--sand:#e9e5cb;--surface:#f5f2df;--ink:#2b321a;--olive:#4f6428;--bronze:#7d5200;--line:#cdc9a4;--dark:#0e1009;--sans:"Geist",sans-serif;--mono:"Geist Mono",monospace}
+    *{box-sizing:border-box}body{margin:0;background:var(--sand);color:var(--ink);font-family:var(--sans)}main{width:min(1500px,calc(100% - 48px));margin:auto;padding:64px 0 80px}header{margin-bottom:36px}.eyebrow{margin:0 0 14px;color:var(--bronze);font:600 11px var(--mono);letter-spacing:.16em;text-transform:uppercase}h1{margin:0;font-size:clamp(42px,5vw,72px);font-weight:500;line-height:.96;letter-spacing:-.055em}.intro{max-width:760px;margin:22px 0 0;color:var(--olive);font-size:15px;line-height:1.65}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}figure{margin:0;border:1px solid var(--line);background:var(--surface)}img{display:block;width:100%;aspect-ratio:16/9}figcaption{display:flex;justify-content:space-between;gap:16px;padding:16px 18px;border-top:1px solid var(--line);font:11px var(--mono)}.logo{margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px}.logo-card{border:1px solid var(--line);background:var(--surface)}.logo-stage{display:grid;place-items:center;min-height:260px;background:var(--dark)}.logo-stage img{width:min(720px,80%);height:auto;aspect-ratio:auto}.logo-card figcaption{padding:16px 18px;font:11px var(--mono)}footer{margin-top:36px;padding-top:22px;border-top:1px solid var(--line);color:var(--olive);font:11px/1.7 var(--mono)}@media(max-width:900px){.grid,.logo{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main>
+  <header><p class="eyebrow">Mecha Green / propuesta de marca de sistema</p><h1>Flat system<br>identity.</h1><p class="intro">Reemplazo del logo pixelado neón por un wordmark Geist plano, con la misma topografía del escritorio y una paleta olive/sand. Sin glow, sombras ni texto duplicado.</p></header>
+  <section class="grid">
+    <figure><img src="rendered/login.webp" alt="Propuesta de login SDDM"><figcaption><span>SDDM LOGIN</span><span>Geist + topographic</span></figcaption></figure>
+    <figure><img src="rendered/boot.webp" alt="Propuesta de arranque Plymouth"><figcaption><span>PLYMOUTH BOOT</span><span>Flat progress</span></figcaption></figure>
+  </section>
+  <section class="logo">
+    <figure class="logo-card"><div class="logo-stage"><img src="rendered/logo.png" alt="Nuevo wordmark Mecha Green"></div><figcaption>WORDMARK / 1200×240 PNG transparente</figcaption></figure>
+    <figure class="logo-card"><img src="rendered/background.webp" alt="Fondo topográfico sin wordmark"><figcaption>BACKGROUND / sin texto duplicado</figcaption></figure>
+  </section>
+  <footer>Propuesta pendiente de aprobación. Los archivos actuales de SDDM y Plymouth no han sido modificados.</footer>
+</main>
+</body>
+</html>

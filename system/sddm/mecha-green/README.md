@@ -1,8 +1,8 @@
 # Mecha Green login
 
 A flat SDDM theme using the same topographic wave brand as the desktop. The
-login keeps only the Omarchy mark, user selector and password field, with Geist
-typography and no HUD, glow, gradients or shadows.
+login keeps only the Pascal-case Mecha Green wordmark, user selector and
+password field, with Geist typography and no HUD, glow, gradients or shadows.
 
 ![Mecha Green login](preview.webp)
 

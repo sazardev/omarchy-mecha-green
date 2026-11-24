@@ -21,9 +21,9 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   notifications, launcher and lock screen. The light theme flips it to sand
   and bronze.
 - **Themed boot, login and lock screens** — the same flat topographic brand on a
-  custom Plymouth splash and Mecha Green SDDM login, with the amber Omarchy mark
-  and password field. The lock screen inherits the current wallpaper and uses
-  the matching amber/sand tokens.
+  custom Plymouth splash and Mecha Green SDDM login, with a Pascal-case Geist
+  wordmark and olive/sand controls. The lock screen inherits the current
+  wallpaper and uses the matching tokens.
 - **Seven flat wallpapers + six live loops per theme** — the `0-topographic`
   brand default plus Drift, Fold, Field, Terrain, Panorama and Undulate. Every
   design has a dark/light still and a clean animated loop with fixed typography.
@@ -47,15 +47,15 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 
 | | |
 |---|---|
-| ![](screenshots/login-preview.webp)<br>**SDDM login** — Mecha Green system access | ![](screenshots/plymouth-preview.webp)<br>**Plymouth boot** — amber Omarchy mark and progress bar |
+| ![](screenshots/login-preview.webp)<br>**SDDM login** — Mecha Green system access | ![](screenshots/plymouth-preview.webp)<br>**Plymouth boot** — Geist wordmark and olive progress bar |
 
 - **Lock screen:** follows the current wallpaper, blurs it and applies the
   `[lock]` tokens from `shell.toml` — amber border, olive field, rust error
   state.
-- **SDDM login:** flat topographic background, Geist typography, amber Omarchy
-  mark, password field and multiuser selector.
-- **Plymouth boot:** the same flat topographic background with the amber Omarchy
-  mark and a matching amber progress bar.
+- **SDDM login:** flat topographic background, Pascal-case Geist wordmark,
+  olive password field and multiuser selector.
+- **Plymouth boot:** the same flat topographic background with the Geist wordmark
+  and a matching olive progress bar.
 
 The login and boot themes are system files, so they have their own installer:
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.3 — 2026-11-24
+
+- Replaced the pixelated Omarchy system logo with a flat Pascal-case
+  `Mecha Green` Geist wordmark.
+- Updated SDDM and Plymouth controls to the olive/sand palette, removed the
+  duplicated background wordmark and refreshed the system previews.
+- Added reproducible system-brand rendering to `render-system-assets.sh`.
+
 ## 1.7.2 — 2026-11-24
 
 - Removed the optional Halo wallpaper filename and credit tables from the main

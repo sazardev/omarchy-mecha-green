@@ -1,8 +1,8 @@
 # Mecha Green Plymouth boot splash
 
 A flat Plymouth theme using the desktop's topographic wave brand. It keeps the
-amber Omarchy mark, progress bar and disk-encryption prompt, without the old
-HUD rings, glow, gradients or microtext.
+Pascal-case Mecha Green wordmark, olive progress bar and disk-encryption prompt,
+without the old HUD rings, glow, gradients or microtext.
 
 ![Mecha Green boot preview](preview.webp)
 
@@ -13,8 +13,8 @@ HUD rings, glow, gradients or microtext.
 | `mecha-green.plymouth` | Theme descriptor |
 | `mecha-green.script` | Plymouth script (background, layout, progress) |
 | `background.png` | 2560×1440 flat topographic brand background |
-| `logo.png` | Amber Omarchy wordmark |
-| `progress_box.png` / `progress_bar.png` | Amber-on-olive progress bar |
+| `logo.png` | Pascal-case Geist Mecha Green wordmark |
+| `progress_box.png` / `progress_bar.png` | Flat olive progress bar |
 | `entry.png` / `lock.png` / `bullet.png` | Encryption password prompt |
 | `preview.webp` | 2560×1440 design preview |
 
