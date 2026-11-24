@@ -15,7 +15,7 @@ Regenerate the wallpapers and theme previews with:
 ```
 
 The script requires `rsvg-convert` and ImageMagick (`magick`). It renders at
-2560×1440, WebP quality 92, then derives the 1200×675 theme previews.
+3840×2160 with lossless WebP, then derives the 1200×675 theme previews.
 
 The six additional topographic designs live in
 [`../proposals/backgrounds/svg/`](../proposals/backgrounds/svg/). Their stills

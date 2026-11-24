@@ -2,14 +2,16 @@
 set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+width=3840
+height=2160
 mkdir -p "$root/rendered" "$root/thumbs"
 
 for source in "$root"/svg/*.svg; do
   name="$(basename "$source" .svg)"
   tmp="$(mktemp --suffix=.png)"
   trap 'rm -f "$tmp"' EXIT
-  rsvg-convert --width 2560 --height 1440 "$source" --output "$tmp"
-  magick "$tmp" -strip -quality 92 "$root/rendered/$name.webp"
+  rsvg-convert --width "$width" --height "$height" "$source" --output "$tmp"
+  magick "$tmp" -strip -define webp:lossless=true -quality 100 "$root/rendered/$name.webp"
   magick "$root/rendered/$name.webp" -resize 1280x720 "$root/thumbs/$name.webp"
   rm -f "$tmp"
   trap - EXIT

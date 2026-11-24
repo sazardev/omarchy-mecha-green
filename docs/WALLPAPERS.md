@@ -6,9 +6,9 @@ still letting you get the full Master Chief desktop in one command.
 
 ## Bundled collection (MIT)
 
-Each theme includes seven 2560×1440 flat stills and six matching live loops.
-The `0-` prefix keeps the brand wallpaper first alphabetically and the `100-`
-series avoids collisions with the optional Halo set.
+Each theme includes seven native 3840×2160 (4K) flat stills and six matching
+live loops. The `0-` prefix keeps the brand wallpaper first alphabetically and
+the `100-` series avoids collisions with the optional Halo set.
 
 | Art | Dark still | Light still |
 |---|---|---|
@@ -24,7 +24,8 @@ The six `100-` designs also have `.mp4` loops with animated contour lines and
 fixed Geist wordmarks. SVG sources live in [`../assets/svg/`](../assets/svg/) and
 [`../proposals/backgrounds/svg/`](../proposals/backgrounds/svg/). Regenerate the
 stills with `./scripts/render-wallpapers.sh` and the loops with
-`python3 proposals/backgrounds/generate-live.py`. See
+`python3 proposals/backgrounds/generate-live.py --install`. The stills are
+lossless WebP; all renders come directly from the unchanged SVG sources. See
 [`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for playback and optional sets.
 
 ## Optional Halo & military set (personal use only)

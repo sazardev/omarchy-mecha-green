@@ -74,6 +74,79 @@ jobs:
               for forbidden in ('gradient', '<filter', 'gaussianblur', 'drop-shadow'):
                   assert forbidden not in text, f'{forbidden} found in {path}'
           PY
+      - name: 4K wallpaper assets
+        run: |
+          python3 - <<'PY'
+          import json
+          from collections import Counter
+          from pathlib import Path
+          import subprocess
+
+
+          def webp_info(path):
+              data = path.read_bytes()
+              assert data[:4] == b'RIFF' and data[8:12] == b'WEBP', path
+              chunk = data[12:16]
+              if chunk == b'VP8X':
+                  width = 1 + int.from_bytes(data[24:27], 'little')
+                  height = 1 + int.from_bytes(data[27:30], 'little')
+              elif chunk == b'VP8L':
+                  bits = int.from_bytes(data[21:25], 'little')
+                  assert data[20] == 0x2F, path
+                  width = 1 + (bits & 0x3FFF)
+                  height = 1 + ((bits >> 14) & 0x3FFF)
+              elif chunk == b'VP8 ':
+                  width = int.from_bytes(data[26:28], 'little') & 0x3FFF
+                  height = int.from_bytes(data[28:30], 'little') & 0x3FFF
+              else:
+                  raise AssertionError(f'Unsupported WebP chunk {chunk!r}: {path}')
+              return chunk, (width, height)
+
+
+          stills = sorted(Path('themes').glob('*/backgrounds/*.webp'))
+          assert len(stills) == 14, len(stills)
+          for path in stills:
+              chunk, size = webp_info(path)
+              assert chunk == b'VP8L', f'{path} must be lossless WebP'
+              assert size == (3840, 2160), f'{path}: {size}'
+
+          videos = sorted(Path('themes').glob('*/backgrounds/*.mp4'))
+          assert len(videos) == 12, len(videos)
+          for path in videos:
+              probe = json.loads(subprocess.check_output([
+                  'ffprobe', '-v', 'error', '-select_streams', 'v:0',
+                  '-show_entries',
+                  'stream=codec_name,profile,width,height,pix_fmt,r_frame_rate,'
+                  'color_range,color_space,color_transfer,color_primaries,nb_frames',
+                  '-show_entries', 'format=duration',
+                  '-of', 'json', str(path),
+              ]))
+              stream = probe['streams'][0]
+              assert stream['codec_name'] == 'h264', path
+              assert stream['profile'] == 'High', path
+              assert (stream['width'], stream['height']) == (3840, 2160), path
+              assert stream['pix_fmt'] == 'yuv420p', path
+              assert stream['r_frame_rate'] == '24/1', path
+              assert stream['color_range'] == 'tv', path
+              assert stream['color_space'] == 'bt709', path
+              assert stream['color_transfer'] == 'bt709', path
+              assert stream['color_primaries'] == 'bt709', path
+              assert stream['nb_frames'] == '192', path
+              assert abs(float(probe['format']['duration']) - 8) < 0.01, path
+              frame = subprocess.check_output([
+                  'ffmpeg', '-v', 'error', '-i', str(path), '-frames:v', '1',
+                  '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-',
+              ])
+              samples = Counter(
+                  tuple(frame[offset:offset + 3])
+                  for offset in range(0, len(frame), 3 * 97)
+              )
+              dominant = samples.most_common(1)[0][0]
+              expected = (233, 229, 203) if '-light' in path.name else (14, 16, 9)
+              assert max(abs(a - b) for a, b in zip(dominant, expected)) <= 3, (
+                  f'{path}: background shifted to {dominant}'
+              )
+          PY
       - name: Live wallpaper assets
         run: |
           for f in hud-dark.png hud-light.png scanlines-dark.png scanlines-light.png \

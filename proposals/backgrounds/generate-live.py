@@ -4,20 +4,33 @@
 from __future__ import annotations
 
 import argparse
+import shutil
 import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = ROOT.parents[1]
 SVG_DIR = ROOT / "svg"
 OUT_DIR = ROOT / "live"
-WIDTH = 2560
-HEIGHT = 1440
+SOURCE_WIDTH = 2560
+SOURCE_HEIGHT = 1440
+WIDTH = 3840
+HEIGHT = 2160
+SCALE = WIDTH / SOURCE_WIDTH
 FPS = 24
 DURATION = 8
 SVG_NS = "http://www.w3.org/2000/svg"
 ET.register_namespace("", SVG_NS)
+THEME_NUMBERS = {
+    "01": "100",
+    "02": "101",
+    "03": "102",
+    "04": "103",
+    "05": "104",
+    "06": "105",
+}
 
 
 def qname(tag: str) -> str:
@@ -29,16 +42,21 @@ def render_layers(source: Path, work: Path) -> tuple[Path, Path, str]:
     root = tree.getroot()
     background = "#0e1009"
     for child in root:
-        if child.tag == qname("rect") and child.attrib.get("width") == str(WIDTH):
+        if (
+            child.tag == qname("rect")
+            and child.attrib.get("width") == str(SOURCE_WIDTH)
+            and child.attrib.get("height") == str(SOURCE_HEIGHT)
+        ):
             background = child.attrib.get("fill", background)
             break
 
+    # Keep the original design coordinates while rendering every layer at 4K.
     line_root = ET.Element(
         qname("svg"),
         {
             "width": str(WIDTH),
             "height": str(HEIGHT),
-            "viewBox": f"0 0 {WIDTH} {HEIGHT}",
+            "viewBox": f"0 0 {SOURCE_WIDTH} {SOURCE_HEIGHT}",
         },
     )
     overlay_root = ET.Element(
@@ -46,7 +64,7 @@ def render_layers(source: Path, work: Path) -> tuple[Path, Path, str]:
         {
             "width": str(WIDTH),
             "height": str(HEIGHT),
-            "viewBox": f"0 0 {WIDTH} {HEIGHT}",
+            "viewBox": f"0 0 {SOURCE_WIDTH} {SOURCE_HEIGHT}",
         },
     )
 
@@ -75,8 +93,8 @@ def render_layers(source: Path, work: Path) -> tuple[Path, Path, str]:
             overlay_root.append(child)
         elif child.tag == qname("rect"):
             is_background = (
-                child.attrib.get("width") == str(WIDTH)
-                and child.attrib.get("height") == str(HEIGHT)
+                child.attrib.get("width") == str(SOURCE_WIDTH)
+                and child.attrib.get("height") == str(SOURCE_HEIGHT)
                 and child.attrib.get("fill") == background
             )
             if not is_background:
@@ -109,24 +127,49 @@ def render_layers(source: Path, work: Path) -> tuple[Path, Path, str]:
     return line_png, overlay_png, background
 
 
-def generate(source: Path) -> Path:
+def install(output: Path) -> None:
+    source_number, name, mode = output.stem.split("-", 2)
+    theme = "mecha-green-light" if mode == "light" else "mecha-green"
+    suffix = "-light" if mode == "light" else ""
+    target = (
+        PROJECT_ROOT
+        / "themes"
+        / theme
+        / "backgrounds"
+        / f"{THEME_NUMBERS[source_number]}-{name}{suffix}.mp4"
+    )
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(output, target)
+    print(f"Installed {target.relative_to(PROJECT_ROOT)}")
+
+
+def generate(source: Path, install_output: bool = False) -> Path:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     output = OUT_DIR / f"{source.stem}.mp4"
     with tempfile.TemporaryDirectory(prefix="mecha-live-") as tmp:
         line_png, overlay_png, background = render_layers(source, Path(tmp))
         color = background.replace("#", "0x")
         phase = f"2*PI*T/{DURATION}"
+        wavelength_x = 640 * SCALE
+        wavelength_y = 360 * SCALE
+        displacement_x = 8 * SCALE
+        displacement_y = 22 * SCALE
+        # Composite in full-range RGB so the later BT.709 limited-range
+        # conversion does not lift the dark background or shift its colours.
         displacement = (
             "[0:v]format=gbrp[line];"
+            "[1:v]format=gbrap[overlay];"
             "[2:v]split=2[xbase][ybase];"
             "[xbase]format=gray,"
-            f"geq=lum='128+8*sin(2*PI*X/640+{phase})',"
+            f"geq=lum='128+{displacement_x:g}*sin(2*PI*X/{wavelength_x:g}+{phase})',"
             f"scale={WIDTH}:{HEIGHT}[xmap];"
             "[ybase]format=gray,"
-            f"geq=lum='128+22*sin(2*PI*Y/360+{phase})',"
+            f"geq=lum='128+{displacement_y:g}*sin(2*PI*Y/{wavelength_y:g}+{phase})',"
             f"scale={WIDTH}:{HEIGHT}[ymap];"
             "[line][xmap][ymap]displace=edge=wrap[warp];"
-            "[warp][1:v]overlay=0:0[out]"
+            "[warp][overlay]overlay=0:0:format=gbrp:alpha=straight,"
+            "scale=in_range=full:out_range=tv:out_color_matrix=bt709,"
+            "format=yuv420p[out]"
         )
         command = [
             "ffmpeg",
@@ -162,23 +205,46 @@ def generate(source: Path) -> Path:
             "-c:v",
             "libx264",
             "-preset",
-            "fast",
+            "slow",
+            "-tune",
+            "animation",
             "-crf",
-            "18",
+            "15",
+            "-profile:v",
+            "high",
+            "-level:v",
+            "5.1",
+            "-x264-params",
+            "colorprim=bt709:transfer=bt709:colormatrix=bt709",
             "-pix_fmt",
             "yuv420p",
+            "-color_range",
+            "tv",
+            "-colorspace",
+            "bt709",
+            "-color_primaries",
+            "bt709",
+            "-color_trc",
+            "bt709",
             "-movflags",
             "+faststart",
             str(output),
         ]
         subprocess.run(command, check=True)
     print(f"Generated {output.name}")
+    if install_output:
+        install(output)
     return output
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--only", help="Render only one SVG stem, for testing")
+    parser.add_argument(
+        "--install",
+        action="store_true",
+        help="Copy rendered loops into both theme background directories",
+    )
     args = parser.parse_args()
 
     sources = sorted(SVG_DIR.glob("*.svg"))
@@ -188,7 +254,7 @@ def main() -> None:
             raise SystemExit(f"No SVG found for {args.only}")
 
     for source in sources:
-        generate(source)
+        generate(source, args.install)
 
 
 if __name__ == "__main__":

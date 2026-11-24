@@ -6,8 +6,9 @@ folder shows up in the normal Omarchy background picker and plays with hardware
 decoding.
 
 Six original live loops are bundled with each theme. They are silent,
-2560×1440 H.264 at 24 fps, 8 seconds long and loop seamlessly. Only the contour
-lines undulate; the Geist wordmark remains fixed.
+3840×2160 (4K) H.264 High at 24 fps, 8 seconds long and loop seamlessly. Only the
+contour lines undulate; the Geist wordmark remains fixed. Every frame is rendered
+natively from the SVG sources rather than upscaled from 1440p.
 
 | Loop | Dark | Light |
 |---|---|---|
@@ -19,8 +20,8 @@ lines undulate; the Geist wordmark remains fixed.
 | Undulate | `105-undulate.mp4` | `105-undulate-light.mp4` |
 
 They appear in the Mecha HUD's **NEXT LIVE** button, which skips stills and
-cycles only videos. Regenerate them with
-`python3 proposals/backgrounds/generate-live.py`.
+cycles only videos. Regenerate the proposal copies and install them into both
+themes with `python3 proposals/backgrounds/generate-live.py --install`.
 
 Videos created with `mecha-livewall` or the Halo set remain optional and use the
 same native OWE playback path.
@@ -93,9 +94,10 @@ This is the command behind the HUD's `NEXT LIVE` button.
 
 ## Performance
 
-- Bundled topographic loops: 2560×1440, 24 fps, H.264 High, no audio.
+- Bundled topographic loops: 3840×2160, 24 fps, H.264 High, BT.709, no audio.
 - Generated `mecha-livewall` loops: 2560×1440, 30 fps by default.
 - OWE pauses video automatically when fullscreen or the monitor sleeps,
   depending on its policy.
-- Keep individual loops under roughly 10 MB and avoid 4K sources for a 1080p
-  desktop.
+- The 4K bundled loops need hardware H.264 decoding for smooth playback. On a
+  1080p display, the matching lossless stills provide the same artwork with
+  lower GPU and storage cost.

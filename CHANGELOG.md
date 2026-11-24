@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.7.8 — 2026-11-24
+
+- Upgraded every bundled wallpaper to native 3840×2160, rendered directly from
+  the original SVG sources without upscaling or changing the artwork.
+- Switched still wallpapers to lossless WebP for crisp contours and exact colours.
+- Re-encoded the twelve live loops at 4K with higher-quality H.264, BT.709 colour
+  metadata and animation tuning while preserving the original motion.
+
 ## 1.7.7 — 2026-11-24
 
 - Fixed Mecha HUD theme-colour detection for Qt versions without `color.lightness()`.

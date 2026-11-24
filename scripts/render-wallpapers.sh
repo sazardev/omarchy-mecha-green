@@ -2,6 +2,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+WIDTH=3840
+HEIGHT=2160
 
 for cmd in rsvg-convert magick; do
   command -v "$cmd" >/dev/null || {
@@ -14,8 +16,8 @@ render_still() {
   local theme="$1" source="$2" output="$3"
   local wallpaper="$ROOT/themes/$theme/backgrounds/$output"
 
-  rsvg-convert --width 2560 --height 1440 "$ROOT/$source" |
-    magick png:- -strip -quality 92 "$wallpaper"
+  rsvg-convert --width "$WIDTH" --height "$HEIGHT" "$ROOT/$source" |
+    magick png:- -strip -define webp:lossless=true -quality 100 "$wallpaper"
   printf 'Rendered %s\n' "$wallpaper"
 }
 
