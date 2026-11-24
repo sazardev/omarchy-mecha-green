@@ -17,7 +17,7 @@ Panel {
   readonly property color foreground: bar ? bar.barForeground : Color.foreground
   readonly property color urgent: Color.urgent
   readonly property color muted: Color.muted
-  readonly property color brand: Color.background.lightness() < 0.5 ? "#9dae5c" : "#4f6428"
+  readonly property color brand: Color.background.r + Color.background.g + Color.background.b < 1.5 ? "#9dae5c" : "#4f6428"
   readonly property color accent: brand
   readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
 

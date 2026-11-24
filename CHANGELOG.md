@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.7 — 2026-11-24
+
+- Fixed Mecha HUD theme-colour detection for Qt versions without `color.lightness()`.
+- Verified the redesigned HUD loads and is placed in the Omarchy bar.
+- Bumped the Mecha HUD plugin to 1.2.1.
+
 ## 1.7.6 — 2026-11-24
 
 - Redesigned the Mecha HUD panel to match the flat topographic design system.

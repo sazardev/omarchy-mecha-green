@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "sazardev.mecha-hud",
   "name": "Mecha HUD",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "sazardev",
   "license": "MIT",
   "description": "Flat Mecha Green system monitor for Omarchy: ping, CPU, RAM, battery, status, radar and live wallpaper controls.",
