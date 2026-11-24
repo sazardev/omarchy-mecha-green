@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.5 — 2026-11-24
+
+- Rewrote the main and Omarchy package READMEs to be shorter and clearer.
+- Removed repeated tables and long catalogs while keeping install, wallpaper,
+  system-screen, customization and license information.
+
 ## 1.7.4 — 2026-11-24
 
 - Made `system/install-login.sh` curl-friendly with automatic repository
