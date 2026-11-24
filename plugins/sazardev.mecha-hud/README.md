@@ -1,11 +1,13 @@
 # Mecha HUD
 
-A tactical status strip for the Omarchy bar: **NET** latency, **THRT** CPU
+A clean, flat system monitor for the Omarchy bar: **NET** latency, **THRT** CPU
 load, **AMMO** RAM pressure and optional **PWR** battery.
 
-## Install
+The panel follows the Mecha Green topographic design system: Geist typography,
+olive/sand surfaces, simple status cards and a minimal radar. No franchise text,
+scanlines, glow or HUD frames.
 
-From the repository root:
+## Install
 
 ```sh
 cp -r plugins/sazardev.mecha-hud ~/.config/omarchy/plugins/
@@ -13,26 +15,21 @@ omarchy-shell shell rescanPlugins
 omarchy plugin enable sazardev.mecha-hud --section right --after omarchy.power
 ```
 
-The installer does this automatically unless you pass `--no-hud`.
+The full installer does this automatically unless you pass `--no-hud`.
 
 ## Interactions
 
 | Action | Result |
 |---|---|
-| Left click | Open the Mecha Command panel |
-| Middle click | Refresh NET, THRT, AMMO, PWR, uptime and gateway now |
-| Right click | Cycle the ping target: Cloudflare → Google → gateway |
-| Hover | Tactical one-line tooltip |
+| Left click | Open the system monitor |
+| Middle click | Refresh all telemetry |
+| Right click | Cycle Cloudflare → Google → gateway |
+| Hover | Show a compact status tooltip |
 
-The command panel is styled like a Halo military menu: integrity bars for
-UPLINK / CORE / AMMO, an objectives list, an animated radar, telemetry cards,
-a 60-sample latency graph, packet-loss count, mission clock, ping-target
-switcher and a reset button. **NEXT LIVE** cycles video wallpapers only via
-`mecha-live-next`.
+The panel includes network, CPU, memory and power status, a 60-sample latency
+graph, ping-target switcher, uptime, reset and **NEXT LIVE** wallpaper control.
 
 ## Settings
-
-Change them from the shell or the bar UI:
 
 ```sh
 omarchy bar set sazardev.mecha-hud pingHost 8.8.8.8
@@ -46,16 +43,10 @@ omarchy bar set sazardev.mecha-hud showCpu true
 | `pingIntervalSec` | integer (2–60) | `5` |
 | `showCpu` | boolean | `true` |
 | `showAmmo` | boolean | `true` |
-| `showPower` | boolean | `true` (only renders with a battery) |
+| `showPower` | boolean | `true` |
 
 ## Notes
 
-- The ping host is passed as a separate `argv` element to `ping`, never
-  interpolated into a shell string. The host is sanitized before use.
-- CPU is computed from two `/proc/stat` samples; RAM from `/proc/meminfo`.
-- The widget falls back to `PWR AC` on machines without a battery. On a
-  desktop the `AMMO` RAM readout is the third block.
-- Requires the Omarchy shell (Quickshell). It is a user plugin, so it survives
-  Omarchy updates.
-- `NEXT LIVE` needs `mecha-live-next` from the Mecha Green full installer. If it
-  is not present, the button falls back to cycling every background.
+- Ping hosts are sanitized and passed as a separate argument.
+- `NEXT LIVE` uses `mecha-live-next`; if unavailable, it cycles all backgrounds.
+- Requires the Omarchy shell (Quickshell).

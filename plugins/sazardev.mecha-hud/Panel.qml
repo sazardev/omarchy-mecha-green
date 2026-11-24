@@ -15,9 +15,10 @@ Panel {
   manageIpc: false
 
   readonly property color foreground: bar ? bar.barForeground : Color.foreground
-  readonly property color accent: Color.accent
   readonly property color urgent: Color.urgent
   readonly property color muted: Color.muted
+  readonly property color brand: Color.background.lightness() < 0.5 ? "#9dae5c" : "#4f6428"
+  readonly property color accent: brand
   readonly property string fontFamily: bar ? bar.fontFamily : Style.font.family
 
   readonly property int pingInterval: Math.max(2, Number(setting("pingIntervalSec", 5)))
@@ -72,8 +73,8 @@ Panel {
 
   readonly property string hudTooltip:
     "NET " + (telemetry.pingOk ? nf(telemetry.latency, 0) + " ms" : "no reply") +
-    "  ·  THREAT " + nf(telemetry.cpu, 0) + "% " + telemetry.threatLabel +
-    "  ·  AMMO " + nf(telemetry.ramUsage, 0) + "% " + telemetry.ammoLabel +
+    "  ·  CPU " + nf(telemetry.cpu, 0) + "% " + telemetry.threatLabel +
+    "  ·  RAM " + nf(telemetry.ramUsage, 0) + "% " + telemetry.ammoLabel +
     (telemetry.hasBattery ? "  ·  PWR " + telemetry.batteryLevel + "% " + telemetry.batteryStatus : "  ·  PWR AC") +
     "  ·  right-click cycles ping target"
 
@@ -158,7 +159,7 @@ Panel {
 
     HudBlock {
       visible: root.showAmmo
-      label: "AMMO"
+      label: "RAM"
       value: String(Math.round(telemetry.ramUsage))
       unit: "%"
       tone: root.colorForAmmo(telemetry.ramUsage)
@@ -212,76 +213,47 @@ Panel {
       onCloseRequested: root.close()
       onTabRequested: function(direction) { root.switchPanel(direction) }
 
-      Canvas {
-        id: backdrop
-        anchors.fill: parent
-        z: -1
-        enabled: false
-        opacity: 0.9
-        onWidthChanged: requestPaint()
-        onHeightChanged: requestPaint()
-        Component.onCompleted: requestPaint()
-        Connections {
-          target: root
-          function onForegroundChanged() { backdrop.requestPaint() }
-          function onAccentChanged() { backdrop.requestPaint() }
-        }
-        onPaint: {
-          var ctx = getContext("2d")
-          ctx.clearRect(0, 0, width, height)
-          ctx.strokeStyle = Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.035)
-          ctx.lineWidth = 1
-          for (var y = 0; y < height; y += 4) {
-            ctx.beginPath(); ctx.moveTo(0, y + 0.5); ctx.lineTo(width, y + 0.5); ctx.stroke()
-          }
-          ctx.strokeStyle = Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.025)
-          for (var x = 0; x < width; x += 64) {
-            ctx.beginPath(); ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, height); ctx.stroke()
-          }
-          var pad = 8
-          var arm = 20
-          ctx.strokeStyle = Qt.rgba(root.accent.r, root.accent.g, root.accent.b, 0.52)
-          ctx.lineWidth = 2
-          ctx.beginPath()
-          ctx.moveTo(pad, pad + arm); ctx.lineTo(pad, pad); ctx.lineTo(pad + arm, pad)
-          ctx.moveTo(width - pad - arm, pad); ctx.lineTo(width - pad, pad); ctx.lineTo(width - pad, pad + arm)
-          ctx.moveTo(pad, height - pad - arm); ctx.lineTo(pad, height - pad); ctx.lineTo(pad + arm, height - pad)
-          ctx.moveTo(width - pad - arm, height - pad); ctx.lineTo(width - pad, height - pad); ctx.lineTo(width - pad, height - pad - arm)
-          ctx.stroke()
-        }
-      }
-
       Column {
         id: column
         width: parent.width
         spacing: Style.space(8)
 
-        PanelHero {
-          width: parent.width
-          title: "MECHA COMMAND"
-          meta: "UNSC // SPARTAN-117 // TACTICAL UPLINK"
-          detail: telemetry.pingOk ? "LINK ACTIVE" : "LINK LOST"
-          foreground: root.foreground
-          fontFamily: root.fontFamily
-        }
-
         RowLayout {
           width: parent.width
+          spacing: Style.space(10)
+
+          WaveMark {
+            Layout.preferredWidth: Style.space(42)
+            Layout.preferredHeight: Style.space(42)
+            stroke: root.brand
+          }
+
+          Column {
+            Layout.fillWidth: true
+            spacing: Style.space(2)
+
+            Text {
+              text: "Mecha Green"
+              color: root.foreground
+              font.family: root.fontFamily
+              font.pixelSize: Style.font.display
+              font.bold: true
+            }
+            Text {
+              text: "SYSTEM MONITOR"
+              color: root.muted
+              font.family: root.fontFamily
+              font.pixelSize: Style.font.caption
+              font.letterSpacing: 2
+            }
+          }
 
           Text {
-            Layout.fillWidth: true
-            text: "MISSION // HOLD THE LINE"
-            color: root.accent
+            text: telemetry.pingOk ? "ONLINE" : "OFFLINE"
+            color: telemetry.pingOk ? root.brand : root.urgent
             font.family: root.fontFamily
             font.pixelSize: Style.font.caption
-            font.letterSpacing: 2
             font.bold: true
-          }
-          Text {
-            text: "SECTOR 07 // 117"
-            color: root.muted
-            font.family: root.fontFamily
-            font.pixelSize: Style.font.caption
             font.letterSpacing: 2
           }
         }
@@ -293,7 +265,7 @@ Panel {
           StatusBar {
             Layout.fillWidth: true
             Layout.preferredWidth: Style.space(130)
-            label: "UPLINK"
+            label: "NETWORK"
             value: telemetry.pingOk ? root.pad3(telemetry.latency) + " MS" : "NO LINK"
             fill: telemetry.pingOk ? Math.max(0, Math.min(1, 1 - telemetry.latency / 150)) : 0
             tone: root.colorForLatency(telemetry.latency)
@@ -302,18 +274,18 @@ Panel {
           StatusBar {
             Layout.fillWidth: true
             Layout.preferredWidth: Style.space(130)
-            label: "CORE"
-            value: String(Math.round(100 - telemetry.cpu)) + "%"
-            fill: Math.max(0, Math.min(1, 1 - telemetry.cpu / 100))
+            label: "CPU"
+            value: String(Math.round(telemetry.cpu)) + "%"
+            fill: Math.max(0, Math.min(1, telemetry.cpu / 100))
             tone: root.colorForCpu(telemetry.cpu)
           }
 
           StatusBar {
             Layout.fillWidth: true
             Layout.preferredWidth: Style.space(130)
-            label: "AMMO"
-            value: String(Math.round(100 - telemetry.ramUsage)) + "%"
-            fill: Math.max(0, Math.min(1, 1 - telemetry.ramUsage / 100))
+            label: "MEMORY"
+            value: String(Math.round(telemetry.ramUsage)) + "%"
+            fill: Math.max(0, Math.min(1, telemetry.ramUsage / 100))
             tone: root.colorForAmmo(telemetry.ramUsage)
           }
 
@@ -354,7 +326,7 @@ Panel {
           TelemetryCard {
             visible: root.showCpu
             Layout.fillWidth: true
-            label: "THREAT"
+            label: "CPU"
             value: root.nf(telemetry.cpu, 0)
             unit: "%"
             detail: telemetry.threatLabel + "  ·  " + root.nf(telemetry.cpu, 0) + "% CPU"
@@ -366,7 +338,7 @@ Panel {
           TelemetryCard {
             visible: root.showAmmo
             Layout.fillWidth: true
-            label: "AMMO"
+            label: "MEMORY"
             value: root.nf(telemetry.ramUsage, 0)
             unit: "%"
             detail: root.nf(telemetry.ramUsed, 1) + " / " + root.nf(telemetry.ramTotal, 1) + " GB"
@@ -377,10 +349,10 @@ Panel {
 
           TelemetryCard {
             Layout.fillWidth: true
-            label: "SHIELD"
+            label: "SIGNAL"
             value: telemetry.pingOk ? root.nf(Math.max(0, 100 - telemetry.latency / 1.5), 0) : "0"
             unit: "%"
-            detail: telemetry.pingOk ? "UPLINK INTEGRITY" : "SIGNAL LOST"
+            detail: telemetry.pingOk ? "LINK QUALITY" : "SIGNAL LOST"
             fill: telemetry.pingOk ? Math.max(0, Math.min(1, 1 - telemetry.latency / 150)) : 0
             tone: root.colorForLatency(telemetry.latency)
             segments: 8
@@ -400,10 +372,10 @@ Panel {
           TelemetryCard {
             visible: !telemetry.hasBattery
             Layout.fillWidth: true
-            label: "MISSION"
+            label: "UPTIME"
             value: telemetry.formatUptime(telemetry.uptimeSec)
             unit: ""
-            detail: "SECTOR 07  ·  HOLD THE LINE"
+            detail: "SYSTEM UPTIME"
             fill: 1
             tone: root.accent
             segments: 8
@@ -430,7 +402,7 @@ Panel {
         }
 
         Text {
-          text: "UPLINK LATENCY // LAST 60 SAMPLES"
+          text: "NETWORK LATENCY  ·  LAST 60 SAMPLES"
           color: root.muted
           font.family: root.fontFamily
           font.pixelSize: Style.font.caption
@@ -482,35 +454,26 @@ Panel {
                 if (samples[i] > maxValue) maxValue = samples[i]
               maxValue = Math.ceil(maxValue / 50) * 50
 
-              // Grid
-              ctx.strokeStyle = Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.10)
+              // Minimal baseline grid.
+              ctx.strokeStyle = Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.08)
               ctx.lineWidth = 1
-              for (var g = 0; g <= 4; g++) {
-                var gy = Math.round(height * g / 4) + 0.5
+              for (var g = 0; g <= 2; g++) {
+                var gy = Math.round(height * g / 2) + 0.5
                 ctx.beginPath()
                 ctx.moveTo(0, gy)
                 ctx.lineTo(width, gy)
                 ctx.stroke()
               }
-              for (var v = 0; v <= 6; v++) {
-                var gx = Math.round(width * v / 6) + 0.5
-                ctx.beginPath()
-                ctx.moveTo(gx, 0)
-                ctx.lineTo(gx, height)
-                ctx.stroke()
-              }
 
               if (count < 2) return
 
-              // Area and line. Gaps are skipped so a lost packet reads as a break.
+              // Line only. Gaps are skipped so a lost packet reads as a break.
               var accent = root.accent
               var line = Qt.rgba(accent.r, accent.g, accent.b, 0.92)
-              var fill = Qt.rgba(accent.r, accent.g, accent.b, 0.10)
               ctx.lineWidth = 2
               ctx.lineJoin = "round"
               ctx.lineCap = "round"
               ctx.strokeStyle = line
-              ctx.fillStyle = fill
 
               var started = false
               var firstX = 0
@@ -536,31 +499,6 @@ Panel {
                 lastY = y
               }
               ctx.stroke()
-
-              // Soft fill below the line, one segment at a time.
-              started = false
-              ctx.beginPath()
-              for (var k = 0; k < count; k++) {
-                var v2 = samples[k]
-                if (v2 < 0) {
-                  started = false
-                  continue
-                }
-                var x2 = count === 1 ? 0 : (width * k / (count - 1))
-                var y2 = height - Math.max(0, Math.min(1, v2 / maxValue)) * height
-                if (!started) {
-                  ctx.moveTo(x2, height)
-                  ctx.lineTo(x2, y2)
-                  started = true
-                } else {
-                  ctx.lineTo(x2, y2)
-                }
-              }
-              if (started && count > 0) {
-                ctx.lineTo(lastX, height)
-                ctx.closePath()
-                ctx.fill()
-              }
 
               // Current point
               ctx.beginPath()
@@ -610,7 +548,7 @@ Panel {
             spacing: Style.space(2)
 
             Text {
-              text: "LIVE FEED // VIDEO WALLPAPERS"
+              text: "LIVE WALLPAPERS"
               color: root.muted
               font.family: root.fontFamily
               font.pixelSize: Style.font.caption
@@ -618,7 +556,7 @@ Panel {
             }
 
             Text {
-              text: "OWE // H.264 // 2560×1440 // NEXT LIVE CYCLES VIDEOS"
+              text: "Cycle through video backgrounds"
               color: root.muted
               font.family: root.fontFamily
               font.pixelSize: Style.font.caption
@@ -679,6 +617,36 @@ Panel {
     }
   }
 
+  component WaveMark: Canvas {
+    id: waveMark
+    property color stroke: root.brand
+
+    onWidthChanged: requestPaint()
+    onHeightChanged: requestPaint()
+    Component.onCompleted: requestPaint()
+    Connections {
+      target: root
+      function onBrandChanged() { waveMark.requestPaint() }
+    }
+
+    onPaint: {
+      var ctx = getContext("2d")
+      ctx.clearRect(0, 0, width, height)
+      ctx.strokeStyle = stroke
+      ctx.lineWidth = 2
+      ctx.lineCap = "round"
+      for (var i = 0; i < 3; i++) {
+        var y = height * (0.28 + i * 0.22)
+        ctx.beginPath()
+        ctx.moveTo(1, y)
+        ctx.bezierCurveTo(width * 0.28, y - height * 0.22,
+                         width * 0.62, y + height * 0.22,
+                         width - 1, y - height * 0.08)
+        ctx.stroke()
+      }
+    }
+  }
+
   component HudSeparator: Rectangle {
     width: 1
     height: Style.space(16)
@@ -729,22 +697,18 @@ Panel {
       }
     }
 
-    Row {
-      spacing: 1
+    Rectangle {
+      width: Style.space(34)
+      height: 3
+      radius: 1.5
       anchors.horizontalCenter: parent.horizontalCenter
+      color: Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.14)
 
-      Repeater {
-        model: block.segments
-
-        Rectangle {
-          required property int index
-          width: 4
-          height: 3
-          radius: 1
-          color: index < Math.ceil(Math.max(0, Math.min(1, block.fill)) * block.segments)
-            ? block.tone
-            : Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.14)
-        }
+      Rectangle {
+        width: parent.width * Math.max(0, Math.min(1, block.fill))
+        height: parent.height
+        radius: 1.5
+        color: block.tone
       }
     }
   }
@@ -804,21 +768,17 @@ Panel {
         }
       }
 
-      Row {
-        spacing: 2
+      Rectangle {
+        width: parent.width
+        height: 4
+        radius: 2
+        color: Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.12)
 
-        Repeater {
-          model: card.segments
-
-          Rectangle {
-            required property int index
-            width: 6
-            height: 4
-            radius: 1
-            color: index < Math.ceil(Math.max(0, Math.min(1, card.fill)) * card.segments)
-              ? card.tone
-              : Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.12)
-          }
+        Rectangle {
+          width: parent.width * Math.max(0, Math.min(1, card.fill))
+          height: parent.height
+          radius: 2
+          color: card.tone
         }
       }
 
@@ -862,19 +822,17 @@ Panel {
       }
     }
 
-    Row {
+    Rectangle {
       width: parent.width
-      spacing: 2
-      Repeater {
-        model: 14
-        Rectangle {
-          required property int index
-          width: Math.max(2, (status.width - 26) / 14)
-          height: 4
-          color: index < Math.ceil(Math.max(0, Math.min(1, status.fill)) * 14)
-            ? status.tone
-            : Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.13)
-        }
+      height: 4
+      radius: 2
+      color: Qt.rgba(root.foreground.r, root.foreground.g, root.foreground.b, 0.12)
+
+      Rectangle {
+        width: parent.width * Math.max(0, Math.min(1, status.fill))
+        height: parent.height
+        radius: 2
+        color: status.tone
       }
     }
   }
@@ -891,7 +849,7 @@ Panel {
     Rectangle {
       width: 6
       height: 6
-      rotation: 45
+      radius: 3
       color: objective.tone
       anchors.verticalCenter: parent.verticalCenter
     }
@@ -934,7 +892,7 @@ Panel {
       spacing: Style.space(7)
 
       Text {
-        text: "OBJECTIVES // ACTIVE"
+        text: "SYSTEM STATUS"
         color: root.muted
         font.family: root.fontFamily
         font.pixelSize: Style.font.caption
@@ -947,23 +905,23 @@ Panel {
       }
 
       ObjectiveRow {
-        label: "MAINTAIN UPLINK"
-        state: telemetry.pingOk ? (telemetry.latency < 100 ? "SECURE" : "DEGRADED") : "LOST"
+        label: "NETWORK"
+        state: telemetry.pingOk ? (telemetry.latency < 100 ? "ONLINE" : "SLOW") : "OFFLINE"
         tone: root.colorForLatency(telemetry.latency)
       }
       ObjectiveRow {
-        label: "MONITOR THREAT"
-        state: telemetry.cpu < 40 ? "LOW" : (telemetry.cpu < 70 ? "GUARDED" : "CRITICAL")
+        label: "CPU LOAD"
+        state: telemetry.cpu < 40 ? "LOW" : (telemetry.cpu < 70 ? "BUSY" : "HIGH")
         tone: root.colorForCpu(telemetry.cpu)
       }
       ObjectiveRow {
-        label: "PRESERVE AMMO"
-        state: telemetry.ramUsage < 60 ? "NOMINAL" : (telemetry.ramUsage < 85 ? "LOW" : "CRITICAL")
+        label: "MEMORY"
+        state: telemetry.ramUsage < 60 ? "NOMINAL" : (telemetry.ramUsage < 85 ? "LOW" : "HIGH")
         tone: root.colorForAmmo(telemetry.ramUsage)
       }
       ObjectiveRow {
-        label: "SECURE POWER"
-        state: telemetry.hasBattery ? (telemetry.charging ? "CHARGING" : (telemetry.batteryLevel > 35 ? "NOMINAL" : "LOW")) : "AC LINK"
+        label: "POWER"
+        state: telemetry.hasBattery ? (telemetry.charging ? "CHARGING" : (telemetry.batteryLevel > 35 ? "NOMINAL" : "LOW")) : "AC"
         tone: root.colorForPower()
       }
 
@@ -974,7 +932,7 @@ Panel {
       }
 
       Text {
-        text: "MISSION CLOCK"
+        text: "UPTIME"
         color: root.muted
         font.family: root.fontFamily
         font.pixelSize: Math.max(8, Style.font.caption - 2)
@@ -1017,58 +975,25 @@ Panel {
       ctx.clearRect(0, 0, width, height)
       var cx = width / 2
       var cy = height / 2
-      var r = Math.min(width, height) / 2 - 4
+      var r = Math.min(width, height) / 2 - 6
       var accent = root.accent
       var fg = root.foreground
 
-      ctx.strokeStyle = Qt.rgba(fg.r, fg.g, fg.b, 0.20)
-      ctx.lineWidth = 1
-      for (var ring = 1; ring <= 3; ring++) {
-        ctx.beginPath()
-        ctx.arc(cx, cy, r * ring / 3, 0, Math.PI * 2)
-        ctx.stroke()
-      }
-      for (var spoke = 0; spoke < 8; spoke++) {
-        var a = spoke * Math.PI / 4
-        ctx.beginPath()
-        ctx.moveTo(cx + Math.cos(a) * r * 0.18, cy + Math.sin(a) * r * 0.18)
-        ctx.lineTo(cx + Math.cos(a) * r, cy + Math.sin(a) * r)
-        ctx.stroke()
-      }
-
-      var sweepAngle = (radar.sweep - 90) * Math.PI / 180
-      ctx.beginPath()
-      ctx.moveTo(cx, cy)
-      ctx.arc(cx, cy, r, sweepAngle - 0.55, sweepAngle, false)
-      ctx.closePath()
-      ctx.fillStyle = Qt.rgba(accent.r, accent.g, accent.b, 0.12)
-      ctx.fill()
-      ctx.beginPath()
-      ctx.moveTo(cx, cy)
-      ctx.lineTo(cx + Math.cos(sweepAngle) * r, cy + Math.sin(sweepAngle) * r)
-      ctx.strokeStyle = Qt.rgba(accent.r, accent.g, accent.b, 0.85)
+      ctx.strokeStyle = Qt.rgba(fg.r, fg.g, fg.b, 0.18)
       ctx.lineWidth = 1.5
-      ctx.stroke()
-
-      var contacts = [
-        { a: 38, r: 0.56, label: "C-01", tone: accent },
-        { a: 146, r: 0.42, label: "C-02", tone: fg },
-        { a: 258, r: 0.68, label: "C-03", tone: root.urgent }
-      ]
-      ctx.font = "10px " + root.fontFamily
-      ctx.textAlign = "center"
-      for (var i = 0; i < contacts.length; i++) {
-        var c = contacts[i]
-        var ca = (c.a - 90) * Math.PI / 180
-        var px = cx + Math.cos(ca) * r * c.r
-        var py = cy + Math.sin(ca) * r * c.r
+      for (var ring = 1; ring <= 2; ring++) {
         ctx.beginPath()
-        ctx.arc(px, py, 3, 0, Math.PI * 2)
-        ctx.fillStyle = Qt.rgba(c.tone.r, c.tone.g, c.tone.b, 0.9)
-        ctx.fill()
-        ctx.fillStyle = Qt.rgba(fg.r, fg.g, fg.b, 0.62)
-        ctx.fillText(c.label, px, py - 7)
+        ctx.arc(cx, cy, r * ring / 2, 0, Math.PI * 2)
+        ctx.stroke()
       }
+
+      var angle = (radar.sweep - 90) * Math.PI / 180
+      var px = cx + Math.cos(angle) * r * 0.72
+      var py = cy + Math.sin(angle) * r * 0.72
+      ctx.beginPath()
+      ctx.arc(px, py, 4, 0, Math.PI * 2)
+      ctx.fillStyle = accent
+      ctx.fill()
     }
   }
 

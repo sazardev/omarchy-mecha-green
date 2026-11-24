@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.7.6 — 2026-11-24
+
+- Redesigned the Mecha HUD panel to match the flat topographic design system.
+- Removed Halo/UNSC copy, scanlines, HUD corner frames and dense radar labels.
+- Added a Geist system-monitor header, custom wave mark, clean status cards,
+  single progress bars and a minimal animated radar.
+- Kept all telemetry, ping-target, uptime, reset and live-wallpaper controls.
+- Bumped the Mecha HUD plugin to 1.2.0 and refreshed its README.
+
 ## 1.7.5 — 2026-11-24
 
 - Rewrote the main and Omarchy package READMEs to be shorter and clearer.

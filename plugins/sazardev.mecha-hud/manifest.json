@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "id": "sazardev.mecha-hud",
   "name": "Mecha HUD",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "sazardev",
   "license": "MIT",
-  "description": "Halo-style tactical Omarchy command panel: ping, CPU, RAM, battery, objectives, radar and live wallpaper controls.",
+  "description": "Flat Mecha Green system monitor for Omarchy: ping, CPU, RAM, battery, status, radar and live wallpaper controls.",
   "kinds": [
     "bar-widget"
   ],
@@ -14,7 +14,7 @@
   },
   "barWidget": {
     "displayName": "Mecha HUD",
-    "description": "A military-green command screen with NET latency, THRT CPU load, AMMO RAM pressure, objectives, radar and a NEXT LIVE wallpaper control.",
+    "description": "A clean military-green monitor with NET latency, CPU load, RAM pressure, system status, radar and live wallpaper controls.",
     "category": "System",
     "allowMultiple": false,
     "defaultSection": "right",
