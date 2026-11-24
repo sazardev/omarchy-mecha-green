@@ -5,25 +5,12 @@ extra playback daemon is required: a video placed in a theme's `backgrounds/`
 folder shows up in the normal Omarchy background picker and plays with hardware
 decoding.
 
-The bundled loops are silent, 2560×1440 H.264 at 30 fps and loop seamlessly.
+No live loops are bundled with the theme. The default wallpaper is the flat
+`0-topographic.webp` still; live wallpapers remain optional.
 
-## Bundled loops
-
-Each theme ships two original MIT loops:
-
-| File | Loop |
-|---|---|
-| `backgrounds/live-helmet.mp4` | 12 s command-feed push over the Spartan helmet, with scanlines, HUD frame and grain |
-| `backgrounds/live-radar.mp4` | 12 s rotating radar sweep with contact blips |
-
-Cycle them with:
-
-```sh
-omarchy theme bg next
-```
-
-They also appear in the Mecha HUD's **NEXT LIVE** button, which skips stills and
-cycles only videos.
+Videos created with `mecha-livewall` or the Halo set are silent, 2560×1440 H.264
+at 30 fps. They appear in the Mecha HUD's **NEXT LIVE** button, which skips
+stills and cycles only videos.
 
 ## Halo live set
 

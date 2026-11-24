@@ -1,26 +1,21 @@
 # Original art sources
 
-These SVGs are the sources for the bundled Mecha Green wallpapers. They are
-original geometric / HUD illustrations, MIT licensed with the rest of the
-theme.
+The bundled Mecha Green wallpaper is an original flat vector illustration,
+MIT licensed with the rest of the theme.
 
 | SVG | Rendered wallpaper |
 |---|---|
-| `helmet-dark.svg` / `helmet-light.svg` | `8-mecha-helmet*.webp` |
-| `topo-dark.svg` / `topo-light.svg` | `9-topographic*.webp` |
-| `keyboard-dark.svg` / `keyboard-light.svg` | `10-keyboard*.webp` |
-| `switch-blueprint-dark.svg` / `switch-blueprint-light.svg` | `11-switch-blueprint*.webp` |
-| `pcb-blueprint-dark.svg` / `pcb-blueprint-light.svg` | `12-pcb-blueprint*.webp` |
-| `radar-dark.svg` / `radar-light.svg` | `13-radar*.webp` |
-| `helmet-blueprint-dark.svg` / `helmet-blueprint-light.svg` | `14-helmet-blueprint*.webp` |
-| `crate-dark.svg` / `crate-light.svg` | `15-crate*.webp` |
+| `topo-dark.svg` | `themes/mecha-green/backgrounds/0-topographic.webp` |
+| `topo-light.svg` | `themes/mecha-green-light/backgrounds/0-topographic-light.webp` |
 
-Render one with:
+Regenerate the wallpapers and theme previews with:
 
 ```sh
-rsvg-convert -w 2560 -h 1440 assets/svg/switch-blueprint-dark.svg -o /tmp/switch.png
-magick /tmp/switch.png -quality 92 /tmp/switch.webp
+./scripts/render-wallpapers.sh
 ```
+
+The script requires `rsvg-convert` and ImageMagick (`magick`). It renders at
+2560×1440, WebP quality 92, then derives the 1200×675 theme previews.
 
 ## LUTs
 

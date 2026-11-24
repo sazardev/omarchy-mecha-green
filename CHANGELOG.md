@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.6.0 — 2026-11-23
+
+- Replaced the bundled wallpaper collection with one flat topographic wave per
+  theme, using Geist typography and the exact dark/light background tokens.
+- Made `0-topographic.webp` / `0-topographic-light.webp` the default brand
+  wallpapers and removed the old stills and bundled live loops.
+- Added `scripts/render-wallpapers.sh` to reproducibly render the wallpapers and
+  theme previews at the canonical quality.
+- Updated the installer to remove legacy theme-owned backgrounds while
+  preserving personal wallpapers, and refreshed CI validation.
+- Updated the registry-ready dark and light theme repositories.
+
 ## 1.5.0 — 2026-11-17
 
 - Added two original MIT live wallpapers to each theme: a 12 s helmet command

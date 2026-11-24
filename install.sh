@@ -103,6 +103,26 @@ install_theme() {
     return
   fi
   mkdir -p "$dest/backgrounds"
+
+  # Remove theme-owned backgrounds from earlier releases while preserving any
+  # personal wallpapers the user may have added to this folder.
+  local legacy=(
+    8-mecha-helmet.webp 9-topographic.webp 10-keyboard.webp
+    11-switch-blueprint.webp 12-pcb-blueprint.webp 13-radar.webp
+    14-helmet-blueprint.webp 15-crate.webp live-helmet.mp4 live-radar.mp4
+  )
+  if [[ $name == "mecha-green-light" ]]; then
+    legacy=(
+      8-mecha-helmet-light.webp 9-topographic-light.webp 10-keyboard-light.webp
+      11-switch-blueprint-light.webp 12-pcb-blueprint-light.webp
+      13-radar-light.webp 14-helmet-blueprint-light.webp 15-crate-light.webp
+      live-helmet.mp4 live-radar.mp4
+    )
+  fi
+  for f in "${legacy[@]}"; do
+    rm -f "$dest/backgrounds/$f"
+  done
+
   for f in colors.toml shell.toml btop.theme hyprland.lua alacritty.toml \
            icons.theme chromium.theme keyboard.rgb README.md; do
     [[ -f "$src/$f" ]] && cp -f "$src/$f" "$dest/$f"

@@ -4,33 +4,22 @@ Mecha Green ships with original artwork and an optional, separately fetched
 Halo & military set. This split keeps the repository's MIT license clean while
 still letting you get the full Master Chief desktop in one command.
 
-## Bundled originals (MIT)
+## Bundled default (MIT)
 
-Each theme includes eight 2560×1440 stills plus two 12-second live loops:
+Each theme includes one 2560×1440 flat wallpaper:
 
-| File | Art |
-|---|---|
-| `8-mecha-helmet.webp` | Geometric Spartan helmet, amber visor, HUD rings |
-| `9-topographic.webp` | Olive contour map with an amber targeting reticle |
-| `10-keyboard.webp` | Product-style MCHOSE Ace 75 render with amber legends |
-| `11-switch-blueprint.webp` | Hall Effect switch cross-section and top view |
-| `12-pcb-blueprint.webp` | 75% keyboard PCB / 6×15 switch matrix |
-| `13-radar.webp` | Tactical radar, contact list and threat readout |
-| `14-helmet-blueprint.webp` | MJOLNIR helmet schematic with dimensions |
-| `15-crate.webp` | Field supply crate stencil with hazard strip |
-| `live-helmet.mp4` | Helmet command-feed loop with scanlines and HUD |
-| `live-radar.mp4` | Rotating radar sweep with contact blips |
+| Theme | File | Art |
+|---|---|---|
+| Dark | `0-topographic.webp` | Flowing olive contour waves and Geist typography on `#0E1009` |
+| Light | `0-topographic-light.webp` | Flowing olive contour waves and Geist typography on `#E9E5CB` |
 
-The light theme has the same eight stills in sand/olive/bronze, suffixed with
-`-light` (for example `11-switch-blueprint-light.webp`), and its own
-`live-helmet.mp4` / `live-radar.mp4` loops.
+The `0-` prefix keeps the brand wallpaper first alphabetically, even when
+optional or personal backgrounds are installed. No live loops are bundled.
 
-SVG sources live in [`../assets/svg/`](../assets/svg/). They are also MIT.
-
-These are the wallpapers a fresh install has. The theme works out of the box
-with them; the Halo & military fetch and live set are optional. See
-[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for playback, controls and the
-`mecha-livewall` generator.
+SVG sources live in [`../assets/svg/`](../assets/svg/). Regenerate the wallpapers
+and previews with `./scripts/render-wallpapers.sh`. The Halo & military fetch and
+live set remain optional; see [`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for
+playback, controls and the `mecha-livewall` generator.
 
 ## Optional Halo & military set (personal use only)
 
@@ -219,7 +208,7 @@ restart is needed.
 |---|---|
 | Theme configuration (`*.toml`, `*.lua`, `btop.theme`, etc.) | MIT |
 | Plugins and scripts | MIT |
-| Original helmet/topographic/keyboard/switch/PCB/radar/crate art, SVGs and live loops | MIT |
+| Original topographic wave art and SVGs | MIT |
 | Halo & military wallpaper set and live loops | © Microsoft–343 Industries / respective Wallhaven uploaders; personal use only; not redistributed here |
 | Omarchy logo (recoloured boot mark) | Omarchy project |
 

@@ -20,6 +20,7 @@ jobs:
           bash -n scripts/mecha-livewall
           bash -n scripts/mecha-live-next
           bash -n scripts/make-live-set.sh
+          bash -n scripts/render-wallpapers.sh
           bash -n system/install-login.sh
           bash -n system/uninstall-login.sh
       - name: JSON manifests
@@ -33,16 +34,31 @@ jobs:
             test -f "$t/colors.toml"
             test -f "$t/shell.toml"
             test -f "$t/preview.png"
+            test "$(find "$t/backgrounds" -maxdepth 1 -type f | wc -l)" -eq 1
             if [[ $t == *light ]]; then
-              test -f "$t/backgrounds/8-mecha-helmet-light.webp"
+              test -f "$t/backgrounds/0-topographic-light.webp"
             else
-              test -f "$t/backgrounds/8-mecha-helmet.webp"
+              test -f "$t/backgrounds/0-topographic.webp"
             fi
-            test -f "$t/backgrounds/live-helmet.mp4"
-            test -f "$t/backgrounds/live-radar.mp4"
           done
           grep -q 'mode = "dark"' themes/mecha-green/colors.toml
           grep -q 'mode = "light"' themes/mecha-green-light/colors.toml
+      - name: Flat wallpaper sources
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import xml.etree.ElementTree as ET
+
+          sources = sorted(Path('assets/svg').glob('*.svg'))
+          assert [p.name for p in sources] == ['topo-dark.svg', 'topo-light.svg']
+          for path in sources:
+              root = ET.parse(path).getroot()
+              assert root.attrib['width'] == '2560'
+              assert root.attrib['height'] == '1440'
+              text = path.read_text().lower()
+              for forbidden in ('gradient', '<filter', 'gaussianblur', 'drop-shadow'):
+                  assert forbidden not in text, f'{forbidden} found in {path}'
+          PY
       - name: Live wallpaper assets
         run: |
           for f in hud-dark.png hud-light.png scanlines-dark.png scanlines-light.png \
