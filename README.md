@@ -375,67 +375,6 @@ mecha-fetch-halo
 ./scripts/fetch-halo-backgrounds.sh
 ```
 
-It adds:
-
-| File | Wallhaven | Credit |
-|---|---|---|
-| `1-master-chief.webp` | [85qdg2](https://wallhaven.cc/w/85qdg2) | NonoRiri |
-| `2-amber-chief.webp` | [4x7leo](https://wallhaven.cc/w/4x7leo) | JT42 |
-| `3-chief-dark.webp` | [3lovdd](https://wallhaven.cc/w/3lovdd) | SnackySkullFace |
-| `4-night-ring.webp` | [9odk5d](https://wallhaven.cc/w/9odk5d) | ArtificialCC |
-| `5-warthog.webp` | [5dy1j8](https://wallhaven.cc/w/5dy1j8) | CrisMaggot |
-| `6-fireteam.webp` | [eo8ggr](https://wallhaven.cc/w/eo8ggr) | ZuaDoR0 |
-| `7-canyon.webp` | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
-| `1-warthog-light.webp` (light) | [5dy1j8](https://wallhaven.cc/w/5dy1j8) | CrisMaggot |
-| `2-canyon-light.webp` (light) | [5wwdz7](https://wallhaven.cc/w/5wwdz7) | nativepixel |
-| `3-desert-light.webp` (light) | [oxer87](https://wallhaven.cc/w/oxer87) | SamUerto |
-| `4-jungle-light.webp` (light) | [zmreeg](https://wallhaven.cc/w/zmreeg) | SamUerto |
-| `16-halo-dawn.webp` | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
-| `17-forerunner-gate.webp` | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
-| `18-warthog-canyon.webp` | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
-| `19-tank-dust.webp` | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
-| `20-helicopter-sunset.webp` | [4lxrdp](https://wallhaven.cc/w/4lxrdp) | br3athless |
-| `21-jet-night.webp` | [42vrp6](https://wallhaven.cc/w/42vrp6) | Wallhaven |
-| `16-halo-dawn.webp` (light) | [e725e8](https://wallhaven.cc/w/e725e8) | ebullientprism |
-| `17-forerunner-gate.webp` (light) | [j5o29p](https://wallhaven.cc/w/j5o29p) | SamUerto |
-| `18-warthog-canyon.webp` (light) | [wyrz9q](https://wallhaven.cc/w/wyrz9q) | SamUerto |
-| `19-tank-dust.webp` (light) | [0jwrjy](https://wallhaven.cc/w/0jwrjy) | Wallhaven |
-| `20-helicopter-snow.webp` (light) | [nmkkq1](https://wallhaven.cc/w/nmkkq1) | Wallhaven |
-
-The curated sets add five files each (six for Forerunner). Dark files use
-22–42; the light twin uses one number lower, 21–41:
-
-| Set | Dark file | Light file | Wallhaven | Credit |
-|---|---|---|---|---|
-| Spartans | `22-chief-noir.webp` | `21-chief-noir.webp` | [0je6vp](https://wallhaven.cc/w/0je6vp) | Wallhaven |
-| Spartans | `23-chief-blue.webp` | `22-chief-blue.webp` | [6qjwel](https://wallhaven.cc/w/6qjwel) | ZuaDoR0 |
-| Spartans | `24-helmet-amber.webp` | `23-helmet-amber.webp` | [83qpoy](https://wallhaven.cc/w/83qpoy) | Crossby |
-| Spartans | `25-chief-rain.webp` | `24-chief-rain.webp` | [lq887r](https://wallhaven.cc/w/lq887r) | canadianakin |
-| Spartans | `26-spartan-visor.webp` | `25-spartan-visor.webp` | [435686](https://wallhaven.cc/w/435686) | ShiftySigma |
-| UNSC | `27-unsc-frigate.webp` | `26-unsc-frigate.webp` | [4537m8](https://wallhaven.cc/w/4537m8) | mattilius258 |
-| UNSC | `28-unsc-city.webp` | `27-unsc-city.webp` | [g8le3e](https://wallhaven.cc/w/g8le3e) | SamUerto |
-| UNSC | `29-odst-squad.webp` | `28-odst-squad.webp` | [lm7l9p](https://wallhaven.cc/w/lm7l9p) | SamUerto |
-| UNSC | `30-pelican-drop.webp` | `29-pelican-drop.webp` | [oxep9p](https://wallhaven.cc/w/oxep9p) | SamUerto |
-| UNSC | `31-warthog-sunset.webp` | `30-warthog-sunset.webp` | [vgj8z8](https://wallhaven.cc/w/vgj8z8) | DeltaPrime |
-| Covenant | `32-elite-portrait.webp` | `31-elite-portrait.webp` | [4d3lrl](https://wallhaven.cc/w/4d3lrl) | JT42 |
-| Covenant | `33-elite-night.webp` | `32-elite-night.webp` | [kw6qq7](https://wallhaven.cc/w/kw6qq7) | SamUerto |
-| Covenant | `34-arbiter-duel.webp` | `33-arbiter-duel.webp` | [mdmkem](https://wallhaven.cc/w/mdmkem) | SamUerto |
-| Covenant | `35-elite-closeup.webp` | `34-elite-closeup.webp` | [mpq2o1](https://wallhaven.cc/w/mpq2o1) | ZuaDoR0 |
-| Covenant | `36-energy-swords.webp` | `35-energy-swords.webp` | [z8gmyo](https://wallhaven.cc/w/z8gmyo) | BIOOH |
-| Forerunner | `37-forerunner-spire.webp` | `36-forerunner-spire.webp` | [39pgl3](https://wallhaven.cc/w/39pgl3) | Crossby |
-| Forerunner | `38-ring-arc.webp` | `37-ring-arc.webp` | [dpvvgm](https://wallhaven.cc/w/dpvvgm) | Wallhaven |
-| Forerunner | `39-forerunner-temple.webp` | `38-forerunner-temple.webp` | [ey1mll](https://wallhaven.cc/w/ey1mll) | SamUerto |
-| Forerunner | `40-forerunner-snow.webp` | `39-forerunner-snow.webp` | [kwomm1](https://wallhaven.cc/w/kwomm1) | DeltaPrime |
-| Forerunner | `41-chief-sunset.webp` | `40-chief-sunset.webp` | [l3o6yl](https://wallhaven.cc/w/l3o6yl) | Doctorc418 |
-| Forerunner | `42-ring-horizon.webp` | `41-ring-horizon.webp` | [y8ldqd](https://wallhaven.cc/w/y8ldqd) | Doctorc418 |
-
-Fetch only the sets you want:
-
-```sh
-mecha-fetch-halo --set spartans,unsc
-mecha-fetch-halo --list-sets
-```
-
 See [`docs/WALLPAPERS.md`](docs/WALLPAPERS.md) for the full credits and notes.
 
 **Halo, Master Chief, MCHOSE and Omarchy are trademarks of their respective

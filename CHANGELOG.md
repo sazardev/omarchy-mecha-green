@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.7.2 — 2026-11-24
+
+- Removed the optional Halo wallpaper filename and credit tables from the main
+  README. Full credits remain available in `docs/WALLPAPERS.md`.
+
 ## 1.7.1 — 2026-11-24
 
 - Removed legacy HUD, terminal, btop and lock-screen screenshots from the README.
