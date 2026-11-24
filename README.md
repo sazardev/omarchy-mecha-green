@@ -43,23 +43,11 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   twin), while `install.sh` adds the HUD, CLI, login screens and optional sets.
 - **Original editable SVG sources** for the full flat topographic collection.
 
-## Real screenshots
-
-Captured on the author's Omarchy desktop at 1920×1080: the bar, the Mecha HUD,
-the themed terminal and btop.
-
-| | |
-|---|---|
-| ![](screenshots/real-dark-hud.webp)<br>**Mecha Command panel** | ![](screenshots/real-dark-cli.webp)<br>**Mecha status** — the tactical terminal |
-| ![](screenshots/real-dark-btop.webp)<br>**btop dark** — olive/amber CPU and memory | ![](screenshots/real-light-btop.webp)<br>**btop light** — sand/bronze |
-| ![](themes/mecha-green/preview.png)<br>**Topographic Wave** — dark | ![](themes/mecha-green-light/preview.png)<br>**Topographic Wave** — light |
-
-## Boot, login and lock
+## Boot and login
 
 | | |
 |---|---|
 | ![](screenshots/login-preview.webp)<br>**SDDM login** — Mecha Green system access | ![](screenshots/plymouth-preview.webp)<br>**Plymouth boot** — amber Omarchy mark and progress bar |
-| ![](screenshots/real-dark-lock.webp)<br>**Lock screen dark** — blurred Mecha Green wallpaper | ![](screenshots/real-light-lock.webp)<br>**Lock screen light** — sand and bronze |
 
 - **Lock screen:** follows the current wallpaper, blurs it and applies the
   `[lock]` tokens from `shell.toml` — amber border, olive field, rust error
@@ -189,12 +177,6 @@ omarchy plugin enable sazardev.ping --section right --after omarchy.network
 ```
 
 ## The Mecha HUD
-
-| | |
-|---|---|
-| ![](screenshots/mecha-hud.png)<br>**Mecha Command — dark** | ![](screenshots/mecha-hud-light.png)<br>**Mecha Command — light** |
-
-![Mecha HUD in the bar](screenshots/mecha-bar.png)
 
 The bar strip is three (or four) military readouts:
 

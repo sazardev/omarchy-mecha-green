@@ -3,8 +3,6 @@
 A tactical status strip for the Omarchy bar: **NET** latency, **THRT** CPU
 load, **AMMO** RAM pressure and optional **PWR** battery.
 
-![Mecha HUD](../../screenshots/mecha-hud.png)
-
 ## Install
 
 From the repository root:

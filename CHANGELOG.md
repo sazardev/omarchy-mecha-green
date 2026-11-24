@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.1 — 2026-11-24
+
+- Removed legacy HUD, terminal, btop and lock-screen screenshots from the README.
+- Deleted the old artwork captures so the project card only shows the new
+  topographic wallpapers, SDDM login and Plymouth boot previews.
+
 ## 1.7.0 — 2026-11-23
 
 - Added six new flat topographic designs: Drift, Fold, Field, Terrain, Panorama
