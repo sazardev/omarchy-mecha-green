@@ -39,15 +39,17 @@ jobs:
             test "$(find "$t/backgrounds" -maxdepth 1 -type f | wc -l)" -eq 13
             if [[ $t == *light ]]; then
               test -f "$t/backgrounds/0-topographic-light.webp"
-              for name in drift fold field terrain panorama undulate; do
-                test -f "$t/backgrounds/100-${name}-light.webp"
-                test -f "$t/backgrounds/100-${name}-light.mp4"
+              for entry in 100:drift 101:fold 102:field 103:terrain 104:panorama 105:undulate; do
+                IFS=: read -r number name <<< "$entry"
+                test -f "$t/backgrounds/${number}-${name}-light.webp"
+                test -f "$t/backgrounds/${number}-${name}-light.mp4"
               done
             else
               test -f "$t/backgrounds/0-topographic.webp"
-              for name in drift fold field terrain panorama undulate; do
-                test -f "$t/backgrounds/100-${name}.webp"
-                test -f "$t/backgrounds/100-${name}.mp4"
+              for entry in 100:drift 101:fold 102:field 103:terrain 104:panorama 105:undulate; do
+                IFS=: read -r number name <<< "$entry"
+                test -f "$t/backgrounds/${number}-${name}.webp"
+                test -f "$t/backgrounds/${number}-${name}.mp4"
               done
             fi
           done
