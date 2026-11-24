@@ -1,15 +1,15 @@
 # Mecha Green login
 
-A custom SDDM theme matching the Mecha Green desktop: dark olive HUD
-background, amber Omarchy mark, amber password field and the multiuser
-selector.
+A flat SDDM theme using the same topographic wave brand as the desktop. The
+login keeps only the Omarchy mark, user selector and password field, with Geist
+typography and no HUD, glow, gradients or shadows.
 
-![Mecha Green login](../../../screenshots/login-preview.webp)
+![Mecha Green login](preview.webp)
 
 ## Preview without logging out
 
 ```sh
-sddm-greeter --test-mode --theme system/sddm/mecha-green
+sddm-greeter-qt6 --test-mode --theme system/sddm/mecha-green
 ```
 
 ## Install

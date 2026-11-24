@@ -20,14 +20,14 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
   amber indicators, amber-tinted selection, gradient-bordered popups, menus,
   notifications, launcher and lock screen. The light theme flips it to sand
   and bronze.
-- **Themed boot, login and lock screens** — a custom Plymouth splash with an
-  amber Omarchy mark and progress bar, a Mecha Green SDDM login with HUD
-  background and amber password field, and a lock screen that blurs the
-  current wallpaper and uses the same amber/sand lock tokens.
-- **One flat brand wallpaper per theme** — flowing topographic waves, Geist
-  typography and the exact dark/light background tokens. `0-topographic.webp`
-  sorts first and is the default. An optional fetcher can still add thirty-four
-  dark and thirty light Halo & military stills plus live loops for personal use.
+- **Themed boot, login and lock screens** — the same flat topographic brand on a
+  custom Plymouth splash and Mecha Green SDDM login, with the amber Omarchy mark
+  and password field. The lock screen inherits the current wallpaper and uses
+  the matching amber/sand tokens.
+- **Seven flat wallpapers + six live loops per theme** — the `0-topographic`
+  brand default plus Drift, Fold, Field, Terrain, Panorama and Undulate. Every
+  design has a dark/light still and a clean animated loop with fixed typography.
+  The `100-` series avoids collisions with the optional Halo set.
 - **Mecha HUD** — a working Quickshell bar plugin: `NET` latency, `THRT` CPU
   load, `AMMO` RAM pressure, optional `PWR` battery. Click for a Halo-style
   command panel with integrity bars, objectives, an animated radar, a
@@ -41,7 +41,7 @@ Omarchy theme tuned to sit next to an MCHOSE Ace 75 in Mecha Green.**
 - **Standard Omarchy install** — registry-ready dark and light theme
   repositories install with `omarchy theme install mecha-green` (or the light
   twin), while `install.sh` adds the HUD, CLI, login screens and optional sets.
-- **Original editable SVG source** for the flat topographic brand wallpaper.
+- **Original editable SVG sources** for the full flat topographic collection.
 
 ## Real screenshots
 
@@ -64,10 +64,10 @@ the themed terminal and btop.
 - **Lock screen:** follows the current wallpaper, blurs it and applies the
   `[lock]` tokens from `shell.toml` — amber border, olive field, rust error
   state.
-- **SDDM login:** dark olive HUD background, amber Omarchy mark, amber
-  password field, multiuser selector.
-- **Plymouth boot:** custom dark-olive theme with the amber Omarchy mark and a
-  matching amber progress bar.
+- **SDDM login:** flat topographic background, Geist typography, amber Omarchy
+  mark, password field and multiuser selector.
+- **Plymouth boot:** the same flat topographic background with the amber Omarchy
+  mark and a matching amber progress bar.
 
 The login and boot themes are system files, so they have their own installer:
 
@@ -100,7 +100,8 @@ omarchy theme install https://github.com/sazardev/omarchy-mecha-green-light-them
 ```
 
 This is the standard Omarchy path: it keeps the palette, `shell.toml`, btop,
-Chromium, icons, keyboard RGB, unlock art and the single flat brand wallpaper.
+Chromium, icons, keyboard RGB, unlock art, seven flat wallpapers and six live
+loops.
 Omarchy regenerates the terminal and Hyprland configs from `colors.toml` and
 drops executable theme files, exactly as designed for third-party themes.
 
@@ -314,27 +315,45 @@ The Hyprland border is a 45° amber → olive → amber gradient.
 | Rust | `#9C3F2D` |
 | Deep patina | `#2F6A5E` |
 
-## Bundled wallpaper
+## Bundled wallpapers
 
-Each theme ships one original 2560×1440 flat wallpaper. The `0-` prefix keeps it
-first alphabetically and makes it the default even when optional or personal
-wallpapers are installed.
+Each theme ships seven original 2560×1440 flat stills and six original live
+loops. `0-topographic` stays first alphabetically and remains the default.
 
 | Art | Dark | Light |
 |---|---|---|
-| Topographic Wave | ![](themes/mecha-green/backgrounds/0-topographic.webp) | ![](themes/mecha-green-light/backgrounds/0-topographic-light.webp) |
+| Default wave | ![](themes/mecha-green/backgrounds/0-topographic.webp) | ![](themes/mecha-green-light/backgrounds/0-topographic-light.webp) |
+| Drift | ![](themes/mecha-green/backgrounds/100-drift.webp) | ![](themes/mecha-green-light/backgrounds/100-drift-light.webp) |
+| Fold | ![](themes/mecha-green/backgrounds/101-fold.webp) | ![](themes/mecha-green-light/backgrounds/101-fold-light.webp) |
+| Field | ![](themes/mecha-green/backgrounds/102-field.webp) | ![](themes/mecha-green-light/backgrounds/102-field-light.webp) |
+| Terrain | ![](themes/mecha-green/backgrounds/103-terrain.webp) | ![](themes/mecha-green-light/backgrounds/103-terrain-light.webp) |
+| Panorama | ![](themes/mecha-green/backgrounds/104-panorama.webp) | ![](themes/mecha-green-light/backgrounds/104-panorama-light.webp) |
+| Undulate | ![](themes/mecha-green/backgrounds/105-undulate.webp) | ![](themes/mecha-green-light/backgrounds/105-undulate-light.webp) |
 
-Editable SVG sources live in `assets/svg/topo-dark.svg` and
-`assets/svg/topo-light.svg`. Regenerate the wallpapers and previews with:
+Editable SVG sources live in `assets/svg/` and
+`proposals/backgrounds/svg/`. Regenerate the stills and previews with:
 
 ```sh
 ./scripts/render-wallpapers.sh
 ```
 
-## Optional live wallpapers
+## Bundled live wallpapers
 
-No live loops are bundled with the theme. For Halo live wallpapers, fetch the
-Halo stills and build the curated loops:
+Each design has an 8-second H.264 loop at 2560×1440 and 24 fps. Only the contour
+lines move; the Geist wordmark stays fixed. No noise, HUD, glow, gradients or
+shadows are added.
+
+| Loop | Dark | Light |
+|---|---|---|
+| Drift | `100-drift.mp4` | `100-drift-light.mp4` |
+| Fold | `101-fold.mp4` | `101-fold-light.mp4` |
+| Field | `102-field.mp4` | `102-field-light.mp4` |
+| Terrain | `103-terrain.mp4` | `103-terrain-light.mp4` |
+| Panorama | `104-panorama.mp4` | `104-panorama-light.mp4` |
+| Undulate | `105-undulate.mp4` | `105-undulate-light.mp4` |
+
+Regenerate the loops with `python3 proposals/backgrounds/generate-live.py`.
+For additional Halo live wallpapers, fetch the Halo stills and build the curated loops:
 
 ```sh
 ./scripts/fetch-halo-backgrounds.sh
@@ -354,10 +373,12 @@ guide is in [`docs/LIVE_WALLPAPERS.md`](docs/LIVE_WALLPAPERS.md).
 
 ## Wallpapers & licensing
 
-The repository bundles one original wallpaper per theme:
+The repository bundles seven original flat stills and six original live loops
+per theme:
 
-- `0-topographic.webp` — flat dark topographic wave.
-- `0-topographic-light.webp` — flat light topographic wave.
+- `0-topographic*.webp` — the default brand wave.
+- `100-drift*` through `105-undulate*` — six additional topographic designs.
+- Matching `.mp4` loops with animated lines and fixed typography.
 
 These are licensed MIT together with the theme code.
 

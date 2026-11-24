@@ -4,22 +4,28 @@ Mecha Green ships with original artwork and an optional, separately fetched
 Halo & military set. This split keeps the repository's MIT license clean while
 still letting you get the full Master Chief desktop in one command.
 
-## Bundled default (MIT)
+## Bundled collection (MIT)
 
-Each theme includes one 2560×1440 flat wallpaper:
+Each theme includes seven 2560×1440 flat stills and six matching live loops.
+The `0-` prefix keeps the brand wallpaper first alphabetically and the `100-`
+series avoids collisions with the optional Halo set.
 
-| Theme | File | Art |
+| Art | Dark still | Light still |
 |---|---|---|
-| Dark | `0-topographic.webp` | Flowing olive contour waves and Geist typography on `#0E1009` |
-| Light | `0-topographic-light.webp` | Flowing olive contour waves and Geist typography on `#E9E5CB` |
+| Default wave | `0-topographic.webp` | `0-topographic-light.webp` |
+| Drift | `100-drift.webp` | `100-drift-light.webp` |
+| Fold | `101-fold.webp` | `101-fold-light.webp` |
+| Field | `102-field.webp` | `102-field-light.webp` |
+| Terrain | `103-terrain.webp` | `103-terrain-light.webp` |
+| Panorama | `104-panorama.webp` | `104-panorama-light.webp` |
+| Undulate | `105-undulate.webp` | `105-undulate-light.webp` |
 
-The `0-` prefix keeps the brand wallpaper first alphabetically, even when
-optional or personal backgrounds are installed. No live loops are bundled.
-
-SVG sources live in [`../assets/svg/`](../assets/svg/). Regenerate the wallpapers
-and previews with `./scripts/render-wallpapers.sh`. The Halo & military fetch and
-live set remain optional; see [`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for
-playback, controls and the `mecha-livewall` generator.
+The six `100-` designs also have `.mp4` loops with animated contour lines and
+fixed Geist wordmarks. SVG sources live in [`../assets/svg/`](../assets/svg/) and
+[`../proposals/backgrounds/svg/`](../proposals/backgrounds/svg/). Regenerate the
+stills with `./scripts/render-wallpapers.sh` and the loops with
+`python3 proposals/backgrounds/generate-live.py`. See
+[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for playback and optional sets.
 
 ## Optional Halo & military set (personal use only)
 

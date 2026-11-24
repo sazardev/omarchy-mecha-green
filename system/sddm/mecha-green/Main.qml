@@ -47,31 +47,14 @@ Rectangle {
     smooth: true
   }
 
-  Rectangle {
-    anchors.fill: parent
-    color: "#0e1009"
-    opacity: 0.28
-  }
-
   Column {
     anchors.centerIn: parent
     spacing: 24
 
-    Text {
-      text: "SYSTEM ACCESS  //  SPARTAN-117"
-      color: "#9dae5c"
-      font.family: "JetBrainsMono Nerd Font"
-      font.pixelSize: 14
-      font.letterSpacing: 3
-      horizontalAlignment: Text.AlignHCenter
-      width: parent.width
-      opacity: 0.9
-    }
-
     Image {
       id: logo
       source: "logo.png"
-      width: Math.min(sourceSize.width, root.width * 0.55)
+      width: Math.min(sourceSize.width, root.width * 0.46)
       height: sourceSize.width > 0 ? Math.round(width * sourceSize.height / sourceSize.width) : 0
       fillMode: Image.PreserveAspectFit
       anchors.horizontalCenter: parent.horizontalCenter
@@ -84,7 +67,7 @@ Rectangle {
       Text {
         text: "<"
         color: root.loginFailed ? "#c85b47" : "#9dae5c"
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: "Geist"
         font.pixelSize: 26
         opacity: userModel.count > 1 ? 1 : 0
         MouseArea {
@@ -98,7 +81,7 @@ Rectangle {
       Text {
         text: root.currentUser
         color: root.loginFailed ? "#c85b47" : "#d8d9b4"
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: "Geist"
         font.pixelSize: 24
         width: 300
         horizontalAlignment: Text.AlignHCenter
@@ -108,7 +91,7 @@ Rectangle {
       Text {
         text: ">"
         color: root.loginFailed ? "#c85b47" : "#9dae5c"
-        font.family: "JetBrainsMono Nerd Font"
+        font.family: "Geist"
         font.pixelSize: 26
         opacity: userModel.count > 1 ? 1 : 0
         MouseArea {
@@ -147,8 +130,8 @@ Rectangle {
           textFormat: Text.PlainText
           text: root.loginFailed ? "ACCESS DENIED" : "ENTER PASSWORD"
           visible: password.text.length === 0
-          color: root.loginFailed ? "#c85b47" : "#737c58"
-          font.family: "JetBrainsMono Nerd Font"
+          color: root.loginFailed ? "#c85b47" : "#bcc09a"
+          font.family: "Geist"
           font.pixelSize: 18
           font.letterSpacing: 2
         }
@@ -177,7 +160,7 @@ Rectangle {
           verticalAlignment: TextInput.AlignVCenter
           horizontalAlignment: TextInput.AlignHCenter
           echoMode: TextInput.Password
-          font.family: "JetBrainsMono Nerd Font"
+          font.family: "Geist"
           font.pixelSize: 24
           font.letterSpacing: 5
           passwordCharacter: "\u2022"
@@ -214,29 +197,6 @@ Rectangle {
         }
       }
     }
-
-    Text {
-      text: "MECHA GREEN  //  OLIVE / AMBER"
-      color: "#737c58"
-      font.family: "JetBrainsMono Nerd Font"
-      font.pixelSize: 13
-      font.letterSpacing: 2
-      horizontalAlignment: Text.AlignHCenter
-      width: parent.width
-      opacity: 0.9
-    }
-  }
-
-  Text {
-    anchors.horizontalCenter: parent.horizontalCenter
-    anchors.bottom: parent.bottom
-    anchors.bottomMargin: 40
-    text: "MCHOSE ACE 75  //  HALL EFFECT  //  8K"
-    color: "#9dae5c"
-    font.family: "JetBrainsMono Nerd Font"
-    font.pixelSize: 11
-    font.letterSpacing: 2
-    opacity: 0.45
   }
 
   Component.onCompleted: password.forceActiveFocus()

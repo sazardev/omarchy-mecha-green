@@ -21,6 +21,8 @@ jobs:
           bash -n scripts/mecha-live-next
           bash -n scripts/make-live-set.sh
           bash -n scripts/render-wallpapers.sh
+          bash -n scripts/render-system-assets.sh
+          python3 -m py_compile proposals/backgrounds/generate-live.py
           bash -n system/install-login.sh
           bash -n system/uninstall-login.sh
       - name: JSON manifests
@@ -34,11 +36,19 @@ jobs:
             test -f "$t/colors.toml"
             test -f "$t/shell.toml"
             test -f "$t/preview.png"
-            test "$(find "$t/backgrounds" -maxdepth 1 -type f | wc -l)" -eq 1
+            test "$(find "$t/backgrounds" -maxdepth 1 -type f | wc -l)" -eq 13
             if [[ $t == *light ]]; then
               test -f "$t/backgrounds/0-topographic-light.webp"
+              for name in drift fold field terrain panorama undulate; do
+                test -f "$t/backgrounds/100-${name}-light.webp"
+                test -f "$t/backgrounds/100-${name}-light.mp4"
+              done
             else
               test -f "$t/backgrounds/0-topographic.webp"
+              for name in drift fold field terrain panorama undulate; do
+                test -f "$t/backgrounds/100-${name}.webp"
+                test -f "$t/backgrounds/100-${name}.mp4"
+              done
             fi
           done
           grep -q 'mode = "dark"' themes/mecha-green/colors.toml
@@ -51,6 +61,9 @@ jobs:
 
           sources = sorted(Path('assets/svg').glob('*.svg'))
           assert [p.name for p in sources] == ['topo-dark.svg', 'topo-light.svg']
+          sources += sorted(Path('proposals/backgrounds/svg').glob('*.svg'))
+          assert len(sources) == 14
+          sources.append(Path('system/sddm/mecha-green/background.svg'))
           for path in sources:
               root = ET.parse(path).getroot()
               assert root.attrib['width'] == '2560'
@@ -69,7 +82,9 @@ jobs:
       - name: Login and boot theme files
         run: |
           test -f system/sddm/mecha-green/Main.qml
+          test -f system/sddm/mecha-green/background.svg
           test -f system/sddm/mecha-green/background.webp
           test -f system/plymouth/mecha-green/mecha-green.plymouth
+          test -f system/plymouth/mecha-green/background.png
           test -f system/plymouth/mecha-green/mecha-green.script
           test -f system/plymouth/mecha-green/progress_bar.png

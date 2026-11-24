@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.7.0 — 2026-11-23
+
+- Added six new flat topographic designs: Drift, Fold, Field, Terrain, Panorama
+  and Undulate, each in dark and light modes.
+- Added twelve clean live wallpapers with animated contour lines and fixed Geist
+  wordmarks. The loops are 2560×1440, 24 fps, 8 seconds, silent and effect-free.
+- Bundled the new stills and loops in both themes under the collision-free
+  `100-` series while keeping `0-topographic` as the default.
+- Extended the topographic brand to SDDM login and Plymouth boot, removing the
+  old radial HUD, glow, vignette, grid and decorative microtext.
+- Added reproducible render scripts, refreshed previews and updated CI checks.
+- Updated the registry-ready dark and light theme repositories.
+
+## 1.6.1 — 2026-11-23
+
+- Extended the flat topographic brand to SDDM login and Plymouth boot.
+- Removed the old radial HUD, glow, vignette, grid and decorative microtext from
+  both system screens.
+- Added `scripts/render-system-assets.sh` and refreshed login/boot previews.
+- Switched SDDM and Plymouth typography to Geist and updated CI checks.
+
 ## 1.6.0 — 2026-11-23
 
 - Replaced the bundled wallpaper collection with one flat topographic wave per

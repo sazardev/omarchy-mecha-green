@@ -1,11 +1,11 @@
 [Plymouth Theme]
 Name=Mecha Green
-Description=Olive and amber Mecha Green boot splash.
+Description=Flat topographic Mecha Green boot splash.
 ModuleName=script
 
 [script]
 ImageDir=/usr/share/plymouth/themes/mecha-green
 ScriptFile=/usr/share/plymouth/themes/mecha-green/mecha-green.script
 ConsoleLogBackgroundColor=0x0e1009
-MonospaceFont=Cantarell 11
-Font=Cantarell 11
+MonospaceFont=Geist Mono 11
+Font=Geist 11

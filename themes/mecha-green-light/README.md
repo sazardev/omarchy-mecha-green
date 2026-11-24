@@ -25,8 +25,9 @@ Sand, olive ink and bronze. The daylight half of the Mecha Green pair.
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — bronze Omarchy boot logo on sand.
-- `backgrounds/0-topographic-light.webp` — the single default wallpaper: flat
-  contour waves and Geist typography on the theme's solid sand background.
+- `backgrounds/` — seven flat topographic stills and six clean live loops:
+  `0-topographic-light` is the default, followed by the collision-free `100-`
+  series (Drift, Fold, Field, Terrain, Panorama and Undulate).
 
 The optional light Halo & military wallpaper sets are fetched separately and
 are not part of the MIT assets: 34 dark / 30 light files across Spartans, UNSC,

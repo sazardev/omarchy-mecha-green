@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-labelledby="title desc">
+  <title id="title">Mecha Green Light — Panorama</title>
+  <desc id="desc">Full-bleed diagonal topographic wave on warm sand with a small Geist wordmark.</desc>
+  <defs>
+    <path id="wave" d="M-200 1080 C260 720 520 900 900 600 C1280 300 1580 460 1940 180 C2220 -20 2480 120 2760 -180"/>
+  </defs>
+  <rect width="2560" height="1440" fill="#e9e5cb"/>
+  <g fill="none" stroke-width="3" stroke-linecap="round">
+    <use href="#wave" transform="translate(0 -360)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -330)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 -300)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -270)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 -240)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -210)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 -180)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -150)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 -120)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -90)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 -60)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 -30)" stroke="#9dae5c"/>
+    <use href="#wave" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 30)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 60)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 90)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 120)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 150)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 180)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 210)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 240)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 270)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 300)" stroke="#4f6428"/>
+    <use href="#wave" transform="translate(0 330)" stroke="#9dae5c"/>
+    <use href="#wave" transform="translate(0 360)" stroke="#4f6428"/>
+  </g>
+  <rect x="100" y="1110" width="600" height="190" fill="#e9e5cb"/>
+  <text x="140" y="1230" font-family="Geist, sans-serif" font-size="104" font-weight="500" letter-spacing="-5" fill="#2b321a">Mecha Green</text>
+</svg>

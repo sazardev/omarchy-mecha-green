@@ -101,8 +101,9 @@ mecha-livewall art.png --mode both --style rain --install --name my-wall
 Styles: `command`, `rain`, `dust`, `pulse`, `storm`, `radar`. The output is
 2560×1440 H.264, 30 fps, silent and looped. `--install` writes to
 `~/.config/omarchy/backgrounds/<theme>/`, and `mecha-live-next` cycles videos
-only. No live loops are bundled with the theme; see
-[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for the optional Halo set.
+only. Six clean topographic loops are bundled with each theme; see
+[`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for the bundled set and optional Halo
+loops.
 
 ## Wallpapers
 
@@ -113,9 +114,9 @@ Add any image to:
 ~/.config/omarchy/themes/mecha-green-light/backgrounds/
 ```
 
-Files are sorted alphabetically. The default wallpaper uses the `0-` prefix so
-it stays first even when optional or personal wallpapers are installed. Cycle
-with:
+Files are sorted alphabetically. The default wallpaper uses the `0-` prefix,
+the bundled topographic collection uses `100-` to `105-`, and the optional Halo
+set uses `1-` to `42-`. Cycle with:
 
 ```sh
 omarchy theme bg next

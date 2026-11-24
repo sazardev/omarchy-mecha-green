@@ -24,7 +24,8 @@ theme and rebuilds the initramfs.
 - Login screen: applies on the next logout/reboot.
 - Boot splash: applies on the next boot.
 - Lock screen: no system install needed; it is themed by the active theme's
-  `shell.toml` and uses the current wallpaper.
+  `shell.toml` and uses the current topographic wallpaper with Omarchy's standard
+  lock treatment.
 
 ## Preview
 

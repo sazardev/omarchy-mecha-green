@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440" role="img" aria-labelledby="title desc">
+  <title id="title">Mecha Green Light — Terrain</title>
+  <desc id="desc">Full-screen nested topographic contours on warm sand with a small Geist wordmark.</desc>
+  <defs>
+    <path id="contour" d="M-720-40 C-820-300-560-500-260-460 C40-620 420-430 570-180 C800 20 720 330 470 470 C200 650-180 560-450 390 C-700 260-820 140-720-40 Z"/>
+  </defs>
+  <rect width="2560" height="1440" fill="#e9e5cb"/>
+  <g transform="translate(1500 720)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#4f6428" stroke-width="3">
+      <use href="#contour" transform="scale(1.55)"/>
+      <use href="#contour" transform="scale(1.40)"/>
+      <use href="#contour" transform="scale(1.25)"/>
+      <use href="#contour" transform="scale(1.10)"/>
+      <use href="#contour" transform="scale(.95)"/>
+      <use href="#contour" transform="scale(.80)"/>
+      <use href="#contour" transform="scale(.65)"/>
+      <use href="#contour" transform="scale(.50)"/>
+      <use href="#contour" transform="scale(.35)"/>
+      <use href="#contour" transform="scale(.22)"/>
+    </g>
+    <g stroke="#9dae5c" stroke-width="2.5">
+      <use href="#contour" transform="translate(-40 26) scale(1.47)"/>
+      <use href="#contour" transform="translate(34 -18) scale(1.32)"/>
+      <use href="#contour" transform="translate(-22 14) scale(1.17)"/>
+      <use href="#contour" transform="translate(18 -10) scale(1.02)"/>
+      <use href="#contour" transform="translate(-10 6) scale(.87)"/>
+      <use href="#contour" transform="translate(8 -4) scale(.72)"/>
+      <use href="#contour" transform="translate(-4 2) scale(.57)"/>
+    </g>
+  </g>
+  <rect x="100" y="1110" width="600" height="190" fill="#e9e5cb"/>
+  <text x="140" y="1230" font-family="Geist, sans-serif" font-size="104" font-weight="500" letter-spacing="-5" fill="#2b321a">Mecha Green</text>
+</svg>

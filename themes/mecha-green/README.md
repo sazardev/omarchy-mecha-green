@@ -29,8 +29,9 @@ This is the dark half of the Mecha Green pair. The light twin is
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — amber Omarchy boot logo.
-- `backgrounds/0-topographic.webp` — the single default wallpaper: flat contour
-  waves and Geist typography on the theme's solid olive background.
+- `backgrounds/` — seven flat topographic stills and six clean live loops:
+  `0-topographic` is the default, followed by the collision-free `100-` series
+  (Drift, Fold, Field, Terrain, Panorama and Undulate).
 
 The optional Halo & military wallpaper sets are fetched separately and are not
 part of the MIT assets: 34 dark / 30 light files across Spartans, UNSC,

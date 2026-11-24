@@ -1,7 +1,7 @@
 [SddmGreeterTheme]
 Name=Mecha Green
-Description=Olive and amber Mecha Green login for Omarchy
+Description=Flat topographic Mecha Green login for Omarchy
 Author=sazardev
 Type=sddm-theme
-Version=1.0
+Version=1.1
 QtVersion=6

@@ -5,12 +5,25 @@ extra playback daemon is required: a video placed in a theme's `backgrounds/`
 folder shows up in the normal Omarchy background picker and plays with hardware
 decoding.
 
-No live loops are bundled with the theme. The default wallpaper is the flat
-`0-topographic.webp` still; live wallpapers remain optional.
+Six original live loops are bundled with each theme. They are silent,
+2560×1440 H.264 at 24 fps, 8 seconds long and loop seamlessly. Only the contour
+lines undulate; the Geist wordmark remains fixed.
 
-Videos created with `mecha-livewall` or the Halo set are silent, 2560×1440 H.264
-at 30 fps. They appear in the Mecha HUD's **NEXT LIVE** button, which skips
-stills and cycles only videos.
+| Loop | Dark | Light |
+|---|---|---|
+| Drift | `100-drift.mp4` | `100-drift-light.mp4` |
+| Fold | `101-fold.mp4` | `101-fold-light.mp4` |
+| Field | `102-field.mp4` | `102-field-light.mp4` |
+| Terrain | `103-terrain.mp4` | `103-terrain-light.mp4` |
+| Panorama | `104-panorama.mp4` | `104-panorama-light.mp4` |
+| Undulate | `105-undulate.mp4` | `105-undulate-light.mp4` |
+
+They appear in the Mecha HUD's **NEXT LIVE** button, which skips stills and
+cycles only videos. Regenerate them with
+`python3 proposals/backgrounds/generate-live.py`.
+
+Videos created with `mecha-livewall` or the Halo set remain optional and use the
+same native OWE playback path.
 
 ## Halo live set
 
@@ -80,7 +93,8 @@ This is the command behind the HUD's `NEXT LIVE` button.
 
 ## Performance
 
-- 2560×1440, 30 fps, H.264 High profile, no audio.
+- Bundled topographic loops: 2560×1440, 24 fps, H.264 High, no audio.
+- Generated `mecha-livewall` loops: 2560×1440, 30 fps by default.
 - OWE pauses video automatically when fullscreen or the monitor sleeps,
   depending on its policy.
 - Keep individual loops under roughly 10 MB and avoid 4K sources for a 1080p
