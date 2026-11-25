@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.8.1 — 2026-11-25
+
+- Re-rendered all twelve bundled live wallpapers at native 60 fps, with 480
+  frames per eight-second loop instead of interpolating the previous 24 fps.
+- Switched loop encoding to NVIDIA NVENC H.264 on supported systems, with an
+  x264 fallback and much lower render time.
+- Optimised the displacement maps so only one row/column is evaluated per frame
+  before scaling, reducing generation time by roughly four times.
+- Rebuilt the 1080p website previews at 60 fps and updated the live wallpaper
+  specs on the theme site.
+- Updated CI, quality documentation and both standalone theme packages for the
+  new frame rate.
+
 ## 1.8.0 — 2026-11-24
 
 - Added the Mecha Green theme website with dark/light modes, a live-loop player,

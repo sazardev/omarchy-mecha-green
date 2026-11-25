@@ -26,10 +26,12 @@ This script regenerates:
 - mobile 1440×3120 and tablet 2732×2048 lossless WebP cuts from the SVGs;
 - ZIP packs for all three device classes;
 - 1280×720 gallery images, 2400×1350 hero images and video posters;
-- 1920×1080 web preview loops;
+- 1920×1080, 60 fps web preview loops;
 - the vendored Geist webfonts used by the site.
 
-Requirements: `rsvg-convert`, ImageMagick (`magick`) and `ffmpeg`.
+Requirements: `rsvg-convert`, ImageMagick (`magick`) and `ffmpeg`. NVENC is used
+automatically when an NVIDIA GPU is available; otherwise the script falls back
+to x264.
 
 ## Deploy
 

@@ -25,7 +25,7 @@ Sand, olive ink and bronze. The daylight half of the Mecha Green pair.
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — bronze Omarchy boot logo on sand.
-- `backgrounds/` — seven flat topographic stills and six clean live loops:
+- `backgrounds/` — seven flat 3840×2160 stills and six clean 60 fps live loops:
   `0-topographic-light` is the default, followed by the collision-free `100-`
   series (Drift, Fold, Field, Terrain, Panorama and Undulate).
 

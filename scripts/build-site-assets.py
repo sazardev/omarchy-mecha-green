@@ -80,6 +80,71 @@ def require(commands: tuple[str, ...]) -> None:
             raise SystemExit(f"Missing required command: {command}")
 
 
+def gpu_encoder_available() -> bool:
+    if not Path("/dev/nvidia0").exists():
+        return False
+    encoders = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-encoders"],
+        text=True,
+        capture_output=True,
+        check=True,
+    ).stdout
+    return "h264_nvenc" in encoders
+
+
+def encoder_options(requested: str) -> list[str]:
+    encoder = requested
+    if encoder == "auto":
+        encoder = "nvenc" if gpu_encoder_available() else "x264"
+    if encoder == "nvenc":
+        return [
+            "-c:v",
+            "h264_nvenc",
+            "-preset",
+            "p7",
+            "-tune",
+            "hq",
+            "-rc",
+            "vbr",
+            "-cq",
+            "19",
+            "-b:v",
+            "0",
+            "-maxrate",
+            "15M",
+            "-bufsize",
+            "30M",
+            "-multipass",
+            "fullres",
+            "-rc-lookahead",
+            "32",
+            "-spatial-aq",
+            "1",
+            "-temporal-aq",
+            "1",
+            "-aq-strength",
+            "8",
+            "-bf",
+            "3",
+            "-b_ref_mode",
+            "middle",
+            "-no-scenecut",
+            "1",
+        ]
+    return [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "slow",
+        "-tune",
+        "animation",
+        "-crf",
+        "18",
+        "-x264-params",
+        "colorprim=bt709:transfer=bt709:colormatrix=bt709",
+    ]
+
+
 def parse_source(path: Path) -> tuple[str, str, list[ET.Element], list[ET.Element]]:
     root = ET.parse(path).getroot()
     background = "#0e1009"
@@ -270,7 +335,7 @@ def make_hero() -> None:
         )
 
 
-def make_web_video(slug: str, mode: str) -> Path:
+def make_web_video(slug: str, mode: str, requested_encoder: str = "auto") -> Path:
     if mode == "dark":
         source = ROOT / f"themes/mecha-green/backgrounds/{dict(LOOPS)[slug]}.mp4"
     else:
@@ -292,20 +357,15 @@ def make_web_video(slug: str, mode: str) -> Path:
             "-vf",
             "scale=1920:1080:flags=lanczos,format=yuv420p",
             "-an",
-            "-c:v",
-            "libx264",
-            "-preset",
-            "slow",
-            "-tune",
-            "animation",
-            "-crf",
-            "18",
+            "-r",
+            "60",
+            *encoder_options(requested_encoder),
             "-profile:v",
             "high",
             "-level:v",
-            "4.0",
-            "-x264-params",
-            "colorprim=bt709:transfer=bt709:colormatrix=bt709",
+            "4.2",
+            "-pix_fmt",
+            "yuv420p",
             "-color_range",
             "tv",
             "-colorspace",
@@ -314,6 +374,8 @@ def make_web_video(slug: str, mode: str) -> Path:
             "bt709",
             "-color_trc",
             "bt709",
+            "-bsf:v",
+            "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1",
             "-movflags",
             "+faststart",
             str(output),
@@ -357,7 +419,7 @@ def write_manifest(
 ) -> None:
     manifest = {
         "name": "Mecha Green",
-        "version": "1.8.0",
+        "version": "1.8.1",
         "desktop": [path.name for path in desktop],
         "mobile": {"size": TARGETS["mobile"], "files": [path.name for path in mobile]},
         "tablet": {"size": TARGETS["tablet"], "files": [path.name for path in tablet]},
@@ -371,6 +433,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--skip-video", action="store_true")
     parser.add_argument("--skip-devices", action="store_true")
+    parser.add_argument(
+        "--encoder",
+        choices=("auto", "nvenc", "x264"),
+        default="auto",
+        help="Hardware encoder for web loops; auto prefers NVENC",
+    )
     args = parser.parse_args()
 
     require(("rsvg-convert", "magick", "ffmpeg"))
@@ -431,7 +499,7 @@ def main() -> None:
         (IMAGES / "posters").mkdir(parents=True, exist_ok=True)
         for slug, _ in LOOPS:
             for mode in MODES:
-                output = make_web_video(slug, mode)
+                output = make_web_video(slug, mode, args.encoder)
                 poster_mode = "light" if mode == "light" else "dark"
                 subprocess.run(
                     [

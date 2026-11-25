@@ -25,7 +25,8 @@ fixed Geist wordmarks. SVG sources live in [`../assets/svg/`](../assets/svg/) an
 [`../proposals/backgrounds/svg/`](../proposals/backgrounds/svg/). Regenerate the
 stills with `./scripts/render-wallpapers.sh` and the loops with
 `python3 proposals/backgrounds/generate-live.py --install`. The stills are
-lossless WebP; all renders come directly from the unchanged SVG sources. See
+lossless WebP; all renders come directly from the unchanged SVG sources. Loops
+are native 4K at 60 fps. See
 [`LIVE_WALLPAPERS.md`](LIVE_WALLPAPERS.md) for playback and optional sets.
 
 ## Optional Halo & military set (personal use only)

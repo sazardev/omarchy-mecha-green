@@ -1,10 +1,11 @@
 # Wallpaper quality
 
-Last verified: 2026-11-24.
+Last verified: 2026-11-25.
 
 The bundled wallpapers are rendered directly from their SVG sources. No raster
 image is enlarged to 4K. The twelve live loops are generated from the same
-vector layers at 3840×2160 before H.264 encoding.
+vector layers at 3840×2160 and 60 fps before H.264 encoding. All 480 frames
+are rendered independently; the previous 24 fps files are not interpolated.
 
 ## Stills
 
@@ -39,16 +40,21 @@ magick themes/mecha-green/backgrounds/100-drift.webp reference.png \
 | Codec | H.264 High, level 5.1 |
 | Pixel format | yuv420p |
 | Colour | BT.709 limited range |
-| Frame rate | 24 fps |
-| Duration | 8 seconds / 192 frames |
-| Encoder | x264 slow, CRF 15, animation tuning |
-| Bitrate | 5.5–19.0 Mbps |
+| Frame rate | 60 fps |
+| Duration | 8 seconds / 480 frames |
+| Encoder | NVIDIA NVENC H.264, p7 high quality, CQ 18 |
+| Bitrate | 20.8–45.0 Mbps |
 | Previous 1440p bitrate | 2.3–9.2 Mbps |
 
 A frame-by-frame inspection of the dense Field loop shows continuous contour
 lines without block noise at 1080p and only normal H.264 edge softening at 1:1
-on a 4K display. The web previews use a 1920×1080 CRF 18 cut. The downloadable
-Omarchy assets remain the native 4K files.
+on a 4K display. The web previews use a 1920×1080, 60 fps NVENC CQ 19 cut at
+7.6–14.7 Mbps. The downloadable Omarchy assets remain the native 4K files.
+
+The final loops are encoded with NVENC on the RTX 2060 SUPER. The vector
+displacement filters still run in FFmpeg on the CPU; only the video encoding is
+offloaded to the GPU. Optimising the displacement maps to single rows/columns
+reduced a loop from about 2m43s to 38s on the development machine.
 
 ## Active Omarchy snapshot
 

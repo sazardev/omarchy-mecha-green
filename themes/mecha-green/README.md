@@ -29,7 +29,7 @@ This is the dark half of the Mecha Green pair. The light twin is
 - `btop.theme`, `icons.theme` (`Yaru-olive`), `chromium.theme`,
   `keyboard.rgb`.
 - `unlock.png` and `preview-unlock.png` — amber Omarchy boot logo.
-- `backgrounds/` — seven flat topographic stills and six clean live loops:
+- `backgrounds/` — seven flat 3840×2160 stills and six clean 60 fps live loops:
   `0-topographic` is the default, followed by the collision-free `100-` series
   (Drift, Fold, Field, Terrain, Panorama and Undulate).
 

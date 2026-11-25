@@ -19,7 +19,7 @@ SOURCE_HEIGHT = 1440
 WIDTH = 3840
 HEIGHT = 2160
 SCALE = WIDTH / SOURCE_WIDTH
-FPS = 24
+FPS = 60
 DURATION = 8
 SVG_NS = "http://www.w3.org/2000/svg"
 ET.register_namespace("", SVG_NS)
@@ -143,7 +143,74 @@ def install(output: Path) -> None:
     print(f"Installed {target.relative_to(PROJECT_ROOT)}")
 
 
-def generate(source: Path, install_output: bool = False) -> Path:
+def gpu_encoder_available() -> bool:
+    if not Path("/dev/nvidia0").exists():
+        return False
+    encoders = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-encoders"],
+        text=True,
+        capture_output=True,
+        check=True,
+    ).stdout
+    return "h264_nvenc" in encoders
+
+
+def encoder_options(requested: str) -> list[str]:
+    encoder = requested
+    if encoder == "auto":
+        encoder = "nvenc" if gpu_encoder_available() else "x264"
+    if encoder == "nvenc":
+        return [
+            "-c:v",
+            "h264_nvenc",
+            "-preset",
+            "p7",
+            "-tune",
+            "hq",
+            "-rc",
+            "vbr",
+            "-cq",
+            "18",
+            "-b:v",
+            "0",
+            "-maxrate",
+            "45M",
+            "-bufsize",
+            "90M",
+            "-multipass",
+            "fullres",
+            "-rc-lookahead",
+            "32",
+            "-spatial-aq",
+            "1",
+            "-temporal-aq",
+            "1",
+            "-aq-strength",
+            "8",
+            "-bf",
+            "3",
+            "-b_ref_mode",
+            "middle",
+            "-no-scenecut",
+            "1",
+        ]
+    return [
+        "-c:v",
+        "libx264",
+        "-preset",
+        "slow",
+        "-tune",
+        "animation",
+        "-crf",
+        "15",
+        "-x264-params",
+        "colorprim=bt709:transfer=bt709:colormatrix=bt709",
+    ]
+
+
+def generate(
+    source: Path, install_output: bool = False, requested_encoder: str = "auto"
+) -> Path:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     output = OUT_DIR / f"{source.stem}.mp4"
     with tempfile.TemporaryDirectory(prefix="mecha-live-") as tmp:
@@ -160,12 +227,12 @@ def generate(source: Path, install_output: bool = False) -> Path:
             "[0:v]format=gbrp[line];"
             "[1:v]format=gbrap[overlay];"
             "[2:v]split=2[xbase][ybase];"
-            "[xbase]format=gray,"
+            "[xbase]format=gray,crop=iw:1:0:0,"
             f"geq=lum='128+{displacement_x:g}*sin(2*PI*X/{wavelength_x:g}+{phase})',"
-            f"scale={WIDTH}:{HEIGHT}[xmap];"
-            "[ybase]format=gray,"
+            f"scale={WIDTH}:{HEIGHT}:flags=neighbor[xmap];"
+            "[ybase]format=gray,crop=1:ih:0:0,"
             f"geq=lum='128+{displacement_y:g}*sin(2*PI*Y/{wavelength_y:g}+{phase})',"
-            f"scale={WIDTH}:{HEIGHT}[ymap];"
+            f"scale={WIDTH}:{HEIGHT}:flags=neighbor[ymap];"
             "[line][xmap][ymap]displace=edge=wrap[warp];"
             "[warp][overlay]overlay=0:0:format=gbrp:alpha=straight,"
             "scale=in_range=full:out_range=tv:out_color_matrix=bt709,"
@@ -202,20 +269,11 @@ def generate(source: Path, install_output: bool = False) -> Path:
             "-r",
             str(FPS),
             "-an",
-            "-c:v",
-            "libx264",
-            "-preset",
-            "slow",
-            "-tune",
-            "animation",
-            "-crf",
-            "15",
+            *encoder_options(requested_encoder),
             "-profile:v",
             "high",
             "-level:v",
-            "5.1",
-            "-x264-params",
-            "colorprim=bt709:transfer=bt709:colormatrix=bt709",
+            "5.2",
             "-pix_fmt",
             "yuv420p",
             "-color_range",
@@ -226,6 +284,8 @@ def generate(source: Path, install_output: bool = False) -> Path:
             "bt709",
             "-color_trc",
             "bt709",
+            "-bsf:v",
+            "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1",
             "-movflags",
             "+faststart",
             str(output),
@@ -245,6 +305,12 @@ def main() -> None:
         action="store_true",
         help="Copy rendered loops into both theme background directories",
     )
+    parser.add_argument(
+        "--encoder",
+        choices=("auto", "nvenc", "x264"),
+        default="auto",
+        help="Hardware encoder to use; auto prefers NVENC",
+    )
     args = parser.parse_args()
 
     sources = sorted(SVG_DIR.glob("*.svg"))
@@ -254,7 +320,7 @@ def main() -> None:
             raise SystemExit(f"No SVG found for {args.only}")
 
     for source in sources:
-        generate(source, args.install)
+        generate(source, args.install, args.encoder)
 
 
 if __name__ == "__main__":

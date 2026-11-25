@@ -118,7 +118,7 @@ jobs:
               probe = json.loads(subprocess.check_output([
                   'ffprobe', '-v', 'error', '-select_streams', 'v:0',
                   '-show_entries',
-                  'stream=codec_name,profile,width,height,pix_fmt,r_frame_rate,'
+                  'stream=codec_name,profile,level,width,height,pix_fmt,r_frame_rate,'
                   'color_range,color_space,color_transfer,color_primaries,nb_frames',
                   '-show_entries', 'format=duration',
                   '-of', 'json', str(path),
@@ -126,14 +126,15 @@ jobs:
               stream = probe['streams'][0]
               assert stream['codec_name'] == 'h264', path
               assert stream['profile'] == 'High', path
+              assert stream['level'] == 52, path
               assert (stream['width'], stream['height']) == (3840, 2160), path
               assert stream['pix_fmt'] == 'yuv420p', path
-              assert stream['r_frame_rate'] == '24/1', path
+              assert stream['r_frame_rate'] == '60/1', path
               assert stream['color_range'] == 'tv', path
               assert stream['color_space'] == 'bt709', path
               assert stream['color_transfer'] == 'bt709', path
               assert stream['color_primaries'] == 'bt709', path
-              assert stream['nb_frames'] == '192', path
+              assert stream['nb_frames'] == '480', path
               assert abs(float(probe['format']['duration']) - 8) < 0.01, path
               frame = subprocess.check_output([
                   'ffmpeg', '-v', 'error', '-i', str(path), '-frames:v', '1',
@@ -210,13 +211,16 @@ jobs:
           for path in videos:
               probe = json.loads(subprocess.check_output([
                   'ffprobe', '-v', 'error', '-select_streams', 'v:0',
-                  '-show_entries', 'stream=codec_name,width,height,color_space',
+                  '-show_entries', 'stream=codec_name,profile,level,width,height,color_space,r_frame_rate',
                   '-of', 'json', str(path),
               ]))
               stream = probe['streams'][0]
               assert stream['codec_name'] == 'h264', path
+              assert stream['profile'] == 'High', path
+              assert stream['level'] == 42, path
               assert (stream['width'], stream['height']) == (1920, 1080), path
               assert stream['color_space'] == 'bt709', path
+              assert stream['r_frame_rate'] == '60/1', path
           PY
       - name: Live wallpaper assets
         run: |

@@ -59,11 +59,11 @@ Each theme includes:
 
 - `0-topographic` — the default brand wallpaper.
 - `100-drift`, `101-fold`, `102-field`, `103-terrain`, `104-panorama` and `105-undulate`.
-- Matching 8-second H.264 loops with animated lines and fixed Geist typography.
+- Matching 8-second, 60 fps H.264 loops with animated lines and fixed Geist typography.
 
 All stills and loops are native 3840×2160 (4K), rendered directly from the
 original SVG artwork without upscaling. Stills use lossless WebP; loops are
-H.264 High, BT.709, 24 fps and silent.
+H.264 High, BT.709, 60 fps and silent.
 
 - Sources and renders: [`proposals/backgrounds/`](proposals/backgrounds/)
 - Live gallery: [`proposals/backgrounds/live.html`](proposals/backgrounds/live.html)

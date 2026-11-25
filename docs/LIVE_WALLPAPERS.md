@@ -6,7 +6,7 @@ folder shows up in the normal Omarchy background picker and plays with hardware
 decoding.
 
 Six original live loops are bundled with each theme. They are silent,
-3840×2160 (4K) H.264 High at 24 fps, 8 seconds long and loop seamlessly. Only the
+3840×2160 (4K) H.264 High at 60 fps, 8 seconds long and loop seamlessly. Only the
 contour lines undulate; the Geist wordmark remains fixed. Every frame is rendered
 natively from the SVG sources rather than upscaled from 1440p.
 
@@ -94,10 +94,12 @@ This is the command behind the HUD's `NEXT LIVE` button.
 
 ## Performance
 
-- Bundled topographic loops: 3840×2160, 24 fps, H.264 High, BT.709, no audio.
+- Bundled topographic loops: 3840×2160, 60 fps, H.264 High, BT.709, no audio.
 - Generated `mecha-livewall` loops: 2560×1440, 30 fps by default.
 - OWE pauses video automatically when fullscreen or the monitor sleeps,
   depending on its policy.
 - The 4K bundled loops need hardware H.264 decoding for smooth playback. On a
   1080p display, the matching lossless stills provide the same artwork with
   lower GPU and storage cost.
+- The bundled 60 fps loops are about 450 MB across both themes; each standalone
+  theme is roughly 225 MB. The website previews are separate 1080p cuts.
