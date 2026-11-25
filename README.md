@@ -6,6 +6,8 @@
 [![Omarchy](https://img.shields.io/badge/Omarchy-Quattro-f2c84b.svg)](https://omarchy.org/)
 [![Validate](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml/badge.svg)](https://github.com/sazardev/omarchy-mecha-green/actions/workflows/validate.yml)
 
+[Website](https://mecha.sazardev.stream) · [Wallpaper quality](docs/QUALITY.md) · [Web deployment](docs/WEBSITE.md)
+
 | Mecha Green | Mecha Green Light |
 |---|---|
 | ![](themes/mecha-green/preview.png) | ![](themes/mecha-green-light/preview.png) |
@@ -13,7 +15,8 @@
 ## Features
 
 - Two complete Omarchy themes with matching shell, terminal, editor and btop colours.
-- Seven flat wallpapers and six clean live loops per theme.
+- Seven flat wallpapers and six clean live loops per theme, all native 4K.
+- Phone and tablet wallpaper packs rendered from the same vector artwork.
 - SDDM login and Plymouth boot screens using the same topographic identity.
 - Mecha HUD and Mecha NET widgets for latency, CPU, RAM and battery status.
 - Optional Halo wallpaper fetcher and live-wallpaper tools.
@@ -64,7 +67,9 @@ H.264 High, BT.709, 24 fps and silent.
 
 - Sources and renders: [`proposals/backgrounds/`](proposals/backgrounds/)
 - Live gallery: [`proposals/backgrounds/live.html`](proposals/backgrounds/live.html)
+- Theme website and downloads: [mecha.sazardev.stream](https://mecha.sazardev.stream)
 - Full wallpaper guide: [`docs/WALLPAPERS.md`](docs/WALLPAPERS.md)
+- Measured quality baseline: [`docs/QUALITY.md`](docs/QUALITY.md)
 
 ## System screens
 

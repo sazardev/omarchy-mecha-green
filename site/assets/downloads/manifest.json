@@ -1,0 +1,64 @@
+{
+  "name": "Mecha Green",
+  "version": "1.8.0",
+  "desktop": [
+    "mecha-green-topographic-dark.webp",
+    "mecha-green-topographic-light.webp",
+    "mecha-green-drift-dark.webp",
+    "mecha-green-drift-light.webp",
+    "mecha-green-fold-dark.webp",
+    "mecha-green-fold-light.webp",
+    "mecha-green-field-dark.webp",
+    "mecha-green-field-light.webp",
+    "mecha-green-terrain-dark.webp",
+    "mecha-green-terrain-light.webp",
+    "mecha-green-panorama-dark.webp",
+    "mecha-green-panorama-light.webp",
+    "mecha-green-undulate-dark.webp",
+    "mecha-green-undulate-light.webp"
+  ],
+  "mobile": {
+    "size": [
+      1440,
+      3120
+    ],
+    "files": [
+      "mecha-green-topographic-dark-mobile.webp",
+      "mecha-green-topographic-light-mobile.webp",
+      "mecha-green-drift-dark-mobile.webp",
+      "mecha-green-drift-light-mobile.webp",
+      "mecha-green-fold-dark-mobile.webp",
+      "mecha-green-fold-light-mobile.webp",
+      "mecha-green-field-dark-mobile.webp",
+      "mecha-green-field-light-mobile.webp",
+      "mecha-green-terrain-dark-mobile.webp",
+      "mecha-green-terrain-light-mobile.webp",
+      "mecha-green-panorama-dark-mobile.webp",
+      "mecha-green-panorama-light-mobile.webp",
+      "mecha-green-undulate-dark-mobile.webp",
+      "mecha-green-undulate-light-mobile.webp"
+    ]
+  },
+  "tablet": {
+    "size": [
+      2732,
+      2048
+    ],
+    "files": [
+      "mecha-green-topographic-dark-tablet.webp",
+      "mecha-green-topographic-light-tablet.webp",
+      "mecha-green-drift-dark-tablet.webp",
+      "mecha-green-drift-light-tablet.webp",
+      "mecha-green-fold-dark-tablet.webp",
+      "mecha-green-fold-light-tablet.webp",
+      "mecha-green-field-dark-tablet.webp",
+      "mecha-green-field-light-tablet.webp",
+      "mecha-green-terrain-dark-tablet.webp",
+      "mecha-green-terrain-light-tablet.webp",
+      "mecha-green-panorama-dark-tablet.webp",
+      "mecha-green-panorama-light-tablet.webp",
+      "mecha-green-undulate-dark-tablet.webp",
+      "mecha-green-undulate-light-tablet.webp"
+    ]
+  }
+}

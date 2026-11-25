@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.8.0 — 2026-11-24
+
+- Added the Mecha Green theme website with dark/light modes, a live-loop player,
+  device downloads and responsive install instructions.
+- Added native mobile 1440×3120 and tablet 2732×2048 wallpaper packs rendered
+  from the original SVGs, plus lossless desktop 4K ZIP downloads.
+- Added 1080p web preview loops, social artwork, favicon and Cloudflare Pages
+  security headers.
+- Added the measured quality baseline in `docs/QUALITY.md` and the deployment
+  guide in `docs/WEBSITE.md`.
+- Added CI checks for the website, device dimensions and page references.
+
 ## 1.7.8 — 2026-11-24
 
 - Upgraded every bundled wallpaper to native 3840×2160, rendered directly from

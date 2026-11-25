@@ -1,0 +1,21 @@
+{
+  "name": "Mecha Green",
+  "short_name": "Mecha Green",
+  "description": "Native 4K topographic wallpapers for Omarchy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0e1009",
+  "theme_color": "#0e1009",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ]
+}
